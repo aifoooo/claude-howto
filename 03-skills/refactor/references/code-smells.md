@@ -1,57 +1,57 @@
-# Code Smells Catalog
+# 代码味道目录
 
-A comprehensive reference of code smells based on Martin Fowler's *Refactoring* (2nd Edition). Code smells are symptoms of deeper problems—they indicate that something might be wrong with your code's design.
+基于 Martin Fowler 的 *Refactoring*（第 2 版）的全面代码味道参考。代码味道是更深层问题的症状——它们表明你的代码设计可能有问题。
 
-> "A code smell is a surface indication that usually corresponds to a deeper problem in the system." — Martin Fowler
+> "代码味道是通常对应于系统更深层问题的表面指示。" — Martin Fowler
 
 ---
 
-## Bloaters
+## 臃肿者
 
-Code smells representing something that has grown too large to be handled effectively.
+代表某些东西已经变得太大而无法有效处理的代码味道。
 
-### Long Method
+### 长方法
 
-**Signs:**
-- Method exceeds 30-50 lines
-- Need to scroll to see the whole method
-- Multiple levels of nesting
-- Comments explaining what sections do
+**迹象：**
+- 方法超过 30-50 行
+- 需要滚动才能看到整个方法
+- 多层嵌套
+- 解释各部分的注释
 
-**Why it's bad:**
-- Hard to understand
-- Difficult to test in isolation
-- Changes have unintended consequences
-- Duplicate logic hides inside
+**为什么不好：**
+- 难以理解
+- 难以单独测试
+- 更改有意想不到的后果
+- 重复逻辑隐藏在内部
 
-**Refactorings:**
-- Extract Method
-- Replace Temp with Query
-- Introduce Parameter Object
-- Replace Method with Method Object
-- Decompose Conditional
+**重构：**
+- 提取方法
+- 用查询替换临时变量
+- 引入参数对象
+- 用方法对象替换方法
+- 分解条件
 
-**Example (Before):**
+**示例（之前）：**
 ```javascript
 function processOrder(order) {
-  // Validate order (20 lines)
+  // 验证订单（20 行）
   if (!order.items) throw new Error('No items');
   if (order.items.length === 0) throw new Error('Empty order');
-  // ... more validation
+  // ... 更多验证
 
-  // Calculate totals (30 lines)
+  // 计算总计（30 行）
   let subtotal = 0;
   for (const item of order.items) {
     subtotal += item.price * item.quantity;
   }
-  // ... tax, shipping, discounts
+  // ... 税、运费、折扣
 
-  // Send notifications (20 lines)
-  // ... email logic
+  // 发送通知（20 行）
+  // ... 邮件逻辑
 }
 ```
 
-**Example (After):**
+**示例（之后）：**
 ```javascript
 function processOrder(order) {
   validateOrder(order);
@@ -63,65 +63,65 @@ function processOrder(order) {
 
 ---
 
-### Large Class
+### 大类
 
-**Signs:**
-- Class has many instance variables (>7-10)
-- Class has many methods (>15-20)
-- Class name is vague (Manager, Handler, Processor)
-- Methods don't use all instance variables
+**迹象：**
+- 类有许多实例变量（>7-10）
+- 类有许多方法（>15-20）
+- 类名模糊（Manager、Handler、Processor）
+- 方法不使用所有实例变量
 
-**Why it's bad:**
-- Violates Single Responsibility Principle
-- Hard to test
-- Changes ripple through unrelated features
-- Difficult to reuse parts
+**为什么不好：**
+- 违反单一职责原则
+- 难以测试
+- 更改波及不相关的功能
+- 难以重用部分
 
-**Refactorings:**
-- Extract Class
-- Extract Subclass
-- Extract Interface
+**重构：**
+- 提取类
+- 提取子类
+- 提取接口
 
-**Detection:**
+**检测：**
 ```
-Lines of code > 300
-Number of methods > 15
-Number of fields > 10
+代码行数 > 300
+方法数量 > 15
+字段数量 > 10
 ```
 
 ---
 
-### Primitive Obsession
+### 原始类型痴迷
 
-**Signs:**
-- Using primitives for domain concepts (string for email, int for money)
-- Arrays of primitives instead of objects
-- String constants for type codes
-- Magic numbers/strings
+**迹象：**
+- 使用原始类型表示领域概念（邮箱用 string、钱用 int）
+- 原始类型的数组而非对象
+- 类型代码的字符串常量
+- 魔法数字/字符串
 
-**Why it's bad:**
-- No validation at type level
-- Logic scattered across codebase
-- Easy to pass wrong values
-- Missing domain concepts
+**为什么不好：**
+- 类型级别无验证
+- 逻辑分散在代码库中
+- 容易传递错误值
+- 缺少领域概念
 
-**Refactorings:**
-- Replace Primitive with Object
-- Replace Type Code with Class
-- Replace Type Code with Subclasses
-- Replace Type Code with State/Strategy
+**重构：**
+- 用对象替换原始类型
+- 用类替换类型代码
+- 用子类替换类型代码
+- 用状态/策略替换类型代码
 
-**Example (Before):**
+**示例（之前）：**
 ```javascript
 const user = {
-  email: 'john@example.com',     // Just a string
-  phone: '1234567890',           // Just a string
-  status: 'active',              // Magic string
-  balance: 10050                 // Cents as integer
+  email: 'john@example.com',     // 只是个字符串
+  phone: '1234567890',           // 只是个字符串
+  status: 'active',              // 魔法字符串
+  balance: 10050                 // 美分作为整数
 };
 ```
 
-**Example (After):**
+**示例（之后）：**
 ```javascript
 const user = {
   email: new Email('john@example.com'),
@@ -133,27 +133,27 @@ const user = {
 
 ---
 
-### Long Parameter List
+### 长参数列表
 
-**Signs:**
-- Methods with 4+ parameters
-- Parameters that always appear together
-- Boolean flags changing method behavior
-- Null/undefined passed frequently
+**迹象：**
+- 方法有 4+ 参数
+- 参数总是一起出现
+- 布尔标志改变方法行为
+- 经常传递 null/undefined
 
-**Why it's bad:**
-- Hard to call correctly
-- Parameter order confusion
-- Indicates method doing too much
-- Hard to add new parameters
+**为什么不好：**
+- 难以正确调用
+- 参数顺序混淆
+- 表明方法做太多
+- 难以添加新参数
 
-**Refactorings:**
-- Introduce Parameter Object
-- Preserve Whole Object
-- Replace Parameter with Method Call
-- Remove Flag Argument
+**重构：**
+- 引入参数对象
+- 保留整个对象
+- 用方法调用替换参数
+- 删除标志参数
 
-**Example (Before):**
+**示例（之前）：**
 ```javascript
 function createUser(firstName, lastName, email, phone,
                     street, city, state, zip,
@@ -162,7 +162,7 @@ function createUser(firstName, lastName, email, phone,
 }
 ```
 
-**Example (After):**
+**示例（之后）：**
 ```javascript
 function createUser(personalInfo, address, options) {
   // personalInfo: { firstName, lastName, email, phone }
@@ -173,32 +173,32 @@ function createUser(personalInfo, address, options) {
 
 ---
 
-### Data Clumps
+### 数据块
 
-**Signs:**
-- Same 3+ fields appear together repeatedly
-- Parameters that always travel together
-- Classes with field subsets belonging together
+**迹象：**
+- 相同的 3+ 字段重复出现
+- 参数总是一起旅行
+- 具有属于一起的字段子集的类
 
-**Why it's bad:**
-- Duplicate handling logic
-- Missing abstraction
-- Harder to extend
-- Indicates hidden class
+**为什么不好：**
+- 重复处理逻辑
+- 缺少抽象
+- 难以扩展
+- 表明隐藏的类
 
-**Refactorings:**
-- Extract Class
-- Introduce Parameter Object
-- Preserve Whole Object
+**重构：**
+- 提取类
+- 引入参数对象
+- 保留整个对象
 
-**Example:**
+**示例：**
 ```javascript
-// Data clump: (x, y, z) coordinates
+// 数据块：(x, y, z) 坐标
 function movePoint(x, y, z, dx, dy, dz) { }
 function scalePoint(x, y, z, factor) { }
 function distanceBetween(x1, y1, z1, x2, y2, z2) { }
 
-// Extract Point3D class
+// 提取 Point3D 类
 class Point3D {
   constructor(x, y, z) { }
   move(delta) { }
@@ -209,30 +209,30 @@ class Point3D {
 
 ---
 
-## Object-Orientation Abusers
+## 面向对象滥用者
 
-Smells indicating incomplete or incorrect use of OOP principles.
+表明 OOP 原则使用不完整或不正确的味道。
 
-### Switch Statements
+### Switch 语句
 
-**Signs:**
-- Long switch/case or if/else chains
-- Same switch in multiple places
-- Switch on type codes
-- Adding new cases requires changes everywhere
+**迹象：**
+- 长的 switch/case 或 if/else 链
+- 多处相同的 switch
+- 按类型代码 switch
+- 添加新案例需要到处更改
 
-**Why it's bad:**
-- Violates Open/Closed Principle
-- Changes ripple to all switch locations
-- Hard to extend
-- Often indicates missing polymorphism
+**为什么不好：**
+- 违反开闭原则
+- 更改波及所有 switch 位置
+- 难以扩展
+- 通常表明缺少多态
 
-**Refactorings:**
-- Replace Conditional with Polymorphism
-- Replace Type Code with Subclasses
-- Replace Type Code with State/Strategy
+**重构：**
+- 用多态替换条件
+- 用子类替换类型代码
+- 用状态/策略替换类型代码
 
-**Example (Before):**
+**示例（之前）：**
 ```javascript
 function calculatePay(employee) {
   switch (employee.type) {
@@ -246,7 +246,7 @@ function calculatePay(employee) {
 }
 ```
 
-**Example (After):**
+**示例（之后）：**
 ```javascript
 class HourlyEmployee {
   calculatePay() {
@@ -263,288 +263,288 @@ class SalariedEmployee {
 
 ---
 
-### Temporary Field
+### 临时字段
 
-**Signs:**
-- Instance variables only used in some methods
-- Fields set conditionally
-- Complex initialization for certain cases
+**迹象：**
+- 实例变量仅在某些方法中使用
+- 条件设置的字段
+- 某些情况的复杂初始化
 
-**Why it's bad:**
-- Confusing—field exists but might be null
-- Hard to understand object state
-- Indicates conditional logic hiding
+**为什么不好：**
+- 令人困惑——字段存在但可能为 null
+- 难以理解对象状态
+- 表明隐藏的条件逻辑
 
-**Refactorings:**
-- Extract Class
-- Introduce Null Object
-- Replace Temp Field with Local
-
----
-
-### Refused Bequest
-
-**Signs:**
-- Subclass doesn't use inherited methods/data
-- Subclass overrides to do nothing
-- Inheritance used for code reuse, not IS-A relationship
-
-**Why it's bad:**
-- Wrong abstraction
-- Violates Liskov Substitution Principle
-- Misleading hierarchy
-
-**Refactorings:**
-- Push Down Method/Field
-- Replace Subclass with Delegate
-- Replace Inheritance with Delegation
+**重构：**
+- 提取类
+- 引入空对象
+- 用局部变量替换临时字段
 
 ---
 
-### Alternative Classes with Different Interfaces
+### 拒绝遗产
 
-**Signs:**
-- Two classes that do similar things
-- Different method names for same concept
-- Could be used interchangeably
+**迹象：**
+- 子类不使用继承的方法/数据
+- 子类覆盖为空
+- 继承用于代码重用而非 IS-A 关系
 
-**Why it's bad:**
-- Duplicate implementations
-- No common interface
-- Hard to switch between
+**为什么不好：**
+- 错误的抽象
+- 违反里氏替换原则
+- 误导的层次结构
 
-**Refactorings:**
-- Rename Method
-- Move Method
-- Extract Superclass
-- Extract Interface
-
----
-
-## Change Preventers
-
-Smells that make changes difficult—changing one thing requires changing many others.
-
-### Divergent Change
-
-**Signs:**
-- One class changed for multiple different reasons
-- Changes in different areas trigger same class edits
-- Class is a "God class"
-
-**Why it's bad:**
-- Violates Single Responsibility
-- High change frequency
-- Merge conflicts
-
-**Refactorings:**
-- Extract Class
-- Extract Superclass
-- Extract Subclass
-
-**Example:**
-A `User` class changes for:
-- Authentication changes
-- Profile changes
-- Billing changes
-- Notification changes
-
-→ Extract: `AuthService`, `ProfileService`, `BillingService`, `NotificationService`
+**重构：**
+- 下推方法/字段
+- 用委托替换子类
+- 用委托替换继承
 
 ---
 
-### Shotgun Surgery
+### 具有不同接口的替代类
 
-**Signs:**
-- One change requires edits in many classes
-- Small feature needs touching 10+ files
-- Changes are scattered, hard to find all
+**迹象：**
+- 两个类做相似的事情
+- 相同概念的不同方法名
+- 可以互换使用
 
-**Why it's bad:**
-- Easy to miss a spot
-- High coupling
-- Changes are error-prone
+**为什么不好：**
+- 重复实现
+- 无通用接口
+- 难以切换
 
-**Refactorings:**
-- Move Method
-- Move Field
-- Inline Class
-
-**Detection:**
-Look for: adding one field requires changes in >5 files.
+**重构：**
+- 重命名方法
+- 移动方法
+- 提取超类
+- 提取接口
 
 ---
 
-### Parallel Inheritance Hierarchies
+## 变更阻止者
 
-**Signs:**
-- Creating subclass in one hierarchy requires subclass in another
-- Class prefixes match (e.g., `DatabaseOrder`, `DatabaseProduct`)
+使更改困难的代码味道——更改一件事需要更改许多其他事情。
 
-**Why it's bad:**
-- Double the maintenance
-- Coupling between hierarchies
-- Easy to forget one side
+### 分散变化
 
-**Refactorings:**
-- Move Method
-- Move Field
-- Eliminate one hierarchy
+**迹象：**
+- 一个类因多个不同原因更改
+- 不同区域的更改触发相同的类编辑
+- 类是一个"上帝类"
+
+**为什么不好：**
+- 违反单一职责
+- 高更改频率
+- 合并冲突
+
+**重构：**
+- 提取类
+- 提取超类
+- 提取子类
+
+**示例：**
+`User` 类因以下原因更改：
+- 认证更改
+- 个人资料更改
+- 计费更改
+- 通知更改
+
+→ 提取：`AuthService`、`ProfileService`、`BillingService`、`NotificationService`
 
 ---
 
-## Dispensables
+### 霰弹手术
 
-Something unnecessary that should be removed.
+**迹象：**
+- 一个更改需要在许多类中编辑
+- 一个功能需要触及 10+ 文件
+- 更改分散，难以找到所有
 
-### Comments (Excessive)
+**为什么不好：**
+- 容易错过一个地方
+- 高耦合
+- 更改容易出错
 
-**Signs:**
-- Comments explaining what code does
-- Commented-out code
-- TODO/FIXME that linger forever
-- Apologies in comments
+**重构：**
+- 移动方法
+- 移动字段
+- 内联类
 
-**Why it's bad:**
-- Comments lie (get out of sync)
-- Code should be self-documenting
-- Dead code causes confusion
+**检测：**
+查找：添加一个字段需要在 >5 个文件中更改。
 
-**Refactorings:**
-- Extract Method (name explains what)
-- Rename (clarity without comments)
-- Remove commented code
-- Introduce Assertion
+---
 
-**Good vs Bad Comments:**
+### 并行继承层次结构
+
+**迹象：**
+- 在一个层次结构中创建子类需要在另一个中创建子类
+- 类前缀匹配（如 `DatabaseOrder`、`DatabaseProduct`）
+
+**为什么不好：**
+- 双重维护
+- 层次结构之间的耦合
+- 容易忘记一边
+
+**重构：**
+- 移动方法
+- 移动字段
+- 消除一个层次结构
+
+---
+
+## 可不必者
+
+不必要的东西应该被删除。
+
+### 过度注释
+
+**迹象：**
+- 解释代码做什么的注释
+- 注释掉的代码
+- 永远存在的 TODO/FIXME
+- 注释中的道歉
+
+**为什么不好：**
+- 注释会撒谎（不同步）
+- 代码应该是自解释的
+- 死代码造成混淆
+
+**重构：**
+- 提取方法（名称解释做什么）
+- 重命名（无需注释的清晰度）
+- 删除注释掉的代码
+- 引入断言
+
+**好注释 vs 坏注释：**
 ```javascript
-// BAD: Explaining what
-// Loop through users and check if active
+// 坏：解释做什么
+// 遍历用户并检查是否活跃
 for (const user of users) {
   if (user.status === 'active') { }
 }
 
-// GOOD: Explaining why
-// Active users only - inactive are handled by cleanup job
+// 好：解释为什么
+// 仅活跃用户 - 非活跃的由清理作业处理
 const activeUsers = users.filter(u => u.isActive);
 ```
 
 ---
 
-### Duplicate Code
+### 重复代码
 
-**Signs:**
-- Same code in multiple places
-- Similar code with small variations
-- Copy-paste patterns
+**迹象：**
+- 多处相同的代码
+- 略有变化的相似代码
+- 复制粘贴模式
 
-**Why it's bad:**
-- Bug fixes needed in multiple places
-- Inconsistency risk
-- Bloated codebase
+**为什么不好：**
+- Bug 修复需要改多处
+- 不一致风险
+- 代码库臃肿
 
-**Refactorings:**
-- Extract Method
-- Extract Class
-- Pull Up Method (in hierarchies)
-- Form Template Method
+**重构：**
+- 提取方法
+- 提取类
+- 提升方法（在层次结构中）
+- 形成模板方法
 
-**Detection Rule:**
-Any code duplicated 3+ times should be extracted.
-
----
-
-### Lazy Class
-
-**Signs:**
-- Class doesn't do enough to justify existence
-- Wrapper with no added value
-- Result of over-engineering
-
-**Why it's bad:**
-- Maintenance overhead
-- Unnecessary indirection
-- Complexity without benefit
-
-**Refactorings:**
-- Inline Class
-- Collapse Hierarchy
+**检测规则：**
+重复 3+ 次的代码应该被提取。
 
 ---
 
-### Dead Code
+### 懒散类
 
-**Signs:**
-- Unreachable code
-- Unused variables/methods/classes
-- Commented-out code
-- Code behind impossible conditions
+**迹象：**
+- 类不足以证明其存在是合理的
+- 无增加值的外包装
+- 过度工程化的结果
 
-**Why it's bad:**
-- Confusion
-- Maintenance burden
-- Slows down understanding
+**为什么不好：**
+- 维护开销
+- 不必要的间接
+- 无收益的复杂性
 
-**Refactorings:**
-- Remove Dead Code
-- Safe Delete
+**重构：**
+- 内联类
+- 折叠层次结构
 
-**Detection:**
+---
+
+### 死代码
+
+**迹象：**
+- 不可达的代码
+- 未使用的变量/方法/类
+- 注释掉的代码
+- 不可能条件后的代码
+
+**为什么不好：**
+- 混淆
+- 维护负担
+- 减慢理解
+
+**重构：**
+- 删除死代码
+- 安全删除
+
+**检测：**
 ```bash
-# Look for unused exports
-# Look for unreferenced functions
-# IDE "unused" warnings
+# 查找未使用的导出
+# 查找未引用的函数
+# IDE"未使用"警告
 ```
 
 ---
 
-### Speculative Generality
+### 投机性通用性
 
-**Signs:**
-- Abstract classes with one subclass
-- Unused parameters "for future use"
-- Methods that only delegate
-- "Framework" for one use case
+**迹象：**
+- 只有一个子类的抽象类
+- "为了将来使用"而未使用的参数
+- 仅委托的方法
+- 一个用例的"框架"
 
-**Why it's bad:**
-- Complexity without benefit
-- YAGNI (You Ain't Gonna Need It)
-- Harder to understand
+**为什么不好：**
+- 无收益的复杂性
+- YAGNI（你不会需要它）
+- 难以理解
 
-**Refactorings:**
-- Collapse Hierarchy
-- Inline Class
-- Remove Parameter
-- Rename Method
+**重构：**
+- 折叠层次结构
+- 内联类
+- 删除参数
+- 重命名方法
 
 ---
 
-## Couplers
+## 耦合者
 
-Smells that represent excessive coupling between classes.
+代表类之间过度耦合的代码味道。
 
-### Feature Envy
+### 特性依恋
 
-**Signs:**
-- Method uses more data from another class than its own
-- Many getter calls to another object
-- Data and behavior are separated
+**迹象：**
+- 方法使用另一个类的数据比自己的还多
+- 许多对另一个对象的 getter 调用
+- 数据和行为分离
 
-**Why it's bad:**
-- Wrong location for behavior
-- Poor encapsulation
-- Hard to maintain
+**为什么不好：**
+- 行为位置错误
+- 封装性差
+- 难以维护
 
-**Refactorings:**
-- Move Method
-- Move Field
-- Extract Method (then move)
+**重构：**
+- 移动方法
+- 移动字段
+- 提取方法（然后移动）
 
-**Example (Before):**
+**示例（之前）：**
 ```javascript
 class Order {
   getDiscountedPrice(customer) {
-    // Uses customer data heavily
+    // 大量使用 customer 数据
     if (customer.loyaltyYears > 5) {
       return this.price * customer.discountRate;
     }
@@ -553,7 +553,7 @@ class Order {
 }
 ```
 
-**Example (After):**
+**示例（之后）：**
 ```javascript
 class Customer {
   getDiscountedPriceFor(price) {
@@ -567,103 +567,103 @@ class Customer {
 
 ---
 
-### Inappropriate Intimacy
+### 不当亲密
 
-**Signs:**
-- Classes access each other's private parts
-- Bidirectional references
-- Subclasses know too much about parents
+**迹象：**
+- 类访问彼此的私有部分
+- 双向引用
+- 子类对父类了解太多
 
-**Why it's bad:**
-- High coupling
-- Changes cascade
-- Hard to modify one without other
+**为什么不好：**
+- 高耦合
+- 更改级联
+- 难以修改一个而不修改另一个
 
-**Refactorings:**
-- Move Method
-- Move Field
-- Change Bidirectional to Unidirectional
-- Extract Class
-- Hide Delegate
+**重构：**
+- 移动方法
+- 移动字段
+- 将双向改为单向
+- 提取类
+- 隐藏委托
 
 ---
 
-### Message Chains
+### 消息链
 
-**Signs:**
-- Long chains of method calls: `a.getB().getC().getD().getValue()`
-- Client depends on navigation structure
-- "Train wreck" code
+**迹象：**
+- 长的方法调用链：`a.getB().getC().getD().getValue()`
+- 客户端依赖于导航结构
+- "火车残骸"代码
 
-**Why it's bad:**
-- Fragile—any change breaks chain
-- Violates Law of Demeter
-- Coupling to structure
+**为什么不好：**
+- 脆弱——任何更改都会破坏链
+- 违反得墨忒耳定律
+- 耦合到结构
 
-**Refactorings:**
-- Hide Delegate
-- Extract Method
-- Move Method
+**重构：**
+- 隐藏委托
+- 提取方法
+- 移动方法
 
-**Example:**
+**示例：**
 ```javascript
-// Bad: Message chain
+// 坏：消息链
 const managerName = employee.getDepartment().getManager().getName();
 
-// Better: Hide delegation
+// 更好：隐藏委托
 const managerName = employee.getManagerName();
 ```
 
 ---
 
-### Middle Man
+### 中间人
 
-**Signs:**
-- Class that only delegates to another
-- Half the methods are delegations
-- No added value
+**迹象：**
+- 仅委托给另一个的类
+- 一半方法是委托
+- 无增加值
 
-**Why it's bad:**
-- Unnecessary indirection
-- Maintenance overhead
-- Confusing architecture
+**为什么不好：**
+- 不必要的间接
+- 维护开销
+- 令人困惑的架构
 
-**Refactorings:**
-- Remove Middle Man
-- Inline Method
+**重构：**
+- 删除中间人
+- 内联方法
 
 ---
 
-## Smell Severity Guide
+## 味道严重性指南
 
-| Severity | Description | Action |
+| 严重性 | 描述 | 行动 |
 |----------|-------------|--------|
-| **Critical** | Blocks development, causes bugs | Fix immediately |
-| **High** | Significant maintenance burden | Fix in current sprint |
-| **Medium** | Noticeable but manageable | Plan for near future |
-| **Low** | Minor inconvenience | Fix opportunistically |
+| **Critical** | 阻塞开发，导致 bug | 立即修复 |
+| **High** | 重大维护负担 | 在当前 sprint 修复 |
+| **Medium** | 明显但可管理 | 计划在近期修复 |
+| **Low** | 小的不便 | 顺便修复 |
 
 ---
 
-## Quick Detection Checklist
+## 快速检测检查清单
 
-Use this checklist when scanning code:
+扫描代码时使用此检查清单：
 
-- [ ] Any method > 30 lines?
-- [ ] Any class > 300 lines?
-- [ ] Any method with > 4 parameters?
-- [ ] Any duplicated code blocks?
-- [ ] Any switch/case on type codes?
-- [ ] Any unused code?
-- [ ] Any methods using another class's data heavily?
-- [ ] Any long chains of method calls?
-- [ ] Any comments explaining "what" not "why"?
-- [ ] Any primitives that should be objects?
+- [ ] 任何方法 > 30 行？
+- [ ] 任何类 > 300 行？
+- [ ] 任何方法有 > 4 个参数？
+- [ ] 任何重复的代码块？
+- [ ] 任何按类型代码的 switch/case？
+- [ ] 任何未使用的代码？
+- [ ] 任何大量使用另一个类数据的方法？
+- [ ] 任何长的方法调用链？
+- [ ] 任何解释"做什么"而非"为什么"的注释？
+- [ ] 任何应该是对象的原始类型？
 
 ---
 
-## Further Reading
+## 延伸阅读
 
-- Fowler, M. (2018). *Refactoring: Improving the Design of Existing Code* (2nd ed.)
+- Fowler, M. (2018). *Refactoring: Improving the Design of Existing Code* (第 2 版)
 - Kerievsky, J. (2004). *Refactoring to Patterns*
 - Feathers, M. (2004). *Working Effectively with Legacy Code*

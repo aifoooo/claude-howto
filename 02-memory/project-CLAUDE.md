@@ -1,88 +1,88 @@
-# Project Configuration
+# 项目配置
 
-## Project Overview
-- **Name**: E-commerce Platform
-- **Tech Stack**: Node.js, PostgreSQL, React 18, Docker
-- **Team Size**: 5 developers
-- **Deadline**: Q4 2025
+## 项目概述
+- **名称**：电商平台
+- **技术栈**：Node.js、PostgreSQL、React 18、Docker
+- **团队规模**：5 名开发人员
+- **截止日期**：2025 年第四季度
 
-## Architecture
+## 架构
 @docs/architecture.md
 @docs/api-standards.md
 @docs/database-schema.md
 
-## Development Standards
+## 开发规范
 
-### Code Style
-- Use Prettier for formatting
-- Use ESLint with airbnb config
-- Maximum line length: 100 characters
-- Use 2-space indentation
+### 代码风格
+- 使用 Prettier 进行格式化
+- 使用 ESLint + airbnb 配置
+- 最大行长度：100 字符
+- 使用 2 空格缩进
 
-### Naming Conventions
-- **Files**: kebab-case (user-controller.js)
-- **Classes**: PascalCase (UserService)
-- **Functions/Variables**: camelCase (getUserById)
-- **Constants**: UPPER_SNAKE_CASE (API_BASE_URL)
-- **Database Tables**: snake_case (user_accounts)
+### 命名规范
+- **文件**：kebab-case（user-controller.js）
+- **类**：PascalCase（UserService）
+- **函数/变量**：camelCase（getUserById）
+- **常量**：UPPER_SNAKE_CASE（API_BASE_URL）
+- **数据库表**：snake_case（user_accounts）
 
-### Git Workflow
-- Branch names: `feature/description` or `fix/description`
-- Commit messages: Follow conventional commits
-- PR required before merge
-- All CI/CD checks must pass
-- Minimum 1 approval required
+### Git 工作流
+- 分支命名：`feature/描述` 或 `fix/描述`
+- 提交消息：遵循约定式提交
+- 合并前需要 PR
+- 所有 CI/CD 检查必须通过
+- 至少需要 1 人审批
 
-### Testing Requirements
-- Minimum 80% code coverage
-- All critical paths must have tests
-- Use Jest for unit tests
-- Use Cypress for E2E tests
-- Test filenames: `*.test.ts` or `*.spec.ts`
+### 测试要求
+- 最低 80% 代码覆盖率
+- 所有关键路径必须有测试
+- 使用 Jest 进行单元测试
+- 使用 Cypress 进行 E2E 测试
+- 测试文件命名：`*.test.ts` 或 `*.spec.ts`
 
-### API Standards
-- RESTful endpoints only
-- JSON request/response
-- Use HTTP status codes correctly
-- Version API endpoints: `/api/v1/`
-- Document all endpoints with examples
+### API 规范
+- 仅使用 RESTful 端点
+- JSON 请求/响应
+- 正确使用 HTTP 状态码
+- API 版本控制：`/api/v1/`
+- 所有端点需要附带示例文档
 
-### Database
-- Use migrations for schema changes
-- Never hardcode credentials
-- Use connection pooling
-- Enable query logging in development
-- Regular backups required
+### 数据库
+- 使用迁移管理 schema 变更
+- 绝不硬编码凭据
+- 使用连接池
+- 开发环境启用查询日志
+- 需要定期备份
 
-### Deployment
-- Docker-based deployment
-- Kubernetes orchestration
-- Blue-green deployment strategy
-- Automatic rollback on failure
-- Database migrations run before deploy
+### 部署
+- 基于 Docker 的部署
+- Kubernetes 编排
+- 蓝绿部署策略
+- 失败时自动回滚
+- 数据库迁移在部署前运行
 
-## Common Commands
+## 常用命令
 
-| Command | Purpose |
+| 命令 | 用途 |
 |---------|---------|
-| `npm run dev` | Start development server |
-| `npm test` | Run test suite |
-| `npm run lint` | Check code style |
-| `npm run build` | Build for production |
-| `npm run migrate` | Run database migrations |
+| `npm run dev` | 启动开发服务器 |
+| `npm test` | 运行测试套件 |
+| `npm run lint` | 检查代码风格 |
+| `npm run build` | 构建生产版本 |
+| `npm run migrate` | 运行数据库迁移 |
 
-## Team Contacts
-- Tech Lead: Sarah Chen (@sarah.chen)
-- Product Manager: Mike Johnson (@mike.j)
-- DevOps: Alex Kim (@alex.k)
+## 团队联系人
+- 技术负责人：Sarah Chen（@sarah.chen）
+- 产品经理：Mike Johnson（@mike.j）
+- 运维：Alex Kim（@alex.k）
 
-## Known Issues & Workarounds
-- PostgreSQL connection pooling limited to 20 during peak hours
-- Workaround: Implement query queuing
-- Safari 14 compatibility issues with async generators
-- Workaround: Use Babel transpiler
+## 已知问题和解决方案
+- PostgreSQL 连接池在高峰时段限制为 20 个
+- 解决方案：实现查询队列
+- Safari 14 对 async generator 的兼容性问题
+- 解决方案：使用 Babel 转译
 
-## Related Projects
-- Analytics Dashboard: `/projects/analytics`
-- Mobile App: `/projects/mobile`
-- Admin Panel: `/projects/admin`
+## 相关项目
+- 分析仪表盘：`/projects/analytics`
+- 移动应用：`/projects/mobile`
+- 管理后台：`/projects/admin`

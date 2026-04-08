@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check external URLs in Markdown files are reachable."""
+"""检查 Markdown 文件中的外部 URL 是否可访问。"""
 
 import re
 import sys
@@ -19,7 +19,7 @@ IGNORE_DIRS = {
     ".claude",
 }
 TIMEOUT = 10
-# Domains/patterns to skip: badges, placeholders, and bot-blocking hosts
+# 要跳过的域名/模式：徽章、占位符和阻止机器人的主机
 SKIP_DOMAINS = {
     "shields.io",
     "img.shields.io",
@@ -30,14 +30,14 @@ SKIP_DOMAINS = {
     "127.0.0.1",
     "my-webhook.example.com",
     "git.internal",
-    # Wikipedia blocks HEAD requests — GET also unreliable in CI without network
+    # Wikipedia 阻止 HEAD 请求 — 在 CI 中没有网络的情况下 GET 也不可靠
     "en.wikipedia.org",
     "wikipedia.org",
-    # GitHub API requires auth — unauthenticated requests return 404 for protected endpoints
+    # GitHub API 需要认证 — 未认证请求对受保护端点返回 404
     "api.github.com",
 }
 SKIP_DOMAIN_SUFFIXES = (".example.com", ".example.org", ".internal")
-# Placeholder/template URLs that are intentionally non-resolvable
+# 故意无法解析的占位符/模板 URL
 SKIP_URL_PATTERNS = {
     "github.com/org/",
     "github.com/user/",
@@ -52,7 +52,7 @@ def is_skipped(url: str) -> bool:
     try:
         domain = url.split("/")[2]
     except IndexError:
-        return True  # malformed URL
+        return True  # 格式错误的 URL
     if any(skip == domain or domain.endswith("." + skip) for skip in SKIP_DOMAINS):
         return True
     if any(domain.endswith(suffix) for suffix in SKIP_DOMAIN_SUFFIXES):
@@ -70,7 +70,7 @@ def check_url(url: str) -> tuple[str, bool, str]:
         with urllib.request.urlopen(req, timeout=TIMEOUT):  # nosec B310
             return url, True, "ok"
     except urllib.error.HTTPError as e:
-        # 403/429 often means the server is up but blocks bots — treat as ok
+        # 403/429 通常表示服务器正常但阻止了机器人 — 视为正常
         if e.code in (401, 403, 405, 429):
             return url, True, f"http {e.code} (ignored)"
         return url, False, f"HTTP {e.code}"
@@ -90,8 +90,8 @@ def main(strict: bool = False) -> int:
     for file_path in md_files:
         content = file_path.read_text()
         for raw_url in URL_RE.findall(content):
-            # Strip trailing Markdown/punctuation characters the regex may over-capture
-            # from link syntax like [text](https://url/) or **https://url)**
+            # 剥离正则表达式可能过度捕获的尾随 Markdown/标点符号
+            # 来自链接语法如 [text](https://url/) 或 **https://url)**
             clean_url = raw_url.rstrip(")>*_`':.,;").split("#")[0]
             urls.setdefault(clean_url, []).append(str(file_path))
 
@@ -111,8 +111,8 @@ def main(strict: bool = False) -> int:
         print("❌ Dead links found:")
         for e in sorted(errors):
             print(f"  - {e}")
-        # In non-strict mode (pre-commit), report but don't block the commit.
-        # Set LINK_CHECK_STRICT=1 (as CI does) to enforce failures.
+        # 在非严格模式（pre-commit）下，报告但不阻止提交。
+        # 设置 LINK_CHECK_STRICT=1（如 CI 所做）以强制失败。
         return 1 if strict else 0
 
     print(f"✅ All external URLs reachable ({len(urls)} checked)")

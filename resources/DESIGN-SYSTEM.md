@@ -1,224 +1,224 @@
-# Claude How To - Design System
+# Claude How To - 设计系统
 
-## Visual Identity
+## 视觉识别
 
-### Icon Design Concept: Compass with Code Bracket
+### 图标设计理念：带代码括号的指南针
 
-The Claude How To icon uses a **compass with a `>` code bracket** to represent guided navigation through code:
+Claude How To 图标使用**带 `>` 代码括号的指南针**来表示代码中的引导式导航：
 
 ```
-     N (green)
+     N (绿色)
      ▲
      │
-W ───>─── E     Compass = Guidance/Direction
-     │          > Bracket = Code/Terminal/CLI
+W ───>─── E     指南针 = 引导/方向
+     │          > 括号 = 代码/终端/CLI
      ▼
-     S (black)
+     S (黑色)
 ```
 
-This creates:
-- **Visual Clarity**: Immediately communicates "code navigation guide"
-- **Symbolic Meaning**: Compass = finding your way; `>` = code/terminal
-- **Scalability**: Works at any size from 16px to 512px
-- **Brand Alignment**: Matches the developer tool aesthetic with minimal palette
+这创造了：
+- **视觉清晰度**：立即传达"代码导航指南"
+- **象征意义**：指南针 = 找到方向；`>` = 代码/终端
+- **可扩展性**：从16px到512px任意尺寸都适用
+- **品牌一致性**：与开发者工具美学相匹配，最小调色板
 
 ---
 
-## Color System
+## 色彩系统
 
-### Palette
+### 调色板
 
-| Color | Hex | RGB | Usage |
+| 颜色 | Hex | RGB | 用途 |
 |-------|-----|-----|-------|
-| Black (Primary) | `#000000` | 0, 0, 0 | Main strokes, text, south needle |
-| White (Background) | `#FFFFFF` | 255, 255, 255 | Light backgrounds |
-| Gray (Secondary) | `#6B7280` | 107, 114, 128 | Minor tick marks, secondary text |
-| Bright Green (Accent) | `#22C55E` | 34, 197, 94 | North needle, center dot, accent lines |
-| Near Black (Dark BG) | `#0A0A0A` | 10, 10, 10 | Dark mode backgrounds |
+| 黑色（主色） | `#000000` | 0, 0, 0 | 主笔触、文字、南针 |
+| 白色（背景） | `#FFFFFF` | 255, 255, 255 | 浅色背景 |
+| 灰色（次要） | `#6B7280` | 107, 114, 128 | 次要刻度线、次要文字 |
+| 亮绿色（强调） | `#22C55E` | 34, 197, 94 | 北针、中心点、强调线 |
+| 近黑色（深色背景） | `#0A0A0A` | 10, 10, 10 | 深色模式背景 |
 
-### Contrast Ratios (WCAG)
+### 对比度（WCAG）
 
-- Black on White: **21:1** AAA
-- Gray on White: **4.6:1** AA
-- Green on White: **3.2:1** (decorative only, not for text)
-- White on Dark: **19.5:1** AAA
+- 黑色 on 白色：**21:1** AAA
+- 灰色 on 白色：**4.6:1** AA
+- 绿色 on 白色：**3.2:1**（仅装饰性，不用于文字）
+- 白色 on 深色：**19.5:1** AAA
 
-### Accent Color Rule
+### 强调色规则
 
-**Bright Green (#22C55E) is reserved for highlights only:**
-- Compass north needle
-- Center dot
-- Accent underlines/borders
-- Never as a background color
-- Never for body text
-
----
-
-## Typography
-
-### Logo Font
-- **Family**: Inter, SF Pro Display, -apple-system, Segoe UI, sans-serif
-- **"Claude"**: 42px, weight 700 (bold), Black
-- **"How-To"**: 32px, weight 500 (medium), Gray (#6B7280)
-- **Subtitle**: 10px, weight 500, Gray, letter-spacing 1.5px, uppercase
-
-### Interface Font
-- **Family**: Inter, SF Pro, system fonts (sans-serif)
-- **Weight**: 400-600
-- **Style**: Clean, readable
+**亮绿色（#22C55E）仅用于高亮：**
+- 指南针北针
+- 中心点
+- 强调下划线/边框
+- 永远不作为背景色
+- 永远不用于正文
 
 ---
 
-## Icon Details
+## 字体排版
 
-### Compass Specifications
+### Logo 字体
+- **字体族**：Inter, SF Pro Display, -apple-system, Segoe UI, sans-serif
+- **"Claude"**：42px, weight 700 (bold), 黑色
+- **"How-To"**：32px, weight 500 (medium), 灰色 (#6B7280)
+- **副标题**：10px, weight 500, 灰色, letter-spacing 1.5px, 全大写
 
-The compass mark is built from these geometric elements:
+### 界面字体
+- **字体族**：Inter, SF Pro, system fonts (sans-serif)
+- **字重**：400-600
+- **风格**：简洁、可读
+
+---
+
+## 图标详情
+
+### 指南针规格
+
+指南针标志由以下几何元素构成：
 
 ```
-Element             | Stroke/Fill    | Color
+元素                  | 笔触/填充     | 颜色
 --------------------|----------------|------------------
-Outer ring          | 3px stroke     | Black / White (dark mode)
-North tick          | 2.5px stroke   | Black / White (dark mode)
-Other cardinal ticks| 2px stroke     | Gray / White 50% (dark mode)
-Intercardinal ticks | 1.5px stroke   | Gray / White 40% (dark mode)
-North needle        | filled polygon | #22C55E (always green)
-South needle        | filled polygon | Black / White (dark mode)
-> bracket           | 3px stroke     | Black / White (dark mode)
-Center dot          | filled circle  | #22C55E (always green)
+外环                  | 3px 笔触       | 黑色 / 白色（深色模式）
+北刻度               | 2.5px 笔触     | 黑色 / 白色（深色模式）
+其他基点刻度          | 2px 笔触       | 灰色 / 白色 50%（深色模式）
+间点刻度             | 1.5px 笔触     | 灰色 / 白色 40%（深色模式）
+北针                 | 填充多边形     | #22C55E（始终绿色）
+南针                 | 填充多边形     | 黑色 / 白色（深色模式）
+> 括号               | 3px 笔触       | 黑色 / 白色（深色模式）
+中心点               | 填充圆形       | #22C55E（始终绿色）
 ```
 
-### Size Progression
+### 尺寸递进
 
 ```
-16px  → Ring + needles + chevron only (minimal)
-32px  → Adds cardinal tick marks
-64px  → Adds intercardinal tick marks
-128px → Full detail, all elements crisp
-256px → Maximum detail, thick strokes
+16px  → 仅环 + 指针 + V 形（最简）
+32px  → 添加基点刻度线
+64px  → 添加间点刻度线
+128px → 完整细节，所有元素清晰
+256px → 最大细节，较粗笔触
 ```
 
 ---
 
-## Sizing Guidelines
+## 尺寸指南
 
-### Logo Sizing
+### Logo 尺寸
 
-- **Minimum**: 200px width (for web)
-- **Recommended**: 520px (native size)
-- **Maximum**: Unlimited (vector format)
-- **Aspect Ratio**: ~4.3:1 (width:height)
+- **最小**：200px 宽度（用于网页）
+- **推荐**：520px（原始尺寸）
+- **最大**：无限（矢量格式）
+- **宽高比**：约 4.3:1（宽:高）
 
-### Icon Sizing
+### 图标尺寸
 
-- **Minimum**: 16px (favicon)
-- **Recommended**: 64-256px (apps, avatars)
-- **Maximum**: Unlimited (vector format)
-- **Aspect Ratio**: 1:1 (square)
+- **最小**：16px（favicon）
+- **推荐**：64-256px（应用、头像）
+- **最大**：无限（矢量格式）
+- **宽高比**：1:1（正方形）
 
 ---
 
-## Spacing & Alignment
+## 间距与对齐
 
-### Logo Spacing
+### Logo 间距
 
 ```
 ┌─────────────────────────────────────┐
 │                                     │
-│        Clear Space Minimum          │
-│         (logo height / 2)           │
+│        最小留白区域                  │
+│         (logo 高度 / 2)              │
 │                                     │
-│    [COMPASS]  Claude                │
+│    [指南针]  Claude                 │
 │               How-To                │
 │                                     │
 └─────────────────────────────────────┘
 ```
 
-### Icon Center Point
+### 图标中心点
 
-All icons center at the midpoint of their canvas:
-- 128×128 for 256px canvas
-- 64×64 for 128px canvas
-- Maintains alignment with other UI elements
-
----
-
-## Accessibility
-
-### Color Contrast
-- All text meets WCAG AA (4.5:1 minimum)
-- Green accent is decorative, not informational
-- No red-green color dependency
-
-### Scalability
-- Vector format ensures clarity at any size
-- Geometric shapes remain recognizable at 16px
-- Progressive detail based on available size
+所有图标的中心位于画布的中点：
+- 256px 画布对应 128×128
+- 128px 画布对应 64×64
+- 与其他 UI 元素保持对齐
 
 ---
 
-## Application Examples
+## 无障碍
 
-### Web Header
-- Size: 520×120px logo
-- File: `logos/claude-howto-logo.svg`
-- Background: White or dark (#0A0A0A)
-- Padding: 20px minimum
+### 色彩对比
+- 所有文字符合 WCAG AA（最低 4.5:1）
+- 绿色强调色是装饰性的，非信息性的
+- 无红绿色彩依赖
 
-### App Icon
-- Size: 256×256px
-- File: `icons/claude-howto-icon.svg`
-- Background: White or dark
-- Use: App shortcuts, avatars
-
-### Browser Favicon
-- Size: 32px (primary), 16px (fallback)
-- File: `favicons/favicon-32.svg`
-- Format: SVG for crisp display
-
-### Social Media
-- Profile: 256×256px icon
-- Banner: 520×120px logo (centered)
-
-### Documentation
-- Chapter Headers: Logo scaled to fit
-- Section Icons: 64×64px favicon
-- Inline: 32×32px favicon
+### 可扩展性
+- 矢量格式确保任意尺寸都清晰
+- 几何形状在16px时仍可识别
+- 基于可用尺寸的渐进细节
 
 ---
 
-## File Format Details
+## 应用示例
 
-### SVG Structure
+### 网页 Header
+- 尺寸：520×120px logo
+- 文件：`logos/claude-howto-logo.svg`
+- 背景：白色或深色 (#0A0A0A)
+- 内边距：最小 20px
 
-All SVG files are flat design:
-- No gradients (solid colors only)
-- No filter effects (no blur, glow, or shadow)
-- Clean stroke and fill geometry
-- ViewBox for responsive scaling
-- Readable, commented code
+### 应用图标
+- 尺寸：256×256px
+- 文件：`icons/claude-howto-icon.svg`
+- 背景：白色或深色
+- 用途：应用快捷方式、头像
 
-### Cross-Browser Compatibility
+### 浏览器 Favicon
+- 尺寸：32px（主要）、16px（备用）
+- 文件：`favicons/favicon-32.svg`
+- 格式：SVG 以确保清晰显示
 
-- Chrome/Edge: Full support
-- Firefox: Full support
-- Safari: Full support
-- iOS Safari: Full support
-- All modern browsers: Full support
+### 社交媒体
+- 头像：256×256px 图标
+- 横幅：520×120px logo（居中）
+
+### 文档
+- 章节标题：Logo 缩放至合适大小
+- 章节图标：64×64px favicon
+- 行内：32×32px favicon
 
 ---
 
-## Customization
+## 文件格式详情
 
-### Changing the Accent Color
+### SVG 结构
 
-To create variants with a different accent:
+所有 SVG 文件都是扁平设计：
+- 无渐变（仅纯色）
+- 无滤镜效果（无模糊、发光或阴影）
+- 清晰的笔触和填充几何
+- 用于响应式缩放的 viewBox
+- 可读的、带注释的代码
 
-1. Replace all instances of `#22C55E` with your accent color
-2. Ensure contrast ratio stays above 3:1 for decorative elements
-3. Keep black/white/gray structure unchanged
+### 跨浏览器兼容性
 
-### Scaling
+- Chrome/Edge：完全支持
+- Firefox：完全支持
+- Safari：完全支持
+- iOS Safari：完全支持
+- 所有现代浏览器：完全支持
+
+---
+
+## 自定义
+
+### 更改强调色
+
+创建不同强调色的变体：
+
+1. 将所有 `#22C55E` 实例替换为你的强调色
+2. 确保装饰元素的对比度保持在 3:1 以上
+3. 保持黑色/白色/灰色结构不变
+
+### 缩放
 
 ```css
 svg {
@@ -227,18 +227,18 @@ svg {
 }
 ```
 
-SVGs scale automatically via viewBox — no transforms needed.
+SVG 通过 viewBox 自动缩放 — 无需 transform。
 
 ---
 
-## Version Control
+## 版本控制
 
-Track design changes in git:
-- Version SVG files normally (they're text)
-- Tag releases with design changes
-- Include DESIGN-SYSTEM.md in commits
+在 git 中跟踪设计变更：
+- 正常版本控制 SVG 文件（它们是文本）
+- 在包含设计变更的提交上打标签
+- 在提交中包含 DESIGN-SYSTEM.md
 
 ---
 
-**Last Updated**: February 2026
-**Design System Version**: 3.0
+**最后更新**：2026年2月
+**设计系统版本**：3.0

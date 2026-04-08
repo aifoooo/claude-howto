@@ -1,4 +1,4 @@
-"""Tests for the EPUB builder module."""
+"""EPUB 构建器模块的测试。"""
 
 from __future__ import annotations
 
@@ -8,8 +8,8 @@ from unittest.mock import patch
 
 import pytest
 
-# Fixtures are imported from conftest.py automatically by pytest
-# Import from parent directory (handled by conftest.py sys.path)
+# Fixtures 是由 pytest 自动从 conftest.py 导入的
+# 从父目录导入（由 conftest.py 的 sys.path 处理）
 from build_epub import (
     BuildState,
     ChapterCollector,
@@ -24,22 +24,22 @@ from build_epub import (
 )
 
 # =============================================================================
-# BuildState Tests
+# BuildState 测试
 # =============================================================================
 
 
 class TestBuildState:
-    """Tests for BuildState dataclass."""
+    """BuildState 数据类的测试。"""
 
     def test_initial_state(self, state: BuildState) -> None:
-        """Test that initial state is empty."""
+        """测试初始状态为空。"""
         assert state.mermaid_counter == 0
         assert len(state.mermaid_cache) == 0
         assert len(state.mermaid_added_to_book) == 0
         assert len(state.path_to_chapter) == 0
 
     def test_state_modification(self, state: BuildState) -> None:
-        """Test that state can be modified."""
+        """测试状态可以被修改。"""
         state.mermaid_counter = 5
         state.mermaid_cache["key"] = (b"data", "file.png")
         state.mermaid_added_to_book.add("file.png")
@@ -51,7 +51,7 @@ class TestBuildState:
         assert state.path_to_chapter["README.md"] == "chap_01.xhtml"
 
     def test_reset(self, state: BuildState) -> None:
-        """Test that reset clears all state."""
+        """测试 reset 清除所有状态。"""
         state.mermaid_counter = 5
         state.mermaid_cache["key"] = (b"data", "file.png")
         state.mermaid_added_to_book.add("file.png")
@@ -66,15 +66,15 @@ class TestBuildState:
 
 
 # =============================================================================
-# EPUBConfig Tests
+# EPUBConfig 测试
 # =============================================================================
 
 
 class TestEPUBConfig:
-    """Tests for EPUBConfig dataclass."""
+    """EPUBConfig 数据类的测试。"""
 
     def test_required_fields(self, tmp_path: Path) -> None:
-        """Test that required fields must be provided."""
+        """测试必须提供必填字段。"""
         config = EPUBConfig(
             root_path=tmp_path,
             output_path=tmp_path / "out.epub",
@@ -83,7 +83,7 @@ class TestEPUBConfig:
         assert config.output_path == tmp_path / "out.epub"
 
     def test_default_values(self, tmp_path: Path) -> None:
-        """Test that default values are set correctly."""
+        """测试默认值是否正确设置。"""
         config = EPUBConfig(
             root_path=tmp_path,
             output_path=tmp_path / "out.epub",
@@ -97,7 +97,7 @@ class TestEPUBConfig:
         assert config.max_retries == 3
 
     def test_custom_values(self, tmp_path: Path) -> None:
-        """Test that custom values override defaults."""
+        """测试自定义值覆盖默认值。"""
         config = EPUBConfig(
             root_path=tmp_path,
             output_path=tmp_path / "out.epub",
@@ -111,20 +111,20 @@ class TestEPUBConfig:
 
 
 # =============================================================================
-# Validation Tests
+# 验证测试
 # =============================================================================
 
 
 class TestValidation:
-    """Tests for input validation."""
+    """输入验证的测试。"""
 
     def test_valid_inputs(self, config: EPUBConfig, logger: logging.Logger) -> None:
-        """Test that valid inputs pass validation."""
-        # Should not raise
+        """测试有效输入通过验证。"""
+        # 不应抛出异常
         validate_inputs(config, logger)
 
     def test_missing_root_path(self, tmp_path: Path, logger: logging.Logger) -> None:
-        """Test that missing root path raises ValidationError."""
+        """测试缺少根路径时抛出 ValidationError。"""
         config = EPUBConfig(
             root_path=tmp_path / "nonexistent",
             output_path=tmp_path / "out.epub",
@@ -133,7 +133,7 @@ class TestValidation:
             validate_inputs(config, logger)
 
     def test_root_path_is_file(self, tmp_path: Path, logger: logging.Logger) -> None:
-        """Test that file as root path raises ValidationError."""
+        """测试将文件作为根路径时抛出 ValidationError。"""
         file_path = tmp_path / "file.txt"
         file_path.write_text("content")
         config = EPUBConfig(
@@ -144,7 +144,7 @@ class TestValidation:
             validate_inputs(config, logger)
 
     def test_no_markdown_files(self, tmp_path: Path, logger: logging.Logger) -> None:
-        """Test that directory with no markdown files raises ValidationError."""
+        """测试没有 markdown 文件的目录时抛出 ValidationError。"""
         empty_dir = tmp_path / "empty"
         empty_dir.mkdir()
         config = EPUBConfig(
@@ -157,7 +157,7 @@ class TestValidation:
     def test_missing_output_directory(
         self, tmp_project: Path, logger: logging.Logger
     ) -> None:
-        """Test that missing output directory raises ValidationError."""
+        """测试缺少输出目录时抛出 ValidationError。"""
         config = EPUBConfig(
             root_path=tmp_project,
             output_path=tmp_project / "nonexistent" / "out.epub",
@@ -167,29 +167,29 @@ class TestValidation:
 
 
 # =============================================================================
-# Mermaid Processing Tests
+# Mermaid 处理测试
 # =============================================================================
 
 
 class TestMermaidProcessing:
-    """Tests for Mermaid diagram processing."""
+    """Mermaid 图表处理的测试。"""
 
     def test_sanitize_mermaid_numbered_list(self) -> None:
-        """Test that numbered lists in brackets are escaped."""
+        """测试方括号中的编号列表被转义。"""
         input_code = 'A["1. First item"] --> B["2. Second item"]'
         expected = 'A["1\\. First item"] --> B["2\\. Second item"]'
         assert sanitize_mermaid(input_code) == expected
 
     def test_sanitize_mermaid_no_change(self) -> None:
-        """Test that code without numbered lists is unchanged."""
+        """测试没有编号列表的代码保持不变。"""
         input_code = "A --> B --> C"
         assert sanitize_mermaid(input_code) == input_code
 
     def test_extract_mermaid_blocks(
         self, tmp_path: Path, logger: logging.Logger
     ) -> None:
-        """Test extraction of Mermaid blocks from files."""
-        # Create test file with mermaid blocks
+        """测试从文件中提取 Mermaid 块。"""
+        # 创建包含 mermaid 块的测试文件
         md_file = tmp_path / "test.md"
         md_file.write_text(
             """# Test
@@ -211,15 +211,15 @@ graph LR
         diagrams = extract_all_mermaid_blocks([(md_file, "Test")], logger)
 
         assert len(diagrams) == 2
-        assert diagrams[0][0] == 1  # First diagram index
-        assert diagrams[1][0] == 2  # Second diagram index
+        assert diagrams[0][0] == 1  # 第一个图表索引
+        assert diagrams[1][0] == 2  # 第二个图表索引
         assert "A --> B" in diagrams[0][1]
         assert "C --> D" in diagrams[1][1]
 
     def test_extract_mermaid_blocks_deduplication(
         self, tmp_path: Path, logger: logging.Logger
     ) -> None:
-        """Test that duplicate Mermaid blocks are deduplicated."""
+        """测试重复的 Mermaid 块被去重。"""
         md_file1 = tmp_path / "test1.md"
         md_file2 = tmp_path / "test2.md"
 
@@ -235,20 +235,20 @@ graph TD
             [(md_file1, "Test1"), (md_file2, "Test2")], logger
         )
 
-        # Should only have one diagram since they're identical
+        # 由于图表相同，应该只有一个
         assert len(diagrams) == 1
 
 
 # =============================================================================
-# Chapter Collection Tests
+# 章节收集测试
 # =============================================================================
 
 
 class TestChapterCollector:
-    """Tests for ChapterCollector class."""
+    """ChapterCollector 类的测试。"""
 
     def test_collect_single_file(self, tmp_path: Path, state: BuildState) -> None:
-        """Test collecting a single markdown file."""
+        """测试收集单个 markdown 文件。"""
         readme = tmp_path / "README.md"
         readme.write_text("# Test")
 
@@ -262,17 +262,17 @@ class TestChapterCollector:
         assert state.path_to_chapter["README.md"] == "chap_01.xhtml"
 
     def test_collect_folder(self, tmp_project: Path, state: BuildState) -> None:
-        """Test collecting a folder with multiple files."""
+        """测试收集包含多个文件的文件夹。"""
         collector = ChapterCollector(tmp_project, state)
         chapters = collector.collect_all_chapters([("01-test-chapter", "Test Chapter")])
 
-        assert len(chapters) == 2  # README.md and section.md
+        assert len(chapters) == 2  # README.md 和 section.md
         assert chapters[0].is_folder_overview is True
         assert chapters[0].folder_name == "Test Chapter"
         assert chapters[1].is_folder_overview is False
 
     def test_path_mapping(self, tmp_project: Path, state: BuildState) -> None:
-        """Test that path mapping is built correctly."""
+        """测试路径映射是否正确构建。"""
         collector = ChapterCollector(tmp_project, state)
         collector.collect_all_chapters(
             [
@@ -287,15 +287,15 @@ class TestChapterCollector:
 
 
 # =============================================================================
-# HTML Generation Tests
+# HTML 生成测试
 # =============================================================================
 
 
 class TestHTMLGeneration:
-    """Tests for HTML generation."""
+    """HTML 生成的测试。"""
 
     def test_create_chapter_html_overview(self) -> None:
-        """Test creating HTML for an overview chapter."""
+        """测试为概述章节创建 HTML。"""
         html = create_chapter_html(
             display_name="Introduction",
             file_title="Introduction",
@@ -309,7 +309,7 @@ class TestHTMLGeneration:
         assert "<p>Content</p>" in html
 
     def test_create_chapter_html_section(self) -> None:
-        """Test creating HTML for a section chapter."""
+        """测试为章节创建 HTML。"""
         html = create_chapter_html(
             display_name="Chapter",
             file_title="Section",
@@ -321,7 +321,7 @@ class TestHTMLGeneration:
         assert "<h1>" not in html
 
     def test_html_escaping(self) -> None:
-        """Test that HTML special characters are escaped."""
+        """测试 HTML 特殊字符被转义。"""
         html = create_chapter_html(
             display_name="<script>alert('xss')</script>",
             file_title="Test & Title",
@@ -330,26 +330,26 @@ class TestHTMLGeneration:
         )
 
         assert "&lt;script&gt;" in html
-        # Note: Python's html.escape uses &#x27; for single quotes
+        # 注意：Python 的 html.escape 对单引号使用 &#x27;
         assert "<script>alert" not in html
 
 
 # =============================================================================
-# Chapter Order Tests
+# 章节顺序测试
 # =============================================================================
 
 
 class TestChapterOrder:
-    """Tests for chapter ordering."""
+    """章节排序的测试。"""
 
     def test_get_chapter_order(self) -> None:
-        """Test that chapter order is defined correctly."""
+        """测试章节顺序是否正确定义。"""
         order = get_chapter_order()
 
         assert len(order) > 0
         assert order[0] == ("README.md", "Introduction")
 
-        # Check that all expected chapters are present
+        # 检查所有预期的章节都存在
         chapter_names = [name for name, _ in order]
         assert "01-slash-commands" in chapter_names
         assert "02-memory" in chapter_names
@@ -357,37 +357,37 @@ class TestChapterOrder:
 
 
 # =============================================================================
-# Logging Tests
+# 日志测试
 # =============================================================================
 
 
 class TestLogging:
-    """Tests for logging setup."""
+    """日志设置的测试。"""
 
     def test_setup_logging_default(self) -> None:
-        """Test default logging setup."""
+        """测试默认日志设置。"""
         logger = setup_logging(verbose=False)
         assert logger.name == "epub_builder"
 
     def test_setup_logging_verbose(self) -> None:
-        """Test verbose logging setup."""
+        """测试详细日志设置。"""
         logger = setup_logging(verbose=True)
         assert logger.name == "epub_builder"
 
 
 # =============================================================================
-# Integration Tests
+# 集成测试
 # =============================================================================
 
 
 class TestIntegration:
-    """Integration tests for the full build process."""
+    """完整构建过程的集成测试。"""
 
     @pytest.mark.asyncio
     async def test_build_without_mermaid(
         self, tmp_project: Path, logger: logging.Logger
     ) -> None:
-        """Test building an EPUB without Mermaid diagrams."""
+        """测试构建不包含 Mermaid 图表的 EPUB。"""
         from build_epub import build_epub_async
 
         config = EPUBConfig(
@@ -395,7 +395,7 @@ class TestIntegration:
             output_path=tmp_project / "test.epub",
         )
 
-        # Override chapter order for minimal test
+        # 覆盖章节顺序以进行最小化测试
         with patch("build_epub.get_chapter_order") as mock_order:
             mock_order.return_value = [("README.md", "Introduction")]
 
@@ -406,7 +406,7 @@ class TestIntegration:
 
 
 # =============================================================================
-# Run tests
+# 运行测试
 # =============================================================================
 
 

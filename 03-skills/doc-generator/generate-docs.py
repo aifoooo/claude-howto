@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
+"""从 Python 源代码中提取 API 文档。"""
+
 import ast
 
 
 class APIDocExtractor(ast.NodeVisitor):
-    """Extract API documentation from Python source code."""
+    """从 Python 源代码中提取 API 文档。"""
 
     def __init__(self):
         self.endpoints = []
 
     def visit_FunctionDef(self, node):
-        """Extract function documentation."""
+        """提取函数文档。"""
         if node.name.startswith("get_") or node.name.startswith("post_"):
             doc = ast.get_docstring(node)
             endpoint = {
@@ -22,14 +24,14 @@ class APIDocExtractor(ast.NodeVisitor):
         self.generic_visit(node)
 
     def _extract_return_type(self, node):
-        """Extract return type from function annotation."""
+        """从函数注解中提取返回类型。"""
         if node.returns:
             return ast.unparse(node.returns)
         return "Any"
 
 
 def generate_markdown_docs(endpoints: list[dict]) -> str:
-    """Generate markdown documentation from endpoints."""
+    """从端点生成 markdown 文档。"""
     docs = "# API Documentation\n\n"
 
     for endpoint in endpoints:

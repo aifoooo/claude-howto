@@ -3,498 +3,498 @@
   <img alt="Claude How To" src="resources/logos/claude-howto-logo.svg">
 </picture>
 
-# Claude Code Examples - Complete Index
+# Claude Code 示例 - 完整索引
 
-This document provides a complete index of all example files organized by feature type.
+本文档按功能类型提供了所有示例文件的完整索引。
 
-## Summary Statistics
+## 摘要统计
 
-- **Total Files**: 100+ files
-- **Categories**: 10 feature categories
-- **Plugins**: 3 complete plugins
-- **Skills**: 6 complete skills
-- **Hooks**: 8 example hooks
-- **Ready to Use**: All examples
-
----
-
-## 01. Slash Commands (10 files)
-
-User-invoked shortcuts for common workflows.
-
-| File | Description | Use Case |
-|------|-------------|----------|
-| `optimize.md` | Code optimization analyzer | Find performance issues |
-| `pr.md` | Pull request preparation | PR workflow automation |
-| `generate-api-docs.md` | API documentation generator | Generate API docs |
-| `commit.md` | Commit message helper | Standardized commits |
-| `setup-ci-cd.md` | CI/CD pipeline setup | DevOps automation |
-| `push-all.md` | Push all changes | Quick push workflow |
-| `unit-test-expand.md` | Expand unit test coverage | Test automation |
-| `doc-refactor.md` | Documentation refactoring | Doc improvements |
-| `pr-slash-command.png` | Screenshot example | Visual reference |
-| `README.md` | Documentation | Setup and usage guide |
-
-**Installation Path**: `.claude/commands/`
-
-**Usage**: `/optimize`, `/pr`, `/generate-api-docs`, `/commit`, `/setup-ci-cd`, `/push-all`, `/unit-test-expand`, `/doc-refactor`
+- **总文件数**：100+ 个文件
+- **类别**：10 个功能类别
+- **插件**：3 个完整插件
+- **技能**：6 个完整技能
+- **钩子**：8 个示例钩子
+- **可直接使用**：所有示例
 
 ---
 
-## 02. Memory (6 files)
+## 01. 斜杠命令（10 个文件）
 
-Persistent context and project standards.
+用户调用的快捷方式，用于常见工作流程。
 
-| File | Description | Scope | Location |
-|------|-------------|-------|----------|
-| `project-CLAUDE.md` | Team project standards | Project-wide | `./CLAUDE.md` |
-| `directory-api-CLAUDE.md` | API-specific rules | Directory | `./src/api/CLAUDE.md` |
-| `personal-CLAUDE.md` | Personal preferences | User | `~/.claude/CLAUDE.md` |
-| `memory-saved.png` | Screenshot: memory saved | - | Visual reference |
-| `memory-ask-claude.png` | Screenshot: ask Claude | - | Visual reference |
-| `README.md` | Documentation | - | Reference |
+| 文件 | 描述 | 使用场景 |
+|------|------|----------|
+| `optimize.md` | 代码优化分析器 | 查找性能问题 |
+| `pr.md` | Pull request 准备 | PR 工作流程自动化 |
+| `generate-api-docs.md` | API 文档生成器 | 生成 API 文档 |
+| `commit.md` | 提交消息助手 | 标准化提交 |
+| `setup-ci-cd.md` | CI/CD 流水线设置 | DevOps 自动化 |
+| `push-all.md` | 推送所有更改 | 快速推送工作流程 |
+| `unit-test-expand.md` | 扩展单元测试覆盖率 | 测试自动化 |
+| `doc-refactor.md` | 文档重构 | 文档改进 |
+| `pr-slash-command.png` | 截图示例 | 视觉参考 |
+| `README.md` | 文档 | 设置和使用指南 |
 
-**Installation**: Copy to appropriate location
+**安装路径**：`.claude/commands/`
 
-**Usage**: Automatically loaded by Claude
+**使用**：`/optimize`、`/pr`、`/generate-api-docs`、`/commit`、`/setup-ci-cd`、`/push-all`、`/unit-test-expand`、`/doc-refactor`
 
 ---
 
-## 03. Skills (28 files)
+## 02. 内存（6 个文件）
 
-Auto-invoked capabilities with scripts and templates.
+持久化上下文和项目标准。
 
-### Code Review Skill (5 files)
+| 文件 | 描述 | 范围 | 位置 |
+|------|------|------|------|
+| `project-CLAUDE.md` | 团队项目标准 | 项目范围 | `./CLAUDE.md` |
+| `directory-api-CLAUDE.md` | API 特定规则 | 目录 | `./src/api/CLAUDE.md` |
+| `personal-CLAUDE.md` | 个人偏好 | 用户 | `~/.claude/CLAUDE.md` |
+| `memory-saved.png` | 截图：内存已保存 | - | 视觉参考 |
+| `memory-ask-claude.png` | 截图：询问 Claude | - | 视觉参考 |
+| `README.md` | 文档 | - | 参考 |
+
+**安装**：复制到适当位置
+
+**使用**：由 Claude 自动加载
+
+---
+
+## 03. 技能（28 个文件）
+
+带脚本和模板的自动调用能力。
+
+### 代码审查技能（5 个文件）
 ```
 code-review/
-├── SKILL.md                          # Skill definition
+├── SKILL.md                          # 技能定义
 ├── scripts/
-│   ├── analyze-metrics.py            # Code metrics analyzer
-│   └── compare-complexity.py         # Complexity comparison
+│   ├── analyze-metrics.py            # 代码指标分析器
+│   └── compare-complexity.py         # 复杂度比较
 └── templates/
-    ├── review-checklist.md           # Review checklist
-    └── finding-template.md           # Finding documentation
+    ├── review-checklist.md           # 审查清单
+    └── finding-template.md           # 发现文档模板
 ```
 
-**Purpose**: Comprehensive code review with security, performance, and quality analysis
+**目的**：全面的代码审查，包含安全、性能和质量分析
 
-**Auto-invoked**: When reviewing code
+**自动调用**：审查代码时
 
 ---
 
-### Brand Voice Skill (4 files)
+### 品牌声音技能（4 个文件）
 ```
 brand-voice/
-├── SKILL.md                          # Skill definition
+├── SKILL.md                          # 技能定义
 ├── templates/
-│   ├── email-template.txt            # Email format
-│   └── social-post-template.txt      # Social media format
-└── tone-examples.md                  # Example messages
+│   ├── email-template.txt            # 邮件格式
+│   └── social-post-template.txt      # 社交媒体格式
+└── tone-examples.md                  # 示例消息
 ```
 
-**Purpose**: Ensure consistent brand voice in communications
+**目的**：确保通信中一致的品牌声音
 
-**Auto-invoked**: When creating marketing copy
+**自动调用**：创建营销文案时
 
 ---
 
-### Documentation Generator Skill (2 files)
+### 文档生成器技能（2 个文件）
 ```
 doc-generator/
-├── SKILL.md                          # Skill definition
-└── generate-docs.py                  # Python doc extractor
+├── SKILL.md                          # 技能定义
+└── generate-docs.py                  # Python 文档提取器
 ```
 
-**Purpose**: Generate comprehensive API documentation from source code
+**目的**：从源代码生成全面的 API 文档
 
-**Auto-invoked**: When creating/updating API documentation
+**自动调用**：创建/更新 API 文档时
 
 ---
 
-### Refactor Skill (5 files)
+### 重构技能（5 个文件）
 ```
 refactor/
-├── SKILL.md                          # Skill definition
+├── SKILL.md                          # 技能定义
 ├── scripts/
-│   ├── analyze-complexity.py         # Complexity analyzer
-│   └── detect-smells.py              # Code smell detector
+│   ├── analyze-complexity.py         # 复杂度分析器
+│   └── detect-smells.py              # 代码异味检测器
 ├── references/
-│   ├── code-smells.md                # Code smells catalog
-│   └── refactoring-catalog.md        # Refactoring patterns
+│   ├── code-smells.md                # 代码异味目录
+│   └── refactoring-catalog.md        # 重构模式目录
 └── templates/
-    └── refactoring-plan.md           # Refactoring plan template
+    └── refactoring-plan.md           # 重构计划模板
 ```
 
-**Purpose**: Systematic code refactoring with complexity analysis
+**目的**：带复杂度分析的系统性代码重构
 
-**Auto-invoked**: When refactoring code
+**自动调用**：重构代码时
 
 ---
 
-### Claude MD Skill (1 file)
+### Claude MD 技能（1 个文件）
 ```
 claude-md/
-└── SKILL.md                          # Skill definition
+└── SKILL.md                          # 技能定义
 ```
 
-**Purpose**: Manage and optimize CLAUDE.md files
+**目的**：管理和优化 CLAUDE.md 文件
 
 ---
 
-### Blog Draft Skill (3 files)
+### 博客草稿技能（3 个文件）
 ```
 blog-draft/
-├── SKILL.md                          # Skill definition
+├── SKILL.md                          # 技能定义
 └── templates/
-    ├── draft-template.md             # Blog draft template
-    └── outline-template.md           # Blog outline template
+    ├── draft-template.md             # 博客草稿模板
+    └── outline-template.md           # 博客大纲模板
 ```
 
-**Purpose**: Draft blog posts with consistent structure
+**目的**：以一致的结构起草博客文章
 
-**Plus**: `README.md` - Skills overview and usage guide
+**另有**：`README.md` - 技能概述和使用指南
 
-**Installation Path**: `~/.claude/skills/` or `.claude/skills/`
-
----
-
-## 04. Subagents (9 files)
-
-Specialized AI assistants with custom capabilities.
-
-| File | Description | Tools | Use Case |
-|------|-------------|-------|----------|
-| `code-reviewer.md` | Code quality analysis | read, grep, diff, lint_runner | Comprehensive reviews |
-| `test-engineer.md` | Test coverage analysis | read, write, bash, grep | Test automation |
-| `documentation-writer.md` | Documentation creation | read, write, grep | Doc generation |
-| `secure-reviewer.md` | Security review (read-only) | read, grep | Security audits |
-| `implementation-agent.md` | Full implementation | read, write, bash, grep, edit, glob | Feature development |
-| `debugger.md` | Debugging specialist | read, bash, grep | Bug investigation |
-| `data-scientist.md` | Data analysis specialist | read, write, bash | Data workflows |
-| `clean-code-reviewer.md` | Clean code standards | read, grep | Code quality |
-| `README.md` | Documentation | - | Setup and usage guide |
-
-**Installation Path**: `.claude/agents/`
-
-**Usage**: Automatically delegated by main agent
+**安装路径**：`~/.claude/skills/` 或 `.claude/skills/`
 
 ---
 
-## 05. MCP Protocol (5 files)
+## 04. 子代理（9 个文件）
 
-External tool and API integrations.
+具有自定义能力的专业 AI 助手。
 
-| File | Description | Integrates With | Use Case |
-|------|-------------|-----------------|----------|
-| `github-mcp.json` | GitHub integration | GitHub API | PR/issue management |
-| `database-mcp.json` | Database queries | PostgreSQL/MySQL | Live data queries |
-| `filesystem-mcp.json` | File operations | Local filesystem | File management |
-| `multi-mcp.json` | Multiple servers | GitHub + DB + Slack | Complete integration |
-| `README.md` | Documentation | - | Setup and usage guide |
+| 文件 | 描述 | 工具 | 使用场景 |
+|------|------|------|----------|
+| `code-reviewer.md` | 代码质量分析 | read, grep, diff, lint_runner | 综合审查 |
+| `test-engineer.md` | 测试覆盖率分析 | read, write, bash, grep | 测试自动化 |
+| `documentation-writer.md` | 文档创建 | read, write, grep | 文档生成 |
+| `secure-reviewer.md` | 安全审查（只读） | read, grep | 安全审计 |
+| `implementation-agent.md` | 完整实现 | read, write, bash, grep, edit, glob | 功能开发 |
+| `debugger.md` | 调试专家 | read, bash, grep | Bug 调查 |
+| `data-scientist.md` | 数据分析专家 | read, write, bash | 数据工作流程 |
+| `clean-code-reviewer.md` | 整洁代码标准 | read, grep | 代码质量 |
+| `README.md` | 文档 | - | 设置和使用指南 |
 
-**Installation Path**: `.mcp.json` (project scope) or `~/.claude.json` (user scope)
+**安装路径**：`.claude/agents/`
 
-**Usage**: `/mcp__github__list_prs`, etc.
-
----
-
-## 06. Hooks (9 files)
-
-Event-driven automation scripts that execute automatically.
-
-| File | Description | Event | Use Case |
-|------|-------------|-------|----------|
-| `format-code.sh` | Auto-format code | PreToolUse:Write | Code formatting |
-| `pre-commit.sh` | Run tests before commit | PreToolUse:Bash | Test automation |
-| `security-scan.sh` | Security scanning | PostToolUse:Write | Security checks |
-| `log-bash.sh` | Log bash commands | PostToolUse:Bash | Command logging |
-| `validate-prompt.sh` | Validate prompts | PreToolUse | Input validation |
-| `notify-team.sh` | Send notifications | Notification | Team notifications |
-| `context-tracker.py` | Track context window usage | PostToolUse | Context monitoring |
-| `context-tracker-tiktoken.py` | Token-based context tracking | PostToolUse | Precise token counting |
-| `README.md` | Documentation | - | Setup and usage guide |
-
-**Installation Path**: Configure in `~/.claude/settings.json`
-
-**Usage**: Configured in settings, executed automatically
-
-**Hook Types** (4 types, 25 events):
-- Tool Hooks: PreToolUse, PostToolUse, PostToolUseFailure, PermissionRequest
-- Session Hooks: SessionStart, SessionEnd, Stop, StopFailure, SubagentStart, SubagentStop
-- Task Hooks: UserPromptSubmit, TaskCompleted, TaskCreated, TeammateIdle
-- Lifecycle Hooks: ConfigChange, CwdChanged, FileChanged, PreCompact, PostCompact, WorktreeCreate, WorktreeRemove, Notification, InstructionsLoaded, Elicitation, ElicitationResult
+**使用**：由主代理自动委托
 
 ---
 
-## 07. Plugins (3 complete plugins, 40 files)
+## 05. MCP 协议（5 个文件）
 
-Bundled collections of features.
+外部工具和 API 集成。
 
-### PR Review Plugin (10 files)
+| 文件 | 描述 | 集成对象 | 使用场景 |
+|------|------|----------|----------|
+| `github-mcp.json` | GitHub 集成 | GitHub API | PR/issue 管理 |
+| `database-mcp.json` | 数据库查询 | PostgreSQL/MySQL | 实时数据查询 |
+| `filesystem-mcp.json` | 文件操作 | 本地文件系统 | 文件管理 |
+| `multi-mcp.json` | 多服务器 | GitHub + DB + Slack | 完整集成 |
+| `README.md` | 文档 | - | 设置和使用指南 |
+
+**安装路径**：`.mcp.json`（项目范围）或 `~/.claude.json`（用户范围）
+
+**使用**：`/mcp__github__list_prs` 等
+
+---
+
+## 06. 钩子（9 个文件）
+
+自动执行的事件驱动自动化脚本。
+
+| 文件 | 描述 | 事件 | 使用场景 |
+|------|------|------|----------|
+| `format-code.sh` | 自动格式化代码 | PreToolUse:Write | 代码格式化 |
+| `pre-commit.sh` | 提交前运行测试 | PreToolUse:Bash | 测试自动化 |
+| `security-scan.sh` | 安全扫描 | PostToolUse:Write | 安全检查 |
+| `log-bash.sh` | 记录 bash 命令 | PostToolUse:Bash | 命令日志 |
+| `validate-prompt.sh` | 验证提示 | PreToolUse | 输入验证 |
+| `notify-team.sh` | 发送通知 | Notification | 团队通知 |
+| `context-tracker.py` | 跟踪上下文窗口使用 | PostToolUse | 上下文监控 |
+| `context-tracker-tiktoken.py` | 基于 token 的上下文跟踪 | PostToolUse | 精确 token 计数 |
+| `README.md` | 文档 | - | 设置和使用指南 |
+
+**安装路径**：在 `~/.claude/settings.json` 中配置
+
+**使用**：在设置中配置，自动执行
+
+**钩子类型**（4 种类型，25 个事件）：
+- 工具钩子：PreToolUse、PostToolUse、PostToolUseFailure、PermissionRequest
+- 会话钩子：SessionStart、SessionEnd、Stop、StopFailure、SubagentStart、SubagentStop
+- 任务钩子：UserPromptSubmit、TaskCompleted、TaskCreated、TeammateIdle
+- 生命周期钩子：ConfigChange、CwdChanged、FileChanged、PreCompact、PostCompact、WorktreeCreate、WorktreeRemove、Notification、InstructionsLoaded、Elicitation、ElicitationResult
+
+---
+
+## 07. 插件（3 个完整插件，40 个文件）
+
+捆绑的功能集合。
+
+### PR 审查插件（10 个文件）
 ```
 pr-review/
 ├── .claude-plugin/
-│   └── plugin.json                   # Plugin manifest
+│   └── plugin.json                   # 插件清单
 ├── commands/
-│   ├── review-pr.md                  # Comprehensive review
-│   ├── check-security.md             # Security check
-│   └── check-tests.md                # Test coverage check
+│   ├── review-pr.md                  # 综合审查
+│   ├── check-security.md             # 安全检查
+│   └── check-tests.md                # 测试覆盖率检查
 ├── agents/
-│   ├── security-reviewer.md          # Security specialist
-│   ├── test-checker.md               # Test specialist
-│   └── performance-analyzer.md       # Performance specialist
+│   ├── security-reviewer.md          # 安全专家
+│   ├── test-checker.md               # 测试专家
+│   └── performance-analyzer.md       # 性能专家
 ├── mcp/
-│   └── github-config.json            # GitHub integration
+│   └── github-config.json            # GitHub 集成
 ├── hooks/
-│   └── pre-review.js                 # Pre-review validation
-└── README.md                         # Plugin documentation
+│   └── pre-review.js                 # 预审查验证
+└── README.md                         # 插件文档
 ```
 
-**Features**: Security analysis, test coverage, performance impact
+**功能**：安全分析、测试覆盖率、性能影响
 
-**Commands**: `/review-pr`, `/check-security`, `/check-tests`
+**命令**：`/review-pr`、`/check-security`、`/check-tests`
 
-**Installation**: `/plugin install pr-review`
+**安装**：`/plugin install pr-review`
 
 ---
 
-### DevOps Automation Plugin (15 files)
+### DevOps 自动化插件（15 个文件）
 ```
 devops-automation/
 ├── .claude-plugin/
-│   └── plugin.json                   # Plugin manifest
+│   └── plugin.json                   # 插件清单
 ├── commands/
-│   ├── deploy.md                     # Deployment
-│   ├── rollback.md                   # Rollback
-│   ├── status.md                     # System status
-│   └── incident.md                   # Incident response
+│   ├── deploy.md                     # 部署
+│   ├── rollback.md                   # 回滚
+│   ├── status.md                     # 系统状态
+│   └── incident.md                   # 事件响应
 ├── agents/
-│   ├── deployment-specialist.md      # Deployment expert
-│   ├── incident-commander.md         # Incident coordinator
-│   └── alert-analyzer.md             # Alert analyzer
+│   ├── deployment-specialist.md      # 部署专家
+│   ├── incident-commander.md         # 事件协调员
+│   └── alert-analyzer.md             # 告警分析器
 ├── mcp/
-│   └── kubernetes-config.json        # Kubernetes integration
+│   └── kubernetes-config.json        # Kubernetes 集成
 ├── hooks/
-│   ├── pre-deploy.js                 # Pre-deployment checks
-│   └── post-deploy.js                # Post-deployment tasks
+│   ├── pre-deploy.js                 # 预部署检查
+│   └── post-deploy.js                # 部署后任务
 ├── scripts/
-│   ├── deploy.sh                     # Deployment automation
-│   ├── rollback.sh                   # Rollback automation
-│   └── health-check.sh               # Health checks
-└── README.md                         # Plugin documentation
+│   ├── deploy.sh                     # 部署自动化
+│   ├── rollback.sh                   # 回滚自动化
+│   └── health-check.sh               # 健康检查
+└── README.md                         # 插件文档
 ```
 
-**Features**: Kubernetes deployment, rollback, monitoring, incident response
+**功能**：Kubernetes 部署、回滚、监控、事件响应
 
-**Commands**: `/deploy`, `/rollback`, `/status`, `/incident`
+**命令**：`/deploy`、`/rollback`、`/status`、`/incident`
 
-**Installation**: `/plugin install devops-automation`
+**安装**：`/plugin install devops-automation`
 
 ---
 
-### Documentation Plugin (14 files)
+### 文档插件（14 个文件）
 ```
 documentation/
 ├── .claude-plugin/
-│   └── plugin.json                   # Plugin manifest
+│   └── plugin.json                   # 插件清单
 ├── commands/
-│   ├── generate-api-docs.md          # API docs generation
-│   ├── generate-readme.md            # README creation
-│   ├── sync-docs.md                  # Doc synchronization
-│   └── validate-docs.md              # Doc validation
+│   ├── generate-api-docs.md          # API 文档生成
+│   ├── generate-readme.md            # README 创建
+│   ├── sync-docs.md                  # 文档同步
+│   └── validate-docs.md              # 文档验证
 ├── agents/
-│   ├── api-documenter.md             # API doc specialist
-│   ├── code-commentator.md           # Code comment specialist
-│   └── example-generator.md          # Example creator
+│   ├── api-documenter.md             # API 文档专家
+│   ├── code-commentator.md           # 代码注释专家
+│   └── example-generator.md          # 示例创建器
 ├── mcp/
-│   └── github-docs-config.json       # GitHub integration
+│   └── github-docs-config.json       # GitHub 集成
 ├── templates/
-│   ├── api-endpoint.md               # API endpoint template
-│   ├── function-docs.md              # Function doc template
-│   └── adr-template.md               # ADR template
-└── README.md                         # Plugin documentation
+│   ├── api-endpoint.md               # API 端点模板
+│   ├── function-docs.md              # 函数文档模板
+│   └── adr-template.md               # ADR 模板
+└── README.md                         # 插件文档
 ```
 
-**Features**: API docs, README generation, doc sync, validation
+**功能**：API 文档、README 生成、文档同步、验证
 
-**Commands**: `/generate-api-docs`, `/generate-readme`, `/sync-docs`, `/validate-docs`
+**命令**：`/generate-api-docs`、`/generate-readme`、`/sync-docs`、`/validate-docs`
 
-**Installation**: `/plugin install documentation`
+**安装**：`/plugin install documentation`
 
-**Plus**: `README.md` - Plugins overview and usage guide
+**另有**：`README.md` - 插件概述和使用指南
 
 ---
 
-## 08. Checkpoints and Rewind (2 files)
+## 08. 检查点和回滚（2 个文件）
 
-Save conversation state and explore alternative approaches.
+保存会话状态并探索替代方法。
 
-| File | Description | Content |
-|------|-------------|---------|
-| `README.md` | Documentation | Comprehensive checkpoint guide |
-| `checkpoint-examples.md` | Real-world examples | Database migration, performance optimization, UI iteration, debugging |
+| 文件 | 描述 | 内容 |
+|------|------|------|
+| `README.md` | 文档 | 全面的检查点指南 |
+| `checkpoint-examples.md` | 真实示例 | 数据库迁移、性能优化、UI 迭代、调试 |
 | | | |
 
-**Key Concepts**:
-- **Checkpoint**: Snapshot of conversation state
-- **Rewind**: Return to previous checkpoint
-- **Branch Point**: Explore multiple approaches
+**关键概念**：
+- **检查点**：会话状态的快照
+- **回滚**：返回到之前的检查点
+- **分支点**：探索多种方法
 
-**Usage**:
+**使用**：
 ```
-# Checkpoints are created automatically with every user prompt
-# To rewind, press Esc twice or use:
+# 检查点在每个用户提示时自动创建
+# 要回滚，按两次 Esc 或使用：
 /rewind
-# Then choose: Restore code and conversation, Restore conversation,
-# Restore code, Summarize from here, or Never mind
+# 然后选择：恢复代码和对话、恢复对话、
+# 恢复代码、从此处总结、或算了
 ```
 
-**Use Cases**:
-- Try different implementations
-- Recover from mistakes
-- Safe experimentation
-- Compare solutions
-- A/B testing
+**使用场景**：
+- 尝试不同的实现
+- 从错误中恢复
+- 安全实验
+- 比较解决方案
+- A/B 测试
 
 ---
 
-## 09. Advanced Features (3 files)
+## 09. 高级功能（3 个文件）
 
-Advanced capabilities for complex workflows.
+用于复杂工作流程的高级能力。
 
-| File | Description | Features |
-|------|-------------|----------|
-| `README.md` | Complete guide | All advanced features documentation |
-| `config-examples.json` | Configuration examples | 10+ use-case-specific configurations |
-| `planning-mode-examples.md` | Planning examples | REST API, database migration, refactoring |
-| Scheduled Tasks | Recurring tasks with `/loop` and cron tools | Automated recurring workflows |
-| Chrome Integration | Browser automation via headless Chromium | Web testing and scraping |
-| Remote Control (expanded) | Connection methods, security, comparison table | Remote session management |
-| Keyboard Customization | Custom keybindings, chord support, contexts | Personalized shortcuts |
-| Desktop App (expanded) | Connectors, launch.json, enterprise features | Desktop integration |
+| 文件 | 描述 | 功能 |
+|------|------|------|
+| `README.md` | 完整指南 | 所有高级功能文档 |
+| `config-examples.json` | 配置示例 | 10+ 个特定用例配置 |
+| `planning-mode-examples.md` | 规划示例 | REST API、数据库迁移、重构 |
+| 计划任务 | 使用 `/loop` 和 cron 工具的定期任务 | 自动化定期工作流程 |
+| Chrome 集成 | 通过无头 Chromium 的浏览器自动化 | Web 测试和抓取 |
+| 远程控制（扩展） | 连接方法、安全性、比较表 | 远程会话管理 |
+| 键盘自定义 | 自定义键绑定、和弦支持、上下文 | 个性化快捷键 |
+| 桌面应用（扩展） | 连接器、launch.json、企业功能 | 桌面集成 |
 | | | |
 
-**Advanced Features Covered**:
+**涵盖的高级功能**：
 
-### Planning Mode
-- Create detailed implementation plans
-- Time estimates and risk assessment
-- Systematic task breakdown
+### 规划模式
+- 创建详细的实现计划
+- 时间估算和风险评估
+- 系统性任务分解
 
-### Extended Thinking
-- Deep reasoning for complex problems
-- Architectural decision analysis
-- Trade-off evaluation
+### 扩展思考
+- 复杂问题的深度推理
+- 架构决策分析
+- 权衡评估
 
-### Background Tasks
-- Long-running operations without blocking
-- Parallel development workflows
-- Task management and monitoring
+### 后台任务
+- 不阻塞的长时运行操作
+- 并行开发工作流程
+- 任务管理和监控
 
-### Permission Modes
-- **default**: Ask for approval on risky actions
-- **acceptEdits**: Auto-accept file edits, ask for others
-- **plan**: Read-only analysis, no modifications
-- **auto**: Automatically approve safe actions, prompt for risky ones
-- **dontAsk**: Accept all actions except risky ones
-- **bypassPermissions**: Accept all (requires `--dangerously-skip-permissions`)
+### 权限模式
+- **default**：对危险操作请求批准
+- **acceptEdits**：自动接受文件编辑，其他则询问
+- **plan**：只读分析，无修改
+- **auto**：自动批准安全操作，危险操作则提示
+- **dontAsk**：接受除危险操作外的所有操作
+- **bypassPermissions**：接受所有操作（需要 `--dangerously-skip-permissions`）
 
-### Headless Mode (`claude -p`)
-- CI/CD integration
-- Automated task execution
-- Batch processing
+### 无头模式（`claude -p`）
+- CI/CD 集成
+- 自动化任务执行
+- 批处理
 
-### Session Management
-- Multiple work sessions
-- Session switching and saving
-- Session persistence
+### 会话管理
+- 多工作会话
+- 会话切换和保存
+- 会话持久化
 
-### Interactive Features
-- Keyboard shortcuts
-- Command history
-- Tab completion
-- Multi-line input
+### 交互功能
+- 键盘快捷键
+- 命令历史
+- Tab 补全
+- 多行输入
 
-### Configuration
-- Comprehensive settings management
-- Environment-specific configs
-- Per-project customization
+### 配置
+- 全面的设置管理
+- 环境特定配置
+- 按项目自定义
 
-### Scheduled Tasks
-- Recurring tasks with `/loop` command
-- Cron tools: CronCreate, CronList, CronDelete
-- Automated recurring workflows
+### 计划任务
+- 使用 `/loop` 命令的定期任务
+- Cron 工具：CronCreate、CronList、CronDelete
+- 自动化定期工作流程
 
-### Chrome Integration
-- Browser automation via headless Chromium
-- Web testing and scraping capabilities
-- Page interaction and data extraction
+### Chrome 集成
+- 通过无头 Chromium 的浏览器自动化
+- Web 测试和抓取能力
+- 页面交互和数据提取
 
-### Remote Control (expanded)
-- Connection methods and protocols
-- Security considerations and best practices
-- Comparison table of remote access options
+### 远程控制（扩展）
+- 连接方法和协议
+- 安全考虑和最佳实践
+- 远程访问选项比较表
 
-### Keyboard Customization
-- Custom keybindings configuration
-- Chord support for multi-key shortcuts
-- Context-aware keybinding activation
+### 键盘自定义
+- 自定义键绑定配置
+- 多键快捷键的和弦支持
+- 上下文感知的键绑定激活
 
-### Desktop App (expanded)
-- Connectors for IDE integration
-- launch.json configuration
-- Enterprise features and deployment
-
----
-
-## 10. CLI Usage (1 file)
-
-Command-line interface usage patterns and reference.
-
-| File | Description | Content |
-|------|-------------|---------|
-| `README.md` | CLI documentation | Flags, options, and usage patterns |
-
-**Key CLI Features**:
-- `claude` - Start interactive session
-- `claude -p "prompt"` - Headless/non-interactive mode
-- `claude web` - Launch web session
-- `claude --model` - Select model (Sonnet 4.6, Opus 4.6)
-- `claude --permission-mode` - Set permission mode
-- `claude --remote` - Enable remote control via WebSocket
+### 桌面应用（扩展）
+- IDE 集成的连接器
+- launch.json 配置
+- 企业功能和使用
 
 ---
 
-## Documentation Files (13 files)
+## 10. CLI 使用（1 个文件）
 
-| File | Location | Description |
-|------|----------|-------------|
-| `README.md` | `/` | Main examples overview |
-| `INDEX.md` | `/` | This complete index |
-| `QUICK_REFERENCE.md` | `/` | Quick reference card |
-| `README.md` | `/01-slash-commands/` | Slash commands guide |
-| `README.md` | `/02-memory/` | Memory guide |
-| `README.md` | `/03-skills/` | Skills guide |
-| `README.md` | `/04-subagents/` | Subagents guide |
-| `README.md` | `/05-mcp/` | MCP guide |
-| `README.md` | `/06-hooks/` | Hooks guide |
-| `README.md` | `/07-plugins/` | Plugins guide |
-| `README.md` | `/08-checkpoints/` | Checkpoints guide |
-| `README.md` | `/09-advanced-features/` | Advanced features guide |
-| `README.md` | `/10-cli/` | CLI guide |
+命令行界面使用模式和参考。
+
+| 文件 | 描述 | 内容 |
+|------|------|------|
+| `README.md` | CLI 文档 | 标志、选项和使用模式 |
+
+**关键 CLI 功能**：
+- `claude` - 启动交互式会话
+- `claude -p "prompt"` - 无头/非交互模式
+- `claude web` - 启动 Web 会话
+- `claude --model` - 选择模型（Sonnet 4.6、Opus 4.6）
+- `claude --permission-mode` - 设置权限模式
+- `claude --remote` - 通过 WebSocket 启用远程控制
 
 ---
 
-## Complete File Tree
+## 文档文件（13 个文件）
+
+| 文件 | 位置 | 描述 |
+|------|------|------|
+| `README.md` | `/` | 主要示例概述 |
+| `INDEX.md` | `/` | 本完整索引 |
+| `QUICK_REFERENCE.md` | `/` | 快速参考卡 |
+| `README.md` | `/01-slash-commands/` | 斜杠命令指南 |
+| `README.md` | `/02-memory/` | 内存指南 |
+| `README.md` | `/03-skills/` | 技能指南 |
+| `README.md` | `/04-subagents/` | 子代理指南 |
+| `README.md` | `/05-mcp/` | MCP 指南 |
+| `README.md` | `/06-hooks/` | 钩子指南 |
+| `README.md` | `/07-plugins/` | 插件指南 |
+| `README.md` | `/08-checkpoints/` | 检查点指南 |
+| `README.md` | `/09-advanced-features/` | 高级功能指南 |
+| `README.md` | `/10-cli/` | CLI 指南 |
+
+---
+
+## 完整文件树
 
 ```
 claude-howto/
-├── README.md                                    # Main overview
-├── INDEX.md                                     # This file
-├── QUICK_REFERENCE.md                           # Quick reference card
-├── claude_concepts_guide.md                     # Original guide
+├── README.md                                    # 主要概述
+├── INDEX.md                                     # 本文件
+├── QUICK_REFERENCE.md                           # 快速参考卡
+├── claude_concepts_guide.md                     # 原始指南
 │
-├── 01-slash-commands/                           # Slash Commands
+├── 01-slash-commands/                           # 斜杠命令
 │   ├── optimize.md
 │   ├── pr.md
 │   ├── generate-api-docs.md
@@ -506,7 +506,7 @@ claude-howto/
 │   ├── pr-slash-command.png
 │   └── README.md
 │
-├── 02-memory/                                   # Memory
+├── 02-memory/                                   # 内存
 │   ├── project-CLAUDE.md
 │   ├── directory-api-CLAUDE.md
 │   ├── personal-CLAUDE.md
@@ -514,7 +514,7 @@ claude-howto/
 │   ├── memory-ask-claude.png
 │   └── README.md
 │
-├── 03-skills/                                   # Skills
+├── 03-skills/                                   # 技能
 │   ├── code-review/
 │   │   ├── SKILL.md
 │   │   ├── scripts/
@@ -551,7 +551,7 @@ claude-howto/
 │   │       └── outline-template.md
 │   └── README.md
 │
-├── 04-subagents/                                # Subagents
+├── 04-subagents/                                # 子代理
 │   ├── code-reviewer.md
 │   ├── test-engineer.md
 │   ├── documentation-writer.md
@@ -562,14 +562,14 @@ claude-howto/
 │   ├── clean-code-reviewer.md
 │   └── README.md
 │
-├── 05-mcp/                                      # MCP Protocol
+├── 05-mcp/                                      # MCP 协议
 │   ├── github-mcp.json
 │   ├── database-mcp.json
 │   ├── filesystem-mcp.json
 │   ├── multi-mcp.json
 │   └── README.md
 │
-├── 06-hooks/                                    # Hooks
+├── 06-hooks/                                    # 钩子
 │   ├── format-code.sh
 │   ├── pre-commit.sh
 │   ├── security-scan.sh
@@ -580,7 +580,7 @@ claude-howto/
 │   ├── context-tracker-tiktoken.py
 │   └── README.md
 │
-├── 07-plugins/                                  # Plugins
+├── 07-plugins/                                  # 插件
 │   ├── pr-review/
 │   │   ├── .claude-plugin/
 │   │   │   └── plugin.json
@@ -640,243 +640,243 @@ claude-howto/
 │   │   └── README.md
 │   └── README.md
 │
-├── 08-checkpoints/                              # Checkpoints
+├── 08-checkpoints/                              # 检查点
 │   ├── checkpoint-examples.md
 │   └── README.md
 │
-├── 09-advanced-features/                        # Advanced Features
+├── 09-advanced-features/                        # 高级功能
 │   ├── config-examples.json
 │   ├── planning-mode-examples.md
 │   └── README.md
 │
-└── 10-cli/                                      # CLI Usage
+└── 10-cli/                                      # CLI 使用
     └── README.md
 ```
 
 ---
 
-## Quick Start by Use Case
+## 按使用场景快速入门
 
-### Code Quality & Reviews
+### 代码质量与审查
 ```bash
-# Install slash command
+# 安装斜杠命令
 cp 01-slash-commands/optimize.md .claude/commands/
 
-# Install subagent
+# 安装子代理
 cp 04-subagents/code-reviewer.md .claude/agents/
 
-# Install skill
+# 安装技能
 cp -r 03-skills/code-review ~/.claude/skills/
 
-# Or install complete plugin
+# 或安装完整插件
 /plugin install pr-review
 ```
 
-### DevOps & Deployment
+### DevOps 与部署
 ```bash
-# Install plugin (includes everything)
+# 安装插件（包含一切）
 /plugin install devops-automation
 ```
 
-### Documentation
+### 文档
 ```bash
-# Install slash command
+# 安装斜杠命令
 cp 01-slash-commands/generate-api-docs.md .claude/commands/
 
-# Install subagent
+# 安装子代理
 cp 04-subagents/documentation-writer.md .claude/agents/
 
-# Install skill
+# 安装技能
 cp -r 03-skills/doc-generator ~/.claude/skills/
 
-# Or install complete plugin
+# 或安装完整插件
 /plugin install documentation
 ```
 
-### Team Standards
+### 团队标准
 ```bash
-# Set up project memory
+# 设置项目内存
 cp 02-memory/project-CLAUDE.md ./CLAUDE.md
 
-# Edit to match your team's standards
+# 编辑以匹配您的团队标准
 ```
 
-### External Integrations
+### 外部集成
 ```bash
-# Set environment variables
+# 设置环境变量
 export GITHUB_TOKEN="your_token"
 export DATABASE_URL="postgresql://..."
 
-# Install MCP config (project scope)
+# 安装 MCP 配置（项目范围）
 cp 05-mcp/multi-mcp.json .mcp.json
 ```
 
-### Automation & Validation
+### 自动化与验证
 ```bash
-# Install hooks
+# 安装钩子
 mkdir -p ~/.claude/hooks
 cp 06-hooks/*.sh ~/.claude/hooks/
 chmod +x ~/.claude/hooks/*.sh
 
-# Configure hooks in settings (~/.claude/settings.json)
-# See 06-hooks/README.md
+# 在设置中配置钩子（~/.claude/settings.json）
+# 参见 06-hooks/README.md
 ```
 
-### Safe Experimentation
+### 安全实验
 ```bash
-# Checkpoints are created automatically with every user prompt
-# To rewind: press Esc+Esc or use /rewind
-# Then choose what to restore from the rewind menu
+# 检查点在每个用户提示时自动创建
+# 要回滚：按 Esc+Esc 或使用 /rewind
+# 然后从回滚菜单中选择要恢复的内容
 
-# See 08-checkpoints/README.md for examples
+# 参见 08-checkpoints/README.md 获取示例
 ```
 
-### Advanced Workflows
+### 高级工作流程
 ```bash
-# Configure advanced features
-# See 09-advanced-features/config-examples.json
+# 配置高级功能
+# 参见 09-advanced-features/config-examples.json
 
-# Use planning mode
+# 使用规划模式
 /plan Implement feature X
 
-# Use permission modes
-claude --permission-mode plan          # For code review (read-only)
-claude --permission-mode acceptEdits   # Auto-accept edits
-claude --permission-mode auto          # Auto-approve safe actions
+# 使用权限模式
+claude --permission-mode plan          # 用于代码审查（只读）
+claude --permission-mode acceptEdits   # 自动接受编辑
+claude --permission-mode auto          # 自动批准安全操作
 
-# Run in headless mode for CI/CD
+# 在 CI/CD 中以无头模式运行
 claude -p "Run tests and report results"
 
-# Run background tasks
+# 运行后台任务
 Run tests in background
 
-# See 09-advanced-features/README.md for complete guide
+# 参见 09-advanced-features/README.md 获取完整指南
 ```
 
 ---
 
-## Feature Coverage Matrix
+## 功能覆盖矩阵
 
-| Category | Commands | Agents | MCP | Hooks | Scripts | Templates | Docs | Images | Total |
-|----------|----------|--------|-----|-------|---------|-----------|------|--------|-------|
-| **01 Slash Commands** | 8 | - | - | - | - | - | 1 | 1 | **10** |
-| **02 Memory** | - | - | - | - | - | 3 | 1 | 2 | **6** |
-| **03 Skills** | - | - | - | - | 5 | 9 | 1 | - | **28** |
-| **04 Subagents** | - | 8 | - | - | - | - | 1 | - | **9** |
+| 类别 | 命令 | 代理 | MCP | 钩子 | 脚本 | 模板 | 文档 | 图片 | 总计 |
+|------|------|------|-----|------|------|------|------|------|------|
+| **01 斜杠命令** | 8 | - | - | - | - | - | 1 | 1 | **10** |
+| **02 内存** | - | - | - | - | - | 3 | 1 | 2 | **6** |
+| **03 技能** | - | - | - | - | 5 | 9 | 1 | - | **28** |
+| **04 子代理** | - | 8 | - | - | - | - | 1 | - | **9** |
 | **05 MCP** | - | - | 4 | - | - | - | 1 | - | **5** |
-| **06 Hooks** | - | - | - | 8 | - | - | 1 | - | **9** |
-| **07 Plugins** | 11 | 9 | 3 | 3 | 3 | 3 | 4 | - | **40** |
-| **08 Checkpoints** | - | - | - | - | - | - | 1 | 1 | **2** |
-| **09 Advanced** | - | - | - | - | - | - | 1 | 2 | **3** |
+| **06 钩子** | - | - | - | 8 | - | - | 1 | - | **9** |
+| **07 插件** | 11 | 9 | 3 | 3 | 3 | 3 | 4 | - | **40** |
+| **08 检查点** | - | - | - | - | - | - | 1 | 1 | **2** |
+| **09 高级** | - | - | - | - | - | - | 1 | 2 | **3** |
 | **10 CLI** | - | - | - | - | - | - | 1 | - | **1** |
 
 ---
 
-## Learning Path
+## 学习路径
 
-### Beginner (Week 1)
-1. ✅ Read `README.md`
-2. ✅ Install 1-2 slash commands
-3. ✅ Create project memory file
-4. ✅ Try basic commands
+### 入门（第一周）
+1. 阅读 `README.md`
+2. 安装 1-2 个斜杠命令
+3. 创建项目内存文件
+4. 尝试基本命令
 
-### Intermediate (Week 2-3)
-1. ✅ Set up GitHub MCP
-2. ✅ Install a subagent
-3. ✅ Try delegating tasks
-4. ✅ Install a skill
+### 中级（第二至三周）
+1. 设置 GitHub MCP
+2. 安装一个子代理
+3. 尝试委托任务
+4. 安装一个技能
 
-### Advanced (Week 4+)
-1. ✅ Install complete plugin
-2. ✅ Create custom slash commands
-3. ✅ Create custom subagent
-4. ✅ Create custom skill
-5. ✅ Build your own plugin
+### 高级（第四周及以上）
+1. 安装完整插件
+2. 创建自定义斜杠命令
+3. 创建自定义子代理
+4. 创建自定义技能
+5. 构建自己的插件
 
-### Expert (Week 5+)
-1. ✅ Set up hooks for automation
-2. ✅ Use checkpoints for experimentation
-3. ✅ Configure planning mode
-4. ✅ Use permission modes effectively
-5. ✅ Set up headless mode for CI/CD
-6. ✅ Master session management
-
----
-
-## Search by Keyword
-
-### Performance
-- `01-slash-commands/optimize.md` - Performance analysis
-- `04-subagents/code-reviewer.md` - Performance review
-- `03-skills/code-review/` - Performance metrics
-- `07-plugins/pr-review/agents/performance-analyzer.md` - Performance specialist
-
-### Security
-- `04-subagents/secure-reviewer.md` - Security review
-- `03-skills/code-review/` - Security analysis
-- `07-plugins/pr-review/` - Security checks
-
-### Testing
-- `04-subagents/test-engineer.md` - Test engineer
-- `07-plugins/pr-review/commands/check-tests.md` - Test coverage
-
-### Documentation
-- `01-slash-commands/generate-api-docs.md` - API docs command
-- `04-subagents/documentation-writer.md` - Doc writer agent
-- `03-skills/doc-generator/` - Doc generator skill
-- `07-plugins/documentation/` - Complete doc plugin
-
-### Deployment
-- `07-plugins/devops-automation/` - Complete DevOps solution
-
-### Automation
-- `06-hooks/` - Event-driven automation
-- `06-hooks/pre-commit.sh` - Pre-commit automation
-- `06-hooks/format-code.sh` - Auto-formatting
-- `09-advanced-features/` - Headless mode for CI/CD
-
-### Validation
-- `06-hooks/security-scan.sh` - Security validation
-- `06-hooks/validate-prompt.sh` - Prompt validation
-
-### Experimentation
-- `08-checkpoints/` - Safe experimentation with rewind
-- `08-checkpoints/checkpoint-examples.md` - Real-world examples
-
-### Planning
-- `09-advanced-features/planning-mode-examples.md` - Planning mode examples
-- `09-advanced-features/README.md` - Extended thinking
-
-### Configuration
-- `09-advanced-features/config-examples.json` - Configuration examples
+### 专家（第五周及以上）
+1. 设置钩子实现自动化
+2. 使用检查点进行实验
+3. 配置规划模式
+4. 有效使用权限模式
+5. 为 CI/CD 设置无头模式
+6. 掌握会话管理
 
 ---
 
-## Notes
+## 关键词搜索
 
-- All examples are ready to use
-- Modify to fit your specific needs
-- Examples follow Claude Code best practices
-- Each category has its own README with detailed instructions
-- Scripts include proper error handling
-- Templates are customizable
+### 性能
+- `01-slash-commands/optimize.md` - 性能分析
+- `04-subagents/code-reviewer.md` - 性能审查
+- `03-skills/code-review/` - 性能指标
+- `07-plugins/pr-review/agents/performance-analyzer.md` - 性能专家
+
+### 安全
+- `04-subagents/secure-reviewer.md` - 安全审查
+- `03-skills/code-review/` - 安全分析
+- `07-plugins/pr-review/` - 安全检查
+
+### 测试
+- `04-subagents/test-engineer.md` - 测试工程师
+- `07-plugins/pr-review/commands/check-tests.md` - 测试覆盖率
+
+### 文档
+- `01-slash-commands/generate-api-docs.md` - API 文档命令
+- `04-subagents/documentation-writer.md` - 文档编写代理
+- `03-skills/doc-generator/` - 文档生成器技能
+- `07-plugins/documentation/` - 完整文档插件
+
+### 部署
+- `07-plugins/devops-automation/` - 完整 DevOps 解决方案
+
+### 自动化
+- `06-hooks/` - 事件驱动自动化
+- `06-hooks/pre-commit.sh` - 预提交自动化
+- `06-hooks/format-code.sh` - 自动格式化
+- `09-advanced-features/` - CI/CD 无头模式
+
+### 验证
+- `06-hooks/security-scan.sh` - 安全验证
+- `06-hooks/validate-prompt.sh` - 提示验证
+
+### 实验
+- `08-checkpoints/` - 带回滚的安全实验
+- `08-checkpoints/checkpoint-examples.md` - 真实示例
+
+### 规划
+- `09-advanced-features/planning-mode-examples.md` - 规划模式示例
+- `09-advanced-features/README.md` - 扩展思考
+
+### 配置
+- `09-advanced-features/config-examples.json` - 配置示例
 
 ---
 
-## Contributing
+## 备注
 
-Want to add more examples? Follow the structure:
-1. Create appropriate subdirectory
-2. Include README.md with usage
-3. Follow naming conventions
-4. Test thoroughly
-5. Update this index
+- 所有示例均可直接使用
+- 修改以适应您的特定需求
+- 示例遵循 Claude Code 最佳实践
+- 每个类别都有自己包含详细说明的 README
+- 脚本包含适当的错误处理
+- 模板可自定义
 
 ---
 
-**Last Updated**: March 2026
-**Total Examples**: 100+ files
-**Categories**: 10 features
-**Hooks**: 8 automation scripts
-**Configuration Examples**: 10+ scenarios
-**Ready to Use**: All examples
+## 贡献
+
+想要添加更多示例？请遵循以下结构：
+1. 创建适当的子目录
+2. 包含带用法的 README.md
+3. 遵循命名约定
+4. 彻底测试
+5. 更新本索引
+
+---
+
+**最后更新**：2026 年 3 月
+**示例总数**：100+ 个文件
+**类别**：10 个功能
+**钩子**：8 个自动化脚本
+**配置示例**：10+ 个场景
+**可直接使用**：所有示例

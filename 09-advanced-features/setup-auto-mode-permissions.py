@@ -2,12 +2,12 @@
 """
 setup-auto-mode-permissions.py
 
-Seed ~/.claude/settings.json with a conservative baseline of safe permissions
-for Claude Code. The default set is read-only and local-inspection oriented;
-optional flags let you widen the allowlist for editing, test execution, git
-write operations, package installs, and GitHub CLI writes.
+为 Claude Code 在 ~/.claude/settings.json 中播撒一套保守的安全权限基线。
+默认集是只读的，面向本地检查导向的；
+可选标志允许您扩大编辑、测试执行、git
+写操作、包安装和 GitHub CLI 写入的白名单。
 
-Usage:
+用法：
     python3 setup-auto-mode-permissions.py
     python3 setup-auto-mode-permissions.py --dry-run
     python3 setup-auto-mode-permissions.py --include-edits --include-tests
@@ -23,7 +23,7 @@ from typing import Iterable
 
 SETTINGS_PATH = Path.home() / ".claude" / "settings.json"
 
-# Core baseline: read-only inspection and low-risk local shell commands.
+# 核心基线：只读检查和低风险本地 shell 命令。
 CORE_PERMISSIONS = [
     "Read(*)",
     "Glob(*)",
@@ -65,7 +65,7 @@ CORE_PERMISSIONS = [
     "Bash(git stash list:*)",
 ]
 
-# Optional but still local: file edits and task bookkeeping.
+# 可选但仍是本地的：文件编辑和任务簿记。
 EDITING_PERMISSIONS = [
     "Edit(*)",
     "Write(*)",
@@ -74,8 +74,8 @@ EDITING_PERMISSIONS = [
     "TaskUpdate(*)",
 ]
 
-# Optional dev/test commands. These can still execute arbitrary project scripts,
-# so keep them opt-in rather than part of the default baseline.
+# 可选的开发/测试命令。这些仍可执行任意项目脚本，
+# 因此将它们作为可选而非默认基线的一部分。
 TEST_AND_BUILD_PERMISSIONS = [
     "Bash(npm test:*)",
     "Bash(cargo test:*)",
@@ -86,8 +86,8 @@ TEST_AND_BUILD_PERMISSIONS = [
     "Bash(cmake:*)",
 ]
 
-# Optional local git write operations. History-rewriting commands stay out of
-# the default baseline because they are easy to misuse.
+# 可选的本地 git 写操作。重写历史的命令因易被滥用而保留在
+# 默认基线之外。
 GIT_WRITE_PERMISSIONS = [
     "Bash(git add:*)",
     "Bash(git commit:*)",
@@ -97,8 +97,8 @@ GIT_WRITE_PERMISSIONS = [
     "Bash(git tag:*)",
 ]
 
-# Optional dependency/package commands. These are intentionally excluded from
-# the default baseline because they can execute project hooks or fetch code.
+# 可选的依赖/包命令。这些因可执行项目钩子或获取代码而被有意排除在
+# 默认基线之外。
 PACKAGE_MANAGER_PERMISSIONS = [
     "Bash(npm ci:*)",
     "Bash(npm install:*)",
@@ -106,12 +106,12 @@ PACKAGE_MANAGER_PERMISSIONS = [
     "Bash(pip3 install:*)",
 ]
 
-# Optional GitHub CLI write access.
+# 可选的 GitHub CLI 写访问权限。
 GITHUB_WRITE_PERMISSIONS = [
     "Bash(gh pr create:*)",
 ]
 
-# Optional extra GitHub CLI read access.
+# 可选的额外 GitHub CLI 读访问权限。
 GITHUB_READ_PERMISSIONS = [
     "Bash(gh pr view:*)",
     "Bash(gh pr list:*)",

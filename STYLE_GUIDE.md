@@ -3,37 +3,37 @@
   <img alt="Claude How To" src="resources/logos/claude-howto-logo.svg">
 </picture>
 
-# Style Guide
+# 风格指南
 
-> Conventions and formatting rules for contributing to Claude How To. Follow this guide to keep content consistent, professional, and easy to maintain.
+> 为 Claude How To 贡献的约定和格式规则。遵循本指南以保持内容一致、专业且易于维护。
 
 ---
 
-## Table of Contents
+## 目录
 
-- [File and Folder Naming](#file-and-folder-naming)
-- [Document Structure](#document-structure)
-- [Headings](#headings)
-- [Text Formatting](#text-formatting)
-- [Lists](#lists)
-- [Tables](#tables)
-- [Code Blocks](#code-blocks)
-- [Links and Cross-References](#links-and-cross-references)
-- [Diagrams](#diagrams)
-- [Emoji Usage](#emoji-usage)
+- [文件和文件夹命名](#文件和文件夹命名)
+- [文档结构](#文档结构)
+- [标题](#标题)
+- [文本格式](#文本格式)
+- [列表](#列表)
+- [表格](#表格)
+- [代码块](#代码块)
+- [链接和交叉引用](#链接和交叉引用)
+- [图表](#图表)
+- [表情符号使用](#表情符号使用)
 - [YAML Frontmatter](#yaml-frontmatter)
-- [Images and Media](#images-and-media)
-- [Tone and Voice](#tone-and-voice)
-- [Commit Messages](#commit-messages)
-- [Checklist for Authors](#checklist-for-authors)
+- [图片和媒体](#图片和媒体)
+- [语气和语调](#语气和语调)
+- [提交消息](#提交消息)
+- [作者检查清单](#作者检查清单)
 
 ---
 
-## File and Folder Naming
+## 文件和文件夹命名
 
-### Lesson Folders
+### 课程文件夹
 
-Lesson folders use a **two-digit numbered prefix** followed by a **kebab-case** descriptor:
+课程文件夹使用**两位数字前缀**后跟**kebab-case**描述符：
 
 ```
 01-slash-commands/
@@ -43,201 +43,201 @@ Lesson folders use a **two-digit numbered prefix** followed by a **kebab-case** 
 05-mcp/
 ```
 
-The number reflects the learning path order from beginner to advanced.
+数字反映了从初学者到高级的学习路径顺序。
 
-### File Names
+### 文件名
 
-| Type | Convention | Examples |
+| 类型 | 约定 | 示例 |
 |------|-----------|----------|
-| **Lesson README** | `README.md` | `01-slash-commands/README.md` |
-| **Feature file** | Kebab-case `.md` | `code-reviewer.md`, `generate-api-docs.md` |
-| **Shell script** | Kebab-case `.sh` | `format-code.sh`, `validate-input.sh` |
-| **Config file** | Standard names | `.mcp.json`, `settings.json` |
-| **Memory file** | Scope-prefixed | `project-CLAUDE.md`, `personal-CLAUDE.md` |
-| **Top-level docs** | UPPER_CASE `.md` | `CATALOG.md`, `QUICK_REFERENCE.md`, `CONTRIBUTING.md` |
-| **Image assets** | Kebab-case | `pr-slash-command.png`, `claude-howto-logo.svg` |
+| **课程 README** | `README.md` | `01-slash-commands/README.md` |
+| **功能文件** | Kebab-case `.md` | `code-reviewer.md`、`generate-api-docs.md` |
+| **Shell 脚本** | Kebab-case `.sh` | `format-code.sh`、`validate-input.sh` |
+| **配置文件** | 标准名称 | `.mcp.json`、`settings.json` |
+| **记忆文件** | 范围前缀 | `project-CLAUDE.md`、`personal-CLAUDE.md` |
+| **顶级文档** | UPPER_CASE `.md` | `CATALOG.md`、`QUICK_REFERENCE.md`、`CONTRIBUTING.md` |
+| **图片资源** | Kebab-case | `pr-slash-command.png`、`claude-howto-logo.svg` |
 
-### Rules
+### 规则
 
-- Use **lowercase** for all file and folder names (except top-level docs like `README.md`, `CATALOG.md`)
-- Use **hyphens** (`-`) as word separators, never underscores or spaces
-- Keep names descriptive but concise
+- 所有文件和文件夹名称使用**小写**（顶级文档如 `README.md`、`CATALOG.md` 除外）
+- 使用**连字符**（`-`）作为单词分隔符，切勿使用下划线或空格
+- 保持名称描述性但简洁
 
 ---
 
-## Document Structure
+## 文档结构
 
-### Root README
+### 根 README
 
-The root `README.md` follows this order:
+根 `README.md` 按以下顺序：
 
-1. Logo (`<picture>` element with dark/light variants)
-2. H1 title
-3. Introductory blockquote (one-line value proposition)
-4. "Why This Guide?" section with comparison table
-5. Horizontal rule (`---`)
-6. Table of Contents
-7. Feature Catalog
-8. Quick Navigation
-9. Learning Path
-10. Feature sections
-11. Getting Started
-12. Best Practices / Troubleshooting
-13. Contributing / License
+1. Logo（带有深色/浅色变体的 `<picture>` 元素）
+2. H1 标题
+3. 简介块引用（一句话价值主张）
+4. "为什么选择本指南？"部分，包含比较表
+5. 水平线（`---`）
+6. 目录
+7. 功能目录
+8. 快速导航
+9. 学习路径
+10. 功能部分
+11. 入门指南
+12. 最佳实践/故障排除
+13. 贡献/许可证
 
-### Lesson README
+### 课程 README
 
-Each lesson `README.md` follows this order:
+每个课程 `README.md` 按以下顺序：
 
-1. H1 title (e.g., `# Slash Commands`)
-2. Brief overview paragraph
-3. Quick reference table (optional)
-4. Architecture diagram (Mermaid)
-5. Detailed sections (H2)
-6. Practical examples (numbered, 4-6 examples)
-7. Best practices (Do's and Don'ts tables)
-8. Troubleshooting
-9. Related guides / Official documentation
-10. Document metadata footer
+1. H1 标题（例如 `# Slash Commands`）
+2. 简要概述段落
+3. 快速参考表（可选）
+4. 架构图（Mermaid）
+5. 详细部分（H2）
+6. 实用示例（编号，4-6 个示例）
+7. 最佳实践（注意事项表）
+8. 故障排除
+9. 相关指南/官方文档
+10. 文档元数据页脚
 
-### Feature/Example File
+### 功能/示例文件
 
-Individual feature files (e.g., `optimize.md`, `pr.md`):
+单个功能文件（例如 `optimize.md`、`pr.md`）：
 
-1. YAML frontmatter (if applicable)
-2. H1 title
-3. Purpose / description
-4. Usage instructions
-5. Code examples
-6. Customization tips
+1. YAML frontmatter（如果适用）
+2. H1 标题
+3. 目的/描述
+4. 使用说明
+5. 代码示例
+6. 自定义提示
 
-### Section Separators
+### 章节分隔符
 
-Use horizontal rules (`---`) to separate major document regions:
+使用水平线（`---`）分隔文档的主要区域：
 
 ```markdown
 ---
 
-## New Major Section
+## 新主要章节
 ```
 
-Place them after the introductory blockquote and between logically distinct parts of the document.
+在简介块引用之后以及文档逻辑上不同部分之间放置它们。
 
 ---
 
-## Headings
+## 标题
 
-### Hierarchy
+### 层级
 
-| Level | Use | Example |
+| 级别 | 用途 | 示例 |
 |-------|-----|---------|
-| `#` H1 | Page title (one per document) | `# Slash Commands` |
-| `##` H2 | Major sections | `## Best Practices` |
-| `###` H3 | Subsections | `### Adding a Skill` |
-| `####` H4 | Sub-subsections (rare) | `#### Configuration Options` |
+| `#` H1 | 页面标题（每个文档一个） | `# Slash Commands` |
+| `##` H2 | 主要章节 | `## Best Practices` |
+| `###` H3 | 子章节 | `### Adding a Skill` |
+| `####` H4 | 子子章节（很少） | `#### Configuration Options` |
 
-### Rules
+### 规则
 
-- **One H1 per document** — the page title only
-- **Never skip levels** — don't jump from H2 to H4
-- **Keep headings concise** — aim for 2-5 words
-- **Use sentence case** — capitalize first word and proper nouns only (exception: feature names stay as-is)
-- **Add emoji prefixes only on root README** section headers (see [Emoji Usage](#emoji-usage))
+- **每个文档一个 H1** - 仅页面标题
+- **永不跳过级别** - 不要从 H2 跳到 H4
+- **保持标题简洁** - 目标 2-5 个单词
+- **使用句子大小写** - 仅大写第一个单词和专有名词（例外：功能名称保持原样）
+- **仅在根 README 章节标题上添加表情符号前缀**（参见[表情符号使用](#表情符号使用)）
 
 ---
 
-## Text Formatting
+## 文本格式
 
-### Emphasis
+### 强调
 
-| Style | When to Use | Example |
+| 样式 | 何时使用 | 示例 |
 |-------|------------|---------|
-| **Bold** (`**text**`) | Key terms, labels in tables, important concepts | `**Installation**:` |
-| *Italic* (`*text*`) | First use of a technical term, book/doc titles | `*frontmatter*` |
-| `Code` (`` `text` ``) | File names, commands, config values, code references | `` `CLAUDE.md` `` |
+| **粗体**（`**text**`） | 关键术语、表中的标签、重要概念 | `**Installation**：` |
+| *斜体*（`*text*`） | 技术术语的首次使用、书/文档标题 | `*frontmatter*` |
+| `Code`（`` `text` ``） | 文件名、命令、配置值、代码引用 | `` `CLAUDE.md` `` |
 
-### Blockquotes for Callouts
+### 用于提示的块引用
 
-Use blockquotes with bold prefixes for important notes:
+使用带有粗体前缀的块引用来表示重要说明：
 
 ```markdown
-> **Note**: Custom slash commands have been merged into skills since v2.0.
-
-> **Important**: Never commit API keys or credentials.
-
-> **Tip**: Combine memory with skills for maximum effectiveness.
+> **Note**：自定义斜杠命令自 v2.0 起已合并到 skills。
+>
+> **Important**：永不提交 API 密钥或凭据。
+>
+> **Tip**：将 memory 与 skills 结合使用以获得最大效果。
 ```
 
-Supported callout types: **Note**, **Important**, **Tip**, **Warning**.
+支持的提示类型：**Note**、**Important**、**Tip**、**Warning**。
 
-### Paragraphs
+### 段落
 
-- Keep paragraphs short (2-4 sentences)
-- Add a blank line between paragraphs
-- Lead with the key point, then provide context
-- Explain the "why" not just the "what"
+- 保持段落短（2-4 句）
+- 段落之间添加空行
+- 首先提出关键点，然后提供上下文
+- 解释"为什么"而不仅是"是什么"
 
 ---
 
-## Lists
+## 列表
 
-### Unordered Lists
+### 无序列表
 
-Use dashes (`-`) with 2-space indentation for nesting:
-
-```markdown
-- First item
-- Second item
-  - Nested item
-  - Another nested item
-    - Deep nested (avoid going deeper than 3 levels)
-- Third item
-```
-
-### Ordered Lists
-
-Use numbered lists for sequential steps, instructions, and ranked items:
+使用连字符（`-`）和 2 空格缩进进行嵌套：
 
 ```markdown
-1. First step
-2. Second step
-   - Sub-point detail
-   - Another sub-point
-3. Third step
+- 第一个项目
+- 第二个项目
+  - 嵌套项目
+  - 另一个嵌套项目
+    - 深度嵌套（避免超过 3 层）
+- 第三个项目
 ```
 
-### Descriptive Lists
+### 有序列表
 
-Use bold labels for key-value style lists:
+对顺序步骤、说明和排名项目使用编号列表：
 
 ```markdown
-- **Performance bottlenecks** - identify O(n^2) operations, inefficient loops
-- **Memory leaks** - find unreleased resources, circular references
-- **Algorithm improvements** - suggest better algorithms or data structures
+1. 第一步
+2. 第二步
+   - 子点详情
+   - 另一个子点
+3. 第三步
 ```
 
-### Rules
+### 描述列表
 
-- Maintain consistent indentation (2 spaces per level)
-- Add a blank line before and after a list
-- Keep list items parallel in structure (all start with verb, or all are nouns, etc.)
-- Avoid nesting deeper than 3 levels
+对键值样式列表使用粗体标签：
+
+```markdown
+- **性能瓶颈** - 识别 O(n^2) 操作、低效循环
+- **内存泄漏** - 查找未释放的资源、循环引用
+- **算法改进** - 建议更好的算法或数据结构
+```
+
+### 规则
+
+- 保持一致的缩进（每级 2 个空格）
+- 在列表之前和之后添加空行
+- 保持列表项目结构平行（都以动词开头，或都是名词等）
+- 避免嵌套超过 3 层
 
 ---
 
-## Tables
+## 表格
 
-### Standard Format
+### 标准格式
 
 ```markdown
-| Column 1 | Column 2 | Column 3 |
+| 第 1 列 | 第 2 列 | 第 3 列 |
 |----------|----------|----------|
-| Data     | Data     | Data     |
+| 数据     | 数据     | 数据     |
 ```
 
-### Common Table Patterns
+### 常见表格模式
 
-**Feature comparison (3-4 columns):**
+**功能比较（3-4 列）：**
 
 ```markdown
 | Feature | Invocation | Persistence | Best For |
@@ -246,7 +246,7 @@ Use bold labels for key-value style lists:
 | **Memory** | Auto-loaded | Cross-session | Long-term learning |
 ```
 
-**Do's and Don'ts:**
+**注意事项：**
 
 ```markdown
 | Do | Don't |
@@ -255,7 +255,7 @@ Use bold labels for key-value style lists:
 | Keep files focused | Overload a single file |
 ```
 
-**Quick reference:**
+**快速参考：**
 
 ```markdown
 | Aspect | Details |
@@ -265,74 +265,74 @@ Use bold labels for key-value style lists:
 | **Complexity** | Intermediate |
 ```
 
-### Rules
+### 规则
 
-- **Bold table headers** when they are row labels (first column)
-- Align pipes for readability in source (optional but preferred)
-- Keep cell content concise; use links for details
-- Use `code formatting` for commands and file paths inside cells
+- 当它们是行标签（第一列）时**粗体表格标题**
+- 为可读性对齐管道（可选但首选）
+- 保持单元格内容简洁；使用链接获取详情
+- 在单元格内使用 `code formatting` 表示命令和文件路径
 
 ---
 
-## Code Blocks
+## 代码块
 
-### Language Tags
+### 语言标签
 
-Always specify a language tag for syntax highlighting:
+始终指定语言标签以进行语法高亮：
 
-| Language | Tag | Use For |
+| 语言 | 标签 | 用于 |
 |----------|-----|---------|
-| Shell | `bash` | CLI commands, scripts |
-| Python | `python` | Python code |
-| JavaScript | `javascript` | JS code |
-| TypeScript | `typescript` | TS code |
-| JSON | `json` | Configuration files |
-| YAML | `yaml` | Frontmatter, config |
-| Markdown | `markdown` | Markdown examples |
-| SQL | `sql` | Database queries |
-| Plain text | (no tag) | Expected output, directory trees |
+| Shell | `bash` | CLI 命令、脚本 |
+| Python | `python` | Python 代码 |
+| JavaScript | `javascript` | JS 代码 |
+| TypeScript | `typescript` | TS 代码 |
+| JSON | `json` | 配置文件 |
+| YAML | `yaml` | Frontmatter、配置 |
+| Markdown | `markdown` | Markdown 示例 |
+| SQL | `sql` | 数据库查询 |
+| 纯文本 | （无标签） | 预期输出、目录树 |
 
-### Conventions
+### 约定
 
 ```bash
-# Comment explaining what the command does
+# 解释命令作用的注释
 claude mcp add notion --transport http https://mcp.notion.com/mcp
 ```
 
-- Add a **comment line** before non-obvious commands
-- Make all examples **copy-paste ready**
-- Show **both simple and advanced** versions when relevant
-- Include **expected output** when it aids understanding (use untagged code block)
+- 在非显而易见命令之前添加**注释行**
+- 使所有示例**可复制粘贴**
+- 必要时展示**简单和高级**版本
+- 当有助于理解时包含**预期输出**（使用无标签代码块）
 
-### Installation Blocks
+### 安装块
 
-Use this pattern for installation instructions:
+对此模式使用安装说明：
 
 ```bash
-# Copy files to your project
+# 将文件复制到您的项目
 cp 01-slash-commands/*.md .claude/commands/
 ```
 
-### Multi-step Workflows
+### 多步骤工作流
 
 ```bash
-# Step 1: Create the directory
+# 步骤 1：创建目录
 mkdir -p .claude/commands
 
-# Step 2: Copy the templates
+# 步骤 2：复制模板
 cp 01-slash-commands/*.md .claude/commands/
 
-# Step 3: Verify installation
+# 步骤 3：验证安装
 ls .claude/commands/
 ```
 
 ---
 
-## Links and Cross-References
+## 链接和交叉引用
 
-### Internal Links (Relative)
+### 内部链接（相对）
 
-Use relative paths for all internal links:
+对所有内部链接使用相对路径：
 
 ```markdown
 [Slash Commands](01-slash-commands/)
@@ -340,36 +340,36 @@ Use relative paths for all internal links:
 [Memory Architecture](02-memory/#memory-architecture)
 ```
 
-From a lesson folder back to root or sibling:
+从课程文件夹返回根目录或同级：
 
 ```markdown
-[Back to main guide](../README.md)
-[Related: Skills](../03-skills/)
+[返回主指南](../README.md)
+[相关：Skills](../03-skills/)
 ```
 
-### External Links (Absolute)
+### 外部链接（绝对）
 
-Use full URLs with descriptive anchor text:
+使用带有描述性锚文本的完整 URL：
 
 ```markdown
 [Anthropic's official documentation](https://code.claude.com/docs/en/overview)
 ```
 
-- Never use "click here" or "this link" as anchor text
-- Use descriptive text that makes sense out of context
+- 永不使用"点击这里"或"此链接"作为锚文本
+- 使用在上下文中合理的描述性文本
 
-### Section Anchors
+### 章节锚点
 
-Link to sections within the same document using GitHub-style anchors:
+使用 GitHub 风格的锚点链接到同一文档内的章节：
 
 ```markdown
 [Feature Catalog](#-feature-catalog)
 [Best Practices](#best-practices)
 ```
 
-### Related Guides Pattern
+### 相关指南模式
 
-End lessons with a related guides section:
+在课程结尾添加相关指南部分：
 
 ```markdown
 ## Related Guides
@@ -381,19 +381,19 @@ End lessons with a related guides section:
 
 ---
 
-## Diagrams
+## 图表
 
 ### Mermaid
 
-Use Mermaid for all diagrams. Supported types:
+对所有图表使用 Mermaid。支持的类型：
 
-- `graph TB` / `graph LR` — architecture, hierarchy, flow
-- `sequenceDiagram` — interaction flows
-- `timeline` — chronological sequences
+- `graph TB` / `graph LR` — 架构、层级、流程
+- `sequenceDiagram` — 交互流程
+- `timeline` — 时间顺序
 
-### Style Conventions
+### 样式约定
 
-Apply consistent colors using style blocks:
+使用样式块应用一致的颜色：
 
 ```mermaid
 graph TB
@@ -405,68 +405,68 @@ graph TB
     style C fill:#e8f5e9,stroke:#333,color:#333
 ```
 
-**Color palette:**
+**调色板：**
 
-| Color | Hex | Use For |
+| 颜色 | 十六进制 | 用于 |
 |-------|-----|---------|
-| Light blue | `#e1f5fe` | Primary components, inputs |
-| Light pink | `#fce4ec` | Processing, middleware |
-| Light green | `#e8f5e9` | Outputs, results |
-| Light yellow | `#fff9c4` | Configuration, optional |
-| Light purple | `#f3e5f5` | User-facing, UI |
+| 浅蓝 | `#e1f5fe` | 主要组件、输入 |
+| 浅粉 | `#fce4ec` | 处理、中间件 |
+| 浅绿 | `#e8f5e9` | 输出、结果 |
+| 浅黄 | `#fff9c4` | 配置、可选 |
+| 浅紫 | `#f3e5f5` | 用户界面、UI |
 
-### Rules
+### 规则
 
-- Use `["Label text"]` for node labels (enables special characters)
-- Use `<br/>` for line breaks within labels
-- Keep diagrams simple (max 10-12 nodes)
-- Add a brief text description below the diagram for accessibility
-- Use top-to-bottom (`TB`) for hierarchies, left-to-right (`LR`) for workflows
+- 使用 `["Label text"]` 表示节点标签（支持特殊字符）
+- 使用 `<br/>` 在标签内换行
+- 保持图表简单（最多 10-12 个节点）
+- 在图表下方添加简要文本描述以提高可访问性
+- 对层级使用自上而下（`TB`），对工作流使用从左到右（`LR`）
 
 ---
 
-## Emoji Usage
+## 表情符号使用
 
-### Where Emojis Are Used
+### 使用表情符号的位置
 
-Emojis are used **sparingly and purposefully** — only in specific contexts:
+表情符号**谨慎且有目的地**使用 - 仅在特定上下文中：
 
-| Context | Emojis | Example |
+| 上下文 | 表情符号 | 示例 |
 |---------|--------|---------|
-| Root README section headers | Category icons | `## 📚 Learning Path` |
-| Skill level indicators | Colored circles | 🟢 Beginner, 🔵 Intermediate, 🔴 Advanced |
-| Do's and Don'ts | Check/cross marks | ✅ Do this, ❌ Don't do this |
-| Complexity ratings | Stars | ⭐⭐⭐ |
+| 根 README 章节标题 | 类别图标 | `## 📚 Learning Path` |
+| 技能级别指示器 | 彩色圆圈 | 🟢 初级、🔵 中级、🔴 高级 |
+| 注意事项 | 勾/叉标记 | ✅ 这样做、❌ 不要这样做 |
+| 复杂度评分 | 星号 | ⭐⭐⭐ |
 
-### Standard Emoji Set
+### 标准表情符号集
 
-| Emoji | Meaning |
-|-------|---------|
-| 📚 | Learning, guides, documentation |
-| ⚡ | Getting started, quick reference |
-| 🎯 | Features, quick reference |
-| 🎓 | Learning paths |
-| 📊 | Statistics, comparisons |
-| 🚀 | Installation, quick commands |
-| 🟢 | Beginner level |
-| 🔵 | Intermediate level |
-| 🔴 | Advanced level |
-| ✅ | Recommended practice |
-| ❌ | Avoid / anti-pattern |
-| ⭐ | Complexity rating unit |
+| 表情符号 | 含义 |
+|---------|---------|
+| 📚 | 学习、指南、文档 |
+| ⚡ | 入门、快速参考 |
+| 🎯 | 功能、快速参考 |
+| 🎓 | 学习路径 |
+| 📊 | 统计、比较 |
+| 🚀 | 安装、快速命令 |
+| 🟢 | 初级级别 |
+| 🔵 | 中级级别 |
+| 🔴 | 高级级别 |
+| ✅ | 推荐做法 |
+| ❌ | 避免/反模式 |
+| ⭐ | 复杂度评分单位 |
 
-### Rules
+### 规则
 
-- **Never use emojis in body text** or paragraphs
-- **Only use emojis in headers** on the root README (not in lesson READMEs)
-- **Do not add decorative emojis** — every emoji should convey meaning
-- Keep emoji usage consistent with the table above
+- **永不将表情符号用于正文文本**或段落
+- **仅在根 README 上将表情符号用于标题**（不在课程 README 中）
+- **不要添加装饰性表情符号** - 每个表情符号都应该传达含义
+- 保持表情符号使用与上表一致
 
 ---
 
 ## YAML Frontmatter
 
-### Feature Files (Skills, Commands, Agents)
+### 功能文件（Skills、Commands、Agents）
 
 ```yaml
 ---
@@ -476,7 +476,7 @@ allowed-tools: Bash, Read, Grep
 ---
 ```
 
-### Optional Fields
+### 可选字段
 
 ```yaml
 ---
@@ -492,20 +492,20 @@ agent: Explore                     # Agent type for context: fork
 ---
 ```
 
-### Rules
+### 规则
 
-- Place frontmatter at the very top of the file
-- Use **kebab-case** for the `name` field
-- Keep `description` to one sentence
-- Only include fields that are needed
+- 将 frontmatter 放在文件最顶部
+- 对 `name` 字段使用 **kebab-case**
+- 将 `description` 保持在一句话
+- 仅包含需要的字段
 
 ---
 
-## Images and Media
+## 图片和媒体
 
-### Logo Pattern
+### Logo 模式
 
-All documents that start with a logo use the `<picture>` element for dark/light mode support:
+所有以 logo 开头的文档使用 `<picture>` 元素支持深色/浅色模式：
 
 ```html
 <picture>
@@ -514,73 +514,73 @@ All documents that start with a logo use the `<picture>` element for dark/light 
 </picture>
 ```
 
-### Screenshots
+### 截图
 
-- Store in the relevant lesson folder (e.g., `01-slash-commands/pr-slash-command.png`)
-- Use kebab-case file names
-- Include descriptive alt text
-- Prefer SVG for diagrams, PNG for screenshots
+- 存储在相关课程文件夹中（例如 `01-slash-commands/pr-slash-command.png`）
+- 使用 kebab-case 文件名
+- 包含描述性 alt 文本
+- 对图表使用 SVG，对截图使用 PNG
 
-### Rules
+### 规则
 
-- Always provide alt text for images
-- Keep image file sizes reasonable (< 500KB for PNGs)
-- Use relative paths for image references
-- Store images in the same directory as the document that references them, or in `assets/` for shared images
+- 始终为图片提供 alt 文本
+- 保持图片文件大小合理（PNG < 500KB）
+- 对图片引用使用相对路径
+- 将图片存储在与引用它的文档相同的目录中，或对共享图片存储在 `assets/`
 
 ---
 
-## Tone and Voice
+## 语气和语调
 
-### Writing Style
+### 写作风格
 
-- **Professional but approachable** — technical accuracy without jargon overload
-- **Active voice** — "Create a file" not "A file should be created"
-- **Direct instructions** — "Run this command" not "You might want to run this command"
-- **Beginner-friendly** — assume the reader is new to Claude Code, not new to programming
+- **专业但平易近人** - 技术准确但不堆积术语
+- **主动语态** - "Create a file" 而非 "A file should be created"
+- **直接说明** - "Run this command" 而非 "You might want to run this command"
+- **对初学者友好** - 假设读者是 Claude Code 新手，而非编程新手
 
-### Content Principles
+### 内容原则
 
-| Principle | Example |
+| 原则 | 示例 |
 |-----------|---------|
-| **Show, don't tell** | Provide working examples, not abstract descriptions |
-| **Progressive complexity** | Start simple, add depth in later sections |
-| **Explain the "why"** | "Use memory for... because..." not just "Use memory for..." |
-| **Copy-paste ready** | Every code block should work when pasted directly |
-| **Real-world context** | Use practical scenarios, not contrived examples |
+| **展示，不要说教** | 提供可工作的示例，而非抽象描述 |
+| **渐进式复杂度** | 从简单开始，在后续章节中增加深度 |
+| **解释"为什么"** | "Use memory for... because..." 而非仅 "Use memory for..." |
+| **可复制粘贴** | 每个代码块都应该可以直接粘贴使用 |
+| **真实世界上下文** | 使用实际场景，而非人为示例 |
 
-### Vocabulary
+### 词汇
 
-- Use "Claude Code" (not "Claude CLI" or "the tool")
-- Use "skill" (not "custom command" — legacy term)
-- Use "lesson" or "guide" for the numbered sections
-- Use "example" for individual feature files
+- 使用"Claude Code"（而非"Claude CLI"或"the tool"）
+- 使用"skill"（而非"custom command" - 旧术语）
+- 对编号章节使用"lesson"或"guide"
+- 对单个功能文件使用"example"
 
 ---
 
-## Commit Messages
+## 提交消息
 
-Follow [Conventional Commits](https://www.conventionalcommits.org/):
+遵循 [Conventional Commits](https://www.conventionalcommits.org/)：
 
 ```
 type(scope): description
 ```
 
-### Types
+### 类型
 
-| Type | Use For |
+| Type | 用于 |
 |------|---------|
-| `feat` | New feature, example, or guide |
-| `fix` | Bug fix, correction, broken link |
-| `docs` | Documentation improvements |
-| `refactor` | Restructuring without changing behavior |
-| `style` | Formatting changes only |
-| `test` | Test additions or changes |
-| `chore` | Build, dependencies, CI |
+| `feat` | 新功能、示例或指南 |
+| `fix` | Bug 修复、修正、断链 |
+| `docs` | 文档改进 |
+| `refactor` | 重构而不改变行为 |
+| `style` | 仅格式更改 |
+| `test` | 测试添加或更改 |
+| `chore` | 构建、依赖、CI |
 
-### Scopes
+### 范围
 
-Use the lesson name or file area as scope:
+使用课程名称或文件区域作为范围：
 
 ```
 feat(slash-commands): Add API documentation generator
@@ -591,9 +591,9 @@ docs(skills): Add comprehensive code review skill
 
 ---
 
-## Document Metadata Footer
+## 文档元数据页脚
 
-Lesson READMEs end with a metadata block:
+课程 README 以元数据块结尾：
 
 ```markdown
 ---
@@ -602,29 +602,29 @@ Lesson READMEs end with a metadata block:
 **Compatible Models**: Claude Sonnet 4.6, Claude Opus 4.6, Claude Haiku 4.5
 ```
 
-- Use month + year format (e.g., "March 2026")
-- Update the version when features change
-- List all compatible models
+- 使用月份 + 年份格式（例如"March 2026"）
+- 当功能更改时更新版本
+- 列出所有兼容的模型
 
 ---
 
-## Checklist for Authors
+## 作者检查清单
 
-Before submitting content, verify:
+提交内容前验证：
 
-- [ ] File/folder names use kebab-case
-- [ ] Document starts with H1 title (one per file)
-- [ ] Heading hierarchy is correct (no skipped levels)
-- [ ] All code blocks have language tags
-- [ ] Code examples are copy-paste ready
-- [ ] Internal links use relative paths
-- [ ] External links have descriptive anchor text
-- [ ] Tables are properly formatted
-- [ ] Emojis follow the standard set (if used at all)
-- [ ] Mermaid diagrams use the standard color palette
-- [ ] No sensitive information (API keys, credentials)
-- [ ] YAML frontmatter is valid (if applicable)
-- [ ] Images have alt text
-- [ ] Paragraphs are short and focused
-- [ ] Related guides section links to relevant lessons
-- [ ] Commit message follows conventional commits format
+- [ ] 文件/文件夹名称使用 kebab-case
+- [ ] 文档以 H1 标题开头（每个文件一个）
+- [ ] 标题层级正确（无跳级别）
+- [ ] 所有代码块都有语言标签
+- [ ] 代码示例可复制粘贴
+- [ ] 内部链接使用相对路径
+- [ ] 外部链接有描述性锚文本
+- [ ] 表格格式正确
+- [ ] 表情符号遵循标准集（如有使用）
+- [ ] Mermaid 图表使用标准调色板
+- [ ] 无敏感信息（API 密钥、凭据）
+- [ ] YAML frontmatter 有效（如适用）
+- [ ] 图片有 alt 文本
+- [ ] 段落短小集中
+- [ ] 相关指南部分链接到相关课程
+- [ ] 提交消息遵循约定式提交格式

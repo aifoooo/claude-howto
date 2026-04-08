@@ -4,19 +4,19 @@ import sys
 
 
 def analyze_code_metrics(code):
-    """Analyze code for common metrics."""
+    """分析代码的常见指标。"""
 
-    # Count functions
+    # 统计函数数量
     functions = len(re.findall(r"^def\s+\w+", code, re.MULTILINE))
 
-    # Count classes
+    # 统计类数量
     classes = len(re.findall(r"^class\s+\w+", code, re.MULTILINE))
 
-    # Average line length
+    # 平均行长度
     lines = code.split("\n")
     avg_length = sum(len(l) for l in lines) / len(lines) if lines else 0
 
-    # Estimate complexity
+    # 估算复杂度
     complexity = len(re.findall(r"\b(if|elif|else|for|while|and|or)\b", code))
 
     return {

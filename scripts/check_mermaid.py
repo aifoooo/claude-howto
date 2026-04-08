@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate Mermaid diagram syntax in Markdown files using mmdc."""
+"""使用 mmdc 验证 Markdown 文件中的 Mermaid 图表语法。"""
 
 import json
 import os
@@ -23,8 +23,8 @@ def main() -> int:
     errors = []
     checked = 0
 
-    # On GitHub Actions Linux runners, Chrome/Puppeteer requires --no-sandbox.
-    # Write a temporary puppeteer config when MERMAID_PUPPETEER_NO_SANDBOX is set.
+    # 在 GitHub Actions Linux 运行器上，Chrome/Puppeteer 需要 --no-sandbox。
+    # 当设置 MERMAID_PUPPETEER_NO_SANDBOX=true 时，写入临时 puppeteer 配置。
     puppeteer_config_path = None
     extra_args: list[str] = []
     if os.environ.get("MERMAID_PUPPETEER_NO_SANDBOX") == "true":

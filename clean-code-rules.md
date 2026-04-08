@@ -1,108 +1,108 @@
-# Clean Code Rules for AI Code Generation
+# AI 代码生成清洁代码规则
 
-These rules guide code generation to produce maintainable, professional-quality code.
+这些规则指导代码生成，以产生可维护的、专业质量的代码。
 
-## Meaningful Names
-- Use intention-revealing names that explain why something exists
-- Avoid disinformation and meaningless distinctions (e.g., `data`, `info`, `manager`)
-- Use pronounceable, searchable names
-- Class names: nouns (e.g., `UserAccount`, `PaymentProcessor`)
-- Method names: verbs (e.g., `calculateTotal`, `sendEmail`)
-- Avoid mental mapping and encodings (Hungarian notation, prefixes)
+## 有意义的名称
+- 使用揭示意图的名称，解释某物存在的原因
+- 避免虚假信息和无意义的区分（例如 `data`、`info`、`manager`）
+- 使用可发音、可搜索的名称
+- 类名：名词（例如 `UserAccount`、`PaymentProcessor`）
+- 方法名：动词（例如 `calculateTotal`、`sendEmail`）
+- 避免心理映射和编码（匈牙利命名法、前缀）
 
-## Functions
-- Keep functions small (< 20 lines ideal)
-- Do one thing only - Single Responsibility Principle
-- One level of abstraction per function
-- Limit arguments: 0-2 ideal, 3 maximum, avoid flag arguments
-- No side effects - function should do what its name says
-- Separate commands (change state) from queries (return info)
-- Prefer exceptions over error codes
+## 函数
+- 保持函数短小（理想情况下 < 20 行）
+- 只做一件事 - 单一职责原则
+- 每个函数一层抽象
+- 限制参数：0-2 个理想，3 个最大，避免标志参数
+- 无副作用 - 函数应该如其名称所述
+- 将命令（改变状态）与查询（返回信息）分离
+- 优先使用异常而非错误代码
 
-## Comments
-- Code should be self-explanatory - avoid comments when possible
-- Good comments: legal info, warnings, TODOs, public API documentation
-- Bad comments: redundant, misleading, or explaining bad code
-- Never comment out code - delete it (version control preserves history)
-- If you need a comment, consider refactoring the code instead
+## 注释
+- 代码应该不言自明 - 尽可能避免注释
+- 好的注释：法律信息、警告、TODO、公共 API 文档
+- 坏的注释：冗余、误导或解释糟糕代码的注释
+- 永不注释掉代码 - 删除它（版本控制保留历史）
+- 如果你需要注释，考虑重构代码
 
-## Formatting
-- Keep files small and focused
-- Vertical formatting: related concepts close together, blank lines separate concepts
-- Horizontal formatting: limit line length (80-120 characters)
-- Use consistent indentation and team style
-- Group related functions together
+## 格式化
+- 保持文件小而专注
+- 垂直格式化：相关概念靠近，空行分隔概念
+- 水平格式化：限制行长度（80-120 个字符）
+- 使用一致的缩进和团队风格
+- 将相关函数分组在一起
 
-## Objects and Data Structures
-- Objects: hide data behind abstractions, expose behavior through methods
-- Data structures: expose data, have minimal behavior
-- Law of Demeter: only talk to immediate friends, avoid `a.getB().getC().doSomething()`
-- Don't expose internal structure through getters/setters blindly
+## 对象和数据结构
+- 对象：将数据隐藏在抽象后面，通过方法暴露行为
+- 数据结构：暴露数据，有最少的行为
+- Demeter 法则：只与直接的朋友交谈，避免 `a.getB().getC().doSomething()`
+- 不要盲目地通过 getter/setter 暴露内部结构
 
-## Error Handling
-- Use exceptions, not return codes or error flags
-- Write `try-catch-finally` first when code might fail
-- Provide context in exception messages
-- Don't return `null` - return empty collections or use Optional/Maybe
-- Don't pass `null` as arguments
+## 错误处理
+- 使用异常，而非返回代码或错误标志
+- 当代码可能失败时，首先编写 `try-catch-finally`
+- 在异常消息中提供上下文
+- 不要返回 `null` - 返回空集合或使用 Optional/Maybe
+- 不要将 `null` 作为参数传递
 
-## Classes
-- Small classes: measured by responsibilities, not lines
-- Single Responsibility Principle: one reason to change
-- High cohesion: class variables used by many methods
-- Low coupling: minimal dependencies between classes
-- Open/Closed Principle: open for extension, closed for modification
+## 类
+- 小类：按职责衡量，而非行数
+- 单一职责原则：一个变更理由
+- 高内聚：类变量被多个方法使用
+- 低耦合：类之间的依赖最小化
+- 开闭原则：开放扩展，封闭修改
 
-## Unit Tests
-- Fast, Independent, Repeatable, Self-validating, Timely (F.I.R.S.T.)
-- One assert per test (or one concept)
-- Test code quality equals production code quality
-- Readable test names that describe what's being tested
-- Arrange-Act-Assert pattern
+## 单元测试
+- 快速、独立、可重复、自我验证、及时（F.I.R.S.T.）
+- 每个测试一个断言（或一个概念）
+- 测试代码质量等于生产代码质量
+- 使用描述性测试名称说明正在测试的内容
+- Arrange-Act-Assert 模式
 
-## Code Quality Principles
-- **DRY (Don't Repeat Yourself)**: No duplication
-- **YAGNI (You Aren't Gonna Need It)**: Don't build for hypothetical futures
-- **KISS (Keep It Simple)**: Avoid unnecessary complexity
-- **Boy Scout Rule**: Leave code cleaner than you found it
+## 代码质量原则
+- **DRY（不要重复自己）**：无重复
+- **YAGNI（你不需要它）**：不要为假设的未来构建
+- **KISS（保持简单）**：避免不必要的复杂性
+- **童子军规则**：让代码比你发现时更干净
 
-## Code Smells to Avoid
-- Long functions or classes
-- Duplicate code
-- Dead code (unused variables, functions, parameters)
-- Feature envy (method more interested in other class)
-- Inappropriate intimacy (classes knowing too much about each other)
-- Long parameter lists
-- Primitive obsession (overusing primitives instead of small objects)
-- Switch/case statements (consider polymorphism)
-- Temporary fields (class variables only used sometimes)
+## 应避免的代码味道
+- 长函数或长类
+- 重复代码
+- 死代码（未使用的变量、函数、参数）
+- 特性羡慕（方法更关注其他类）
+- 不适当的亲密（类之间相互了解太多）
+- 长参数列表
+- 原始类型痴迷（过度使用原始类型而非小对象）
+- Switch/case 语句（考虑多态）
+- 临时字段（有时才使用的类变量）
 
-## Concurrency
-- Keep concurrent code separate from other code
-- Limit scope of synchronized/locked data
-- Use thread-safe collections
-- Keep synchronized sections small
-- Know your execution models and primitives
+## 并发
+- 将并发代码与其他代码分开
+- 限制同步/锁定数据的范围
+- 使用线程安全集合
+- 保持同步部分小
+- 了解你的执行模型和原语
 
-## System Design
-- Separate construction from use (dependency injection)
-- Use factories, builders for complex object creation
-- Program to interfaces, not implementations
-- Favor composition over inheritance
-- Apply design patterns when they simplify, not to show off
+## 系统设计
+- 将构造与使用分离（依赖注入）
+- 对于复杂对象创建，使用工厂、构建器
+- 面向接口编程，而非实现
+- 优先使用组合而非继承
+- 当设计模式简化时应用，而非炫耀
 
-## Refactoring
-- Refactor continuously, not in big batches
-- Always have passing tests before and after
-- Small steps: one change at a time
-- Common refactorings: Extract Method, Rename, Move, Inline
+## 重构
+- 持续重构，而非大批量
+- 重构前后始终有通过的测试
+- 小步骤：一次一个更改
+- 常见重构：提取方法、重命名、移动、内联
 
-## Documentation
-- Self-documenting code > comments > external docs
-- Public APIs need clear documentation
-- Include examples in documentation
-- Keep docs close to code (ideally in code)
+## 文档
+- 自文档化代码 > 注释 > 外部文档
+- 公共 API 需要清晰的文档
+- 在文档中包含示例
+- 保持文档接近代码（最好在代码中）
 
 ---
 
-**Core Philosophy**: Code is read 10x more than written. Optimize for readability and maintainability, not cleverness.
+**核心哲学**：代码阅读次数是编写次数的 10 倍。为可读性和可维护性优化，而非技巧。

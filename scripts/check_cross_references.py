@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate cross-references, anchors, and code fences in Markdown files."""
+"""验证 Markdown 文件中的交叉引用、锚点和代码栅栏。"""
 
 import re
 import sys
@@ -27,17 +27,17 @@ def iter_md_files():
 
 
 def heading_to_anchor(heading: str) -> str:
-    # Match GitHub's anchor generation: strip non-ASCII (emoji), strip punctuation,
-    # lowercase, replace spaces with hyphens, strip leading/trailing hyphens.
+    # 匹配 GitHub 的锚点生成：剥离非 ASCII（emoji）、剥离标点符号、
+    # 小写、将空格替换为连字符、剥离首尾连字符。
     heading_ascii = heading.encode("ascii", "ignore").decode()
     return re.sub(r"[^\w\s-]", "", heading_ascii.lower()).replace(" ", "-").rstrip("-")
 
 
 def strip_code_blocks(content: str) -> str:
-    """Remove fenced code blocks and inline code spans to avoid scanning example links."""
-    # Strip fenced code blocks (``` ... ```)
+    """移除带栅栏的代码块和内联代码跨度以避免扫描示例链接。"""
+    # 剥离带栅栏的代码块（``` ... ```）
     content = re.sub(r"```[^\n]*\n.*?```", "", content, flags=re.DOTALL)
-    # Strip inline code spans (` ... `)
+    # 剥离内联代码跨度（` ... `）
     content = re.sub(r"`[^`\n]+`", "", content)
     return content
 
@@ -47,18 +47,17 @@ def main() -> int:
 
     for file_path in iter_md_files():
         content = file_path.read_text()
-        # Strip code blocks before scanning for links/anchors to avoid false positives
-        # from documentation examples inside code fences.
+        # 在扫描链接/锚点之前剥离代码块以避免代码栅栏内文档示例的误报
         scannable = strip_code_blocks(content)
 
-        # Relative .md links must resolve
+        # 相对 .md 链接必须能解析
         errors.extend(
             f"{file_path}: broken cross-reference → '{link_path}'"
             for link_path in re.findall(r"\[[^\]]+\]\(([^)#]+\.md)[^)]*\)", scannable)
             if not (file_path.parent / link_path).resolve().exists()
         )
 
-        # In-page anchors must match a real heading
+        # 页内锚点必须匹配真实标题
         anchors = re.findall(r"\[[^\]]+\]\(#([^)]+)\)", scannable)
         if anchors:
             headings = re.findall(r"^#{1,6}\s+(.+)$", content, re.MULTILINE)
@@ -69,11 +68,11 @@ def main() -> int:
                 if anchor not in valid_anchors
             )
 
-        # Unmatched code fences (only count fences at start of line)
+        # 不匹配的代码栅栏（仅计算行首的栅栏）
         if len(re.findall(r"^```", content, re.MULTILINE)) % 2 != 0:
             errors.append(f"{file_path}: unmatched code fences")
 
-    # All numbered lesson dirs must have README.md
+    # 所有编号课程目录必须有 README.md
     for i in range(1, 11):
         errors.extend(
             f"{d}: missing README.md"

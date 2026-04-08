@@ -1,25 +1,25 @@
 #!/usr/bin/env python3
 """
-Code Smell Detector
+代码异味检测器
 
-Detects common code smells in Python, JavaScript, and TypeScript files.
-Based on Martin Fowler's catalog of code smells.
+检测 Python、JavaScript 和 TypeScript 文件中的常见代码异味。
+基于 Martin Fowler 的代码异味目录。
 
-Usage:
+用法：
     python detect-smells.py <file>
     python detect-smells.py --dir <directory>
-    python detect-smells.py -v <file>  # Verbose with code snippets
+    python detect-smells.py -v <file>  # 详细模式，包含代码片段
 
-Detects:
-    - Long Method (>30 lines)
-    - Long Parameter List (>4 params)
-    - Duplicate Code (similar code blocks)
-    - Large Class (>300 lines, >10 methods)
-    - Dead Code (unused variables/functions)
-    - Complex Conditionals (deep nesting, long chains)
-    - Magic Numbers/Strings
-    - Feature Envy (methods using other class data heavily)
-    - Comments explaining what (not why)
+检测内容：
+    - 长方法（>30 行）
+    - 长参数列表（>4 个参数）
+    - 重复代码（相似的代码块）
+    - 大类（>300 行，>10 个方法）
+    - 死代码（未使用的变量/函数）
+    - 复杂条件（深层嵌套、长链）
+    - 魔法数字/字符串
+    - 功能依恋（大量使用其他类的数据的方法）
+    - 解释"是什么"而非"为什么"的注释
 """
 
 import argparse
@@ -33,7 +33,7 @@ from collections import defaultdict
 
 
 class SmellSeverity(Enum):
-    """Severity levels for code smells."""
+    """代码异味的严重级别。"""
     LOW = "Low"
     MEDIUM = "Medium"
     HIGH = "High"
@@ -41,7 +41,7 @@ class SmellSeverity(Enum):
 
 
 class SmellType(Enum):
-    """Types of code smells."""
+    """代码异味的类型。"""
     LONG_METHOD = "Long Method"
     LONG_PARAMETER_LIST = "Long Parameter List"
     DUPLICATE_CODE = "Duplicate Code"
@@ -60,7 +60,7 @@ class SmellType(Enum):
 
 @dataclass
 class CodeSmell:
-    """Represents a detected code smell."""
+    """表示检测到的代码异味。"""
     smell_type: SmellType
     severity: SmellSeverity
     location: str
@@ -73,7 +73,7 @@ class CodeSmell:
 
 @dataclass
 class SmellReport:
-    """Report of all smells found in a file."""
+    """文件中所有异味的报告。"""
     filename: str
     smells: List[CodeSmell] = field(default_factory=list)
 
@@ -95,9 +95,9 @@ class SmellReport:
 
 
 class SmellDetector:
-    """Detect code smells in source files."""
+    """检测源代码中的代码异味。"""
 
-    # Thresholds (configurable)
+    # 阈值（可配置）
     THRESHOLDS = {
         'long_method_lines': 30,
         'very_long_method_lines': 50,
@@ -120,7 +120,7 @@ class SmellDetector:
         self.smells: List[CodeSmell] = []
 
     def _detect_language(self) -> str:
-        """Detect programming language from file extension."""
+        """从文件扩展名检测编程语言。"""
         ext = os.path.splitext(self.filepath)[1].lower()
         ext_map = {
             '.py': 'python',
@@ -132,7 +132,7 @@ class SmellDetector:
         return ext_map.get(ext, 'python')
 
     def detect_all(self) -> SmellReport:
-        """Run all smell detectors."""
+        """运行所有异味检测器。"""
         self._detect_long_methods()
         self._detect_long_parameter_lists()
         self._detect_large_class()
@@ -148,7 +148,7 @@ class SmellDetector:
         return SmellReport(filename=self.filename, smells=self.smells)
 
     def _get_snippet(self, start: int, end: int, context: int = 2) -> str:
-        """Get code snippet with context."""
+        """获取带有上下文的代码片段。"""
         actual_start = max(0, start - context)
         actual_end = min(len(self.lines), end + context)
         snippet_lines = []
@@ -158,7 +158,7 @@ class SmellDetector:
         return '\n'.join(snippet_lines)
 
     def _detect_long_methods(self) -> None:
-        """Detect methods that are too long."""
+        """检测过长的方法。"""
         if self.language == 'python':
             pattern = r'^\s*def\s+(\w+)\s*\([^)]*\):'
         else:
@@ -172,7 +172,7 @@ class SmellDetector:
         for i, line in enumerate(self.lines):
             match = re.search(pattern, line)
             if match:
-                # Check previous method if exists
+                # 检查之前的方法（如果存在）
                 if current_method:
                     method_lines = i - method_start
                     self._check_method_length(current_method, method_start, i - 1, method_lines)
@@ -181,7 +181,7 @@ class SmellDetector:
                 method_start = i
                 indent_level = len(line) - len(line.lstrip())
 
-            # Track end of Python functions by indentation
+            # 通过缩进跟踪 Python 函数的结束
             if self.language == 'python' and current_method:
                 if line.strip() and not line.strip().startswith('#'):
                     current_indent = len(line) - len(line.lstrip())
@@ -190,13 +190,13 @@ class SmellDetector:
                         self._check_method_length(current_method, method_start, i - 1, method_lines)
                         current_method = None
 
-        # Check last method
+        # 检查最后一个方法
         if current_method:
             method_lines = len(self.lines) - method_start
             self._check_method_length(current_method, method_start, len(self.lines) - 1, method_lines)
 
     def _check_method_length(self, name: str, start: int, end: int, lines: int) -> None:
-        """Check if method is too long and add smell if so."""
+        """检查方法是否过长并在必要时添加异味。"""
         if lines > self.THRESHOLDS['very_long_method_lines']:
             severity = SmellSeverity.HIGH
             desc = f"Method '{name}' is {lines} lines (threshold: {self.THRESHOLDS['long_method_lines']})"
@@ -218,7 +218,7 @@ class SmellDetector:
         ))
 
     def _detect_long_parameter_lists(self) -> None:
-        """Detect functions with too many parameters."""
+        """检测参数过多的函数。"""
         if self.language == 'python':
             pattern = r'def\s+(\w+)\s*\(([^)]*)\)'
         else:
@@ -227,17 +227,17 @@ class SmellDetector:
         for i, line in enumerate(self.lines):
             match = re.search(pattern, line)
             if match:
-                # Safely extract groups
+                # 安全地提取组
                 groups = match.groups()
                 func_name = groups[0] or (groups[2] if len(groups) > 2 else None)
                 params_str = groups[1] if len(groups) > 1 else ""
                 if not params_str and len(groups) > 3:
                     params_str = groups[3] or ""
 
-                # Count parameters
+                # 统计参数
                 if params_str.strip():
                     params = [p.strip() for p in params_str.split(',') if p.strip()]
-                    # Filter out 'self', 'cls' for Python
+                    # 为 Python 过滤掉 'self', 'cls'
                     if self.language == 'python':
                         params = [p for p in params if p not in ('self', 'cls')]
                     param_count = len(params)
@@ -256,7 +256,7 @@ class SmellDetector:
                         ))
 
     def _detect_large_class(self) -> None:
-        """Detect classes that are too large."""
+        """检测过大的类。"""
         if self.language == 'python':
             class_pattern = r'^\s*class\s+(\w+)'
             method_pattern = r'^\s+def\s+\w+'
@@ -272,7 +272,7 @@ class SmellDetector:
         for i, line in enumerate(self.lines):
             class_match = re.search(class_pattern, line)
             if class_match:
-                # Check previous class
+                # 检查之前的类
                 if current_class:
                     self._check_class_size(current_class, class_start, i - 1, method_count)
 
@@ -281,16 +281,16 @@ class SmellDetector:
                 method_count = 0
                 class_indent = len(line) - len(line.lstrip())
 
-            # Count methods in current class
+            # 统计当前类中的方法
             if current_class and re.search(method_pattern, line):
                 method_count += 1
 
-        # Check last class
+        # 检查最后一个类
         if current_class:
             self._check_class_size(current_class, class_start, len(self.lines) - 1, method_count)
 
     def _check_class_size(self, name: str, start: int, end: int, methods: int) -> None:
-        """Check if class is too large."""
+        """检查类是否过大。"""
         lines = end - start + 1
 
         issues = []
@@ -318,9 +318,9 @@ class SmellDetector:
             ))
 
     def _detect_complex_conditionals(self) -> None:
-        """Detect complex conditional expressions."""
+        """检测复杂的条件表达式。"""
         for i, line in enumerate(self.lines):
-            # Count logical operators in line
+            # 统计行中的逻辑运算符
             and_or_count = len(re.findall(r'\b(and|or|&&|\|\|)\b', line))
 
             if and_or_count >= 3:
@@ -336,23 +336,23 @@ class SmellDetector:
                 ))
 
     def _detect_magic_numbers(self) -> None:
-        """Detect magic numbers and strings."""
-        # Skip common acceptable values
+        """检测魔法数字和字符串。"""
+        # 跳过常见可接受的值
         acceptable = {'0', '1', '-1', '2', '100', 'true', 'false', 'null', 'None', '""', "''"}
 
         for i, line in enumerate(self.lines):
-            # Skip comments and imports
+            # 跳过注释和导入
             stripped = line.strip()
             if stripped.startswith('#') or stripped.startswith('//') or \
                stripped.startswith('import') or stripped.startswith('from'):
                 continue
 
-            # Find numeric literals (excluding in variable names)
+            # 查找数字字面量（排除变量名中的）
             numbers = re.findall(r'(?<![a-zA-Z_])\b(\d+\.?\d*)\b(?![a-zA-Z_])', line)
 
             for num in numbers:
                 if num not in acceptable and float(num) > 2:
-                    # Check if it's likely a magic number (in calculation or comparison)
+                    # 检查它是否可能是魔法数字（在计算或比较中）
                     if re.search(rf'[<>=+\-*/]\s*{re.escape(num)}|{re.escape(num)}\s*[<>=+\-*/]', line):
                         self.smells.append(CodeSmell(
                             smell_type=SmellType.MAGIC_NUMBER,
@@ -364,10 +364,10 @@ class SmellDetector:
                             suggestion="Replace magic number with named constant",
                             code_snippet=self._get_snippet(i, i + 1, 0)
                         ))
-                        break  # One magic number per line is enough
+                        break  # 每行一个魔法数字就够了
 
     def _detect_excessive_comments(self) -> None:
-        """Detect comments that explain 'what' instead of 'why'."""
+        """检测解释"是什么"而非"为什么"的注释。"""
         what_patterns = [
             r'#\s*(set|get|return|loop|iterate|check|if|increment|decrement)',
             r'//\s*(set|get|return|loop|iterate|check|if|increment|decrement)',
@@ -389,17 +389,17 @@ class SmellDetector:
                     break
 
     def _detect_deeply_nested(self) -> None:
-        """Detect deeply nested code blocks."""
+        """检测深层嵌套的代码块。"""
         max_depth = 0
         current_depth = 0
         depth_start = 0
 
         for i, line in enumerate(self.lines):
             if self.language == 'python':
-                # Count by indentation
+                # 通过缩进统计
                 if line.strip():
                     indent = len(line) - len(line.lstrip())
-                    depth = indent // 4  # Assume 4-space indent
+                    depth = indent // 4  # 假设 4 空格缩进
                     if depth > current_depth:
                         if depth > max_depth:
                             max_depth = depth
@@ -407,7 +407,7 @@ class SmellDetector:
                                 depth_start = i
                     current_depth = depth
             else:
-                # Count braces
+                # 统计大括号
                 current_depth += line.count('{') - line.count('}')
                 if current_depth > max_depth:
                     max_depth = current_depth
@@ -427,9 +427,9 @@ class SmellDetector:
             ))
 
     def _detect_switch_statements(self) -> None:
-        """Detect switch statements that might need polymorphism."""
+        """检测可能需要多态的 switch 语句。"""
         if self.language == 'python':
-            # Python 3.10+ match statements or if/elif chains
+            # Python 3.10+ match 语句或 if/elif 链
             pattern = r'^\s*(if|elif).*==.*:'
             consecutive_conditions = 0
             chain_start = 0
@@ -448,7 +448,7 @@ class SmellDetector:
             pattern = r'\bswitch\s*\('
             for i, line in enumerate(self.lines):
                 if re.search(pattern, line):
-                    # Count cases
+                    # 统计 cases
                     case_count = 0
                     for j in range(i, min(i + 50, len(self.lines))):
                         case_count += len(re.findall(r'\bcase\b', self.lines[j]))
@@ -456,7 +456,7 @@ class SmellDetector:
                         self._add_switch_smell(i, i + 1, case_count)
 
     def _add_switch_smell(self, start: int, end: int, cases: int) -> None:
-        """Add a switch statement smell."""
+        """添加 switch 语句异味。"""
         self.smells.append(CodeSmell(
             smell_type=SmellType.SWITCH_STATEMENT,
             severity=SmellSeverity.MEDIUM,
@@ -469,7 +469,7 @@ class SmellDetector:
         ))
 
     def _detect_message_chains(self) -> None:
-        """Detect long method chains (train wrecks)."""
+        """检测长方法链（火车残骸）。"""
         chain_pattern = r'(\w+(?:\.\w+\([^)]*\)){3,})'
 
         for i, line in enumerate(self.lines):
@@ -489,18 +489,18 @@ class SmellDetector:
                     ))
 
     def _detect_duplicate_code(self) -> None:
-        """Detect potential duplicate code blocks (simplified)."""
-        # Create line hashes for comparison
+        """检测潜在的重复代码块（简化版）。"""
+        # 创建用于比较的行哈希
         line_hashes: Dict[str, List[int]] = defaultdict(list)
 
         for i, line in enumerate(self.lines):
             normalized = re.sub(r'\s+', ' ', line.strip())
-            if len(normalized) > 20:  # Only significant lines
+            if len(normalized) > 20:  # 仅考虑有意义的行
                 line_hashes[normalized].append(i)
 
-        # Find duplicates
+        # 查找重复
         for normalized, positions in line_hashes.items():
-            if len(positions) >= 3:  # At least 3 occurrences
+            if len(positions) >= 3:  # 至少 3 次出现
                 self.smells.append(CodeSmell(
                     smell_type=SmellType.DUPLICATE_CODE,
                     severity=SmellSeverity.MEDIUM,
@@ -513,8 +513,8 @@ class SmellDetector:
                 ))
 
     def _detect_dead_code(self) -> None:
-        """Detect potentially dead code (simplified)."""
-        # Look for common dead code patterns
+        """检测潜在的死代码（简化版）。"""
+        # 查找常见的死代码模式
         patterns = [
             (r'^\s*#.*TODO.*delete', "TODO to delete"),
             (r'^\s*#.*FIXME.*remove', "FIXME to remove"),
@@ -540,7 +540,7 @@ class SmellDetector:
 
 
 def print_report(report: SmellReport, verbose: bool = False) -> None:
-    """Print smell report in readable format."""
+    """以可读格式打印异味报告。"""
     print("=" * 70)
     print(f"CODE SMELL DETECTION REPORT: {report.filename}")
     print("=" * 70)
@@ -558,7 +558,7 @@ def print_report(report: SmellReport, verbose: bool = False) -> None:
         print("=" * 70)
         return
 
-    # Group by type
+    # 按类型分组
     by_type: Dict[SmellType, List[CodeSmell]] = defaultdict(list)
     for smell in report.smells:
         by_type[smell.smell_type].append(smell)
@@ -603,7 +603,7 @@ def print_report(report: SmellReport, verbose: bool = False) -> None:
 
 
 def analyze_directory(directory: str, verbose: bool = False) -> None:
-    """Analyze all supported files in a directory."""
+    """分析目录中的所有支持的文件。"""
     supported_extensions = ['.py', '.js', '.jsx', '.ts', '.tsx']
     files = []
 
@@ -661,10 +661,10 @@ def main():
         description='Detect code smells in source files',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
-Examples:
-  %(prog)s myfile.py                    Analyze single file
-  %(prog)s --dir src/                   Analyze directory
-  %(prog)s -v myfile.py                 Verbose with code snippets
+示例：
+  %(prog)s myfile.py                    分析单个文件
+  %(prog)s --dir src/                   分析目录
+  %(prog)s -v myfile.py                 详细模式，包含代码片段
         """
     )
     parser.add_argument('file', nargs='?', help='File to analyze')

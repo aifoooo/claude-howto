@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Compare cyclomatic complexity of code before and after changes.
-Helps identify if refactoring actually simplifies code structure.
+比较代码变更前后的圈复杂度。
+帮助识别重构是否真正简化了代码结构。
 """
 
 import re
@@ -9,7 +9,7 @@ import sys
 
 
 class ComplexityAnalyzer:
-    """Analyze code complexity metrics."""
+    """分析代码复杂度指标。"""
 
     def __init__(self, code: str):
         self.code = code
@@ -17,12 +17,12 @@ class ComplexityAnalyzer:
 
     def calculate_cyclomatic_complexity(self) -> int:
         """
-        Calculate cyclomatic complexity using McCabe's method.
-        Count decision points: if, elif, else, for, while, except, and, or
+        使用 McCabe 方法计算圈复杂度。
+        统计决策点：if、elif、else、for、while、except、and、or
         """
-        complexity = 1  # Base complexity
+        complexity = 1  # 基本复杂度
 
-        # Count decision points
+        # 统计决策点
         decision_patterns = [
             r"\bif\b",
             r"\belif\b",
@@ -41,21 +41,21 @@ class ComplexityAnalyzer:
 
     def calculate_cognitive_complexity(self) -> int:
         """
-        Calculate cognitive complexity - how hard is it to understand?
-        Based on nesting depth and control flow.
+        计算认知复杂度 — 理解代码有多难？
+        基于嵌套深度和控制流。
         """
         cognitive = 0
         nesting_depth = 0
 
         for line in self.lines:
-            # Track nesting depth
+            # 跟踪嵌套深度
             if re.search(r"^\s*(if|for|while|def|class|try)\b", line):
                 nesting_depth += 1
                 cognitive += nesting_depth
             elif re.search(r"^\s*(elif|else|except|finally)\b", line):
                 cognitive += nesting_depth
 
-            # Reduce nesting when unindenting
+            # 取消缩进时减少嵌套
             if line and not line[0].isspace():
                 nesting_depth = 0
 
@@ -63,17 +63,17 @@ class ComplexityAnalyzer:
 
     def calculate_maintainability_index(self) -> float:
         """
-        Maintainability Index ranges from 0-100.
-        > 85: Excellent
-        > 65: Good
-        > 50: Fair
-        < 50: Poor
+        可维护性指数范围为 0-100。
+        > 85：优秀
+        > 65：良好
+        > 50：一般
+        < 50：差
         """
         lines = len(self.lines)
         cyclomatic = self.calculate_cyclomatic_complexity()
         cognitive = self.calculate_cognitive_complexity()
 
-        # Simplified MI calculation
+        # 简化的 MI 计算
         mi = (
             171
             - 5.2 * (cyclomatic / lines)
@@ -84,7 +84,7 @@ class ComplexityAnalyzer:
         return max(0, min(100, mi))
 
     def get_complexity_report(self) -> dict:
-        """Generate comprehensive complexity report."""
+        """生成综合复杂度报告。"""
         return {
             "cyclomatic_complexity": self.calculate_cyclomatic_complexity(),
             "cognitive_complexity": self.calculate_cognitive_complexity(),
@@ -99,7 +99,7 @@ class ComplexityAnalyzer:
 
 
 def compare_files(before_file: str, after_file: str) -> None:
-    """Compare complexity metrics between two code versions."""
+    """比较两个代码版本之间的复杂度指标。"""
 
     with open(before_file) as f:
         before_code = f.read()

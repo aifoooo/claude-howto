@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """
-上下文使用追踪器 - 追踪每个请求的 token 消耗。
+上下文使用追踪器（tiktoken 版本）- 追踪每个请求的 token 消耗。
 
 使用 UserPromptSubmit 作为"预消息"钩子和 Stop 作为"后响应"钩子
 来计算每个请求的 token 使用 delta。
 
-此版本使用基于字符的估算（无依赖）。
-如需更高精度，参见 context-tracker-tiktoken.py。
+此版本使用 tiktoken 和 p50k_base 编码以获得约 90-95% 的准确性。
+需要：pip install tiktoken
+
+如需零依赖版本，参见 context-tracker.py。
 
 用法：
     将两个钩子配置为使用同一脚本：
@@ -18,6 +20,17 @@ import os
 import sys
 import tempfile
 
+try:
+    import tiktoken
+
+    TIKTOKEN_AVAILABLE = True
+except ImportError:
+    TIKTOKEN_AVAILABLE = False
+    print(
+        "Warning: tiktoken not installed. Install with: pip install tiktoken",
+        file=sys.stderr,
+    )
+
 # 配置
 CONTEXT_LIMIT = 128000  # Claude 的上下文窗口（根据你的模型调整）
 
@@ -27,14 +40,23 @@ def get_state_file(session_id: str) -> str:
     return os.path.join(tempfile.gettempdir(), f"claude-context-{session_id}.json")
 
 
-def count_tokens_estimate(text: str) -> int:
+def count_tokens(text: str) -> int:
     """
-    使用基于字符的近似估算 token 计数。
+    使用 tiktoken 和 p50k_base 编码计算 token 数量。
 
-    使用每个 token 约 4 个字符的比率，对英文文本提供约 80-90% 的准确性。
-    对于代码和非英文文本准确性较低。
+    与 Claude 的实际分词器相比，这提供约 90-95% 的准确性。
+    如果 tiktoken 不可用，回退到字符估算。
+
+    注意：Anthropic 尚未发布官方离线分词器。
+    tiktoken 与 p50k_base 是一个合理的近似值，因为 Claude 和 GPT 模型都使用
+    BPE（字节对编码）。
     """
-    return len(text) // 4
+    if TIKTOKEN_AVAILABLE:
+        enc = tiktoken.get_encoding("p50k_base")
+        return len(enc.encode(text))
+    else:
+        # 回退到字符估算（每 token 约 4 个字符）
+        return len(text) // 4
 
 
 def read_transcript(transcript_path: str) -> str:
@@ -68,7 +90,7 @@ def handle_user_prompt_submit(data: dict) -> None:
     transcript_path = data.get("transcript_path", "")
 
     transcript_content = read_transcript(transcript_path)
-    current_tokens = count_tokens_estimate(transcript_content)
+    current_tokens = count_tokens(transcript_content)
 
     # 保存到临时文件以供后续比较
     state_file = get_state_file(session_id)
@@ -82,7 +104,7 @@ def handle_stop(data: dict) -> None:
     transcript_path = data.get("transcript_path", "")
 
     transcript_content = read_transcript(transcript_path)
-    current_tokens = count_tokens_estimate(transcript_content)
+    current_tokens = count_tokens(transcript_content)
 
     # 加载预消息计数
     state_file = get_state_file(session_id)
@@ -101,8 +123,9 @@ def handle_stop(data: dict) -> None:
     percentage = (current_tokens / CONTEXT_LIMIT) * 100
 
     # 报告使用情况（stderr 以免干扰钩子输出）
+    method = "tiktoken" if TIKTOKEN_AVAILABLE else "estimated"
     print(
-        f"Context (estimated): ~{current_tokens:,} tokens "
+        f"Context ({method}): ~{current_tokens:,} tokens "
         f"({percentage:.1f}% used, ~{remaining:,} remaining)",
         file=sys.stderr,
     )

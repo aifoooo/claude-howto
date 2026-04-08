@@ -1,5 +1,5 @@
 #!/bin/bash
-# Send notifications on events
+# 在事件发生时发送通知
 # Hook: PostPush
 
 REPO_NAME=$(basename $(git rev-parse --show-toplevel 2>/dev/null) 2>/dev/null)
@@ -7,9 +7,9 @@ COMMIT_MSG=$(git log -1 --pretty=%B 2>/dev/null)
 AUTHOR=$(git log -1 --pretty=%an 2>/dev/null)
 BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
 
-echo "📢 Sending notification to team..."
+echo "📢 正在向团队发送通知..."
 
-# Slack webhook example (replace with your webhook URL)
+# Slack webhook 示例（替换为你的 webhook URL）
 SLACK_WEBHOOK="${SLACK_WEBHOOK_URL:-}"
 
 if [ -n "$SLACK_WEBHOOK" ]; then
@@ -28,10 +28,10 @@ if [ -n "$SLACK_WEBHOOK" ]; then
     }" \
     --silent --output /dev/null
 
-  echo "✅ Slack notification sent"
+  echo "✅ Slack 通知已发送"
 fi
 
-# Discord webhook example (replace with your webhook URL)
+# Discord webhook 示例（替换为你的 webhook URL）
 DISCORD_WEBHOOK="${DISCORD_WEBHOOK_URL:-}"
 
 if [ -n "$DISCORD_WEBHOOK" ]; then
@@ -50,17 +50,17 @@ if [ -n "$DISCORD_WEBHOOK" ]; then
     }" \
     --silent --output /dev/null
 
-  echo "✅ Discord notification sent"
+  echo "✅ Discord 通知已发送"
 fi
 
-# Email notification example
+# 邮件通知示例
 EMAIL_TO="${TEAM_EMAIL:-}"
 
 if [ -n "$EMAIL_TO" ]; then
   echo "New push to $REPO_NAME by $AUTHOR" | \
     mail -s "Git Push: $BRANCH" "$EMAIL_TO"
 
-  echo "✅ Email notification sent"
+  echo "✅ 邮件通知已发送"
 fi
 
 exit 0

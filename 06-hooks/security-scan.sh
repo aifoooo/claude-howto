@@ -1,61 +1,61 @@
 #!/bin/bash
-# Security scan on file write
+# 文件写入时进行安全扫描
 # Hook: PostToolUse:Write
 
 FILE=$1
 
 if [ -z "$FILE" ]; then
-  echo "Usage: $0 <file_path>"
+  echo "用法: $0 <文件路径>"
   exit 0
 fi
 
-echo "🔒 Running security scan on: $FILE"
+echo "🔒 在以下文件上运行安全扫描: $FILE"
 
 ISSUES_FOUND=0
 
-# Check for hardcoded passwords
+# 检查硬编码密码
 if grep -qE "(password|passwd|pwd)\s*=\s*['\"][^'\"]+['\"]" "$FILE"; then
-  echo "⚠️  WARNING: Potential hardcoded password detected in $FILE"
+  echo "⚠️  警告：在 $FILE 中检测到可能的硬编码密码"
   ISSUES_FOUND=1
 fi
 
-# Check for hardcoded API keys
+# 检查硬编码 API 密钥
 if grep -qE "(api[_-]?key|apikey|access[_-]?token)\s*=\s*['\"][^'\"]+['\"]" "$FILE"; then
-  echo "⚠️  WARNING: Potential hardcoded API key detected in $FILE"
+  echo "⚠️  警告：在 $FILE 中检测到可能的硬编码 API 密钥"
   ISSUES_FOUND=1
 fi
 
-# Check for hardcoded secrets
+# 检查硬编码 secrets
 if grep -qE "(secret|token)\s*=\s*['\"][^'\"]+['\"]" "$FILE"; then
-  echo "⚠️  WARNING: Potential hardcoded secret detected in $FILE"
+  echo "⚠️  警告：在 $FILE 中检测到可能的硬编码 secret"
   ISSUES_FOUND=1
 fi
 
-# Check for private keys
+# 检查私钥
 if grep -q "BEGIN.*PRIVATE KEY" "$FILE"; then
-  echo "⚠️  WARNING: Private key detected in $FILE"
+  echo "⚠️  警告：在 $FILE 中检测到私钥"
   ISSUES_FOUND=1
 fi
 
-# Check for AWS keys
+# 检查 AWS 密钥
 if grep -qE "AKIA[0-9A-Z]{16}" "$FILE"; then
-  echo "⚠️  WARNING: AWS access key detected in $FILE"
+  echo "⚠️  警告：在 $FILE 中检测到 AWS 访问密钥"
   ISSUES_FOUND=1
 fi
 
-# Scan with semgrep if available
+# 如果 semgrep 可用则扫描
 if command -v semgrep &> /dev/null; then
   semgrep --config=auto "$FILE" --quiet 2>/dev/null
 fi
 
-# Scan with trufflehog if available
+# 如果 trufflehog 可用则扫描
 if command -v trufflehog &> /dev/null; then
   trufflehog filesystem "$FILE" --only-verified --quiet 2>/dev/null
 fi
 
 if [ $ISSUES_FOUND -eq 0 ]; then
-  echo "✅ No security issues found"
+  echo "✅ 未发现安全问题"
 fi
 
-# Don't block the operation, just warn
+# 不阻止操作，只是警告
 exit 0

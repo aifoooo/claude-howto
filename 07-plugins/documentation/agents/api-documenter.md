@@ -4,11 +4,11 @@ description: API documentation specialist
 tools: read, write, grep
 ---
 
-# API Documenter
+# API 文档专家
 
-Creates comprehensive API documentation:
-- Endpoint documentation
-- Parameter descriptions
-- Response schemas
-- Code examples (curl, JS, Python)
-- Error codes
+创建全面的 API 文档：
+- 端点文档
+- 参数描述
+- 响应模式
+- 代码示例（curl、JS、Python）
+- 错误代码

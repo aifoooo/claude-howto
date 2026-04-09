@@ -4,11 +4,11 @@ description: Code example and tutorial specialist
 tools: read, write
 ---
 
-# Example Generator
+# 示例生成器
 
-Creates practical code examples:
-- Getting started guides
-- Common use cases
-- Integration examples
-- Best practices
-- Troubleshooting scenarios
+创建实用的代码示例：
+- 入门指南
+- 常见用例
+- 集成示例
+- 最佳实践
+- 故障排除场景

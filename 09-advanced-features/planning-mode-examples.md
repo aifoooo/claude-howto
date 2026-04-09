@@ -1,533 +1,533 @@
-# Planning Mode Examples
+# 规划模式示例
 
-Real-world examples demonstrating effective use of planning mode in Claude Code.
+展示在 Claude Code 中有效使用规划模式的真实案例。
 
-## Example 1: Building a REST API
+## 示例 1：构建 REST API
 
-### Without Planning Mode
-
-```
-User: Build a REST API for a blog
-
-Claude: I'll create the API...
-[Starts coding immediately, may miss requirements]
-```
-
-### With Planning Mode
+### 不使用规划模式
 
 ```
-User: /plan Build a REST API for a blog
+用户：构建一个博客 REST API
 
-Claude: Let me create a comprehensive plan for the blog API.
-
-## Blog REST API Implementation Plan
-
-### Phase 1: Project Setup (15 min)
-1. Initialize Node.js project with Express
-2. Set up TypeScript configuration
-3. Install dependencies (express, pg, jwt, joi)
-4. Configure environment variables
-5. Set up project structure
-
-### Phase 2: Database Layer (30 min)
-6. Design database schema
-   - users table (id, email, password_hash, created_at)
-   - posts table (id, user_id, title, content, published, created_at, updated_at)
-   - comments table (id, post_id, user_id, content, created_at)
-7. Create migration files
-8. Set up database connection pool
-9. Implement database models
-
-### Phase 3: Authentication (45 min)
-10. Implement user registration endpoint
-11. Implement login endpoint with JWT
-12. Create authentication middleware
-13. Add password hashing with bcrypt
-14. Implement token refresh logic
-
-### Phase 4: Posts API (40 min)
-15. GET /api/posts - List all published posts (with pagination)
-16. GET /api/posts/:id - Get single post
-17. POST /api/posts - Create new post (auth required)
-18. PUT /api/posts/:id - Update post (auth required, ownership check)
-19. DELETE /api/posts/:id - Delete post (auth required, ownership check)
-20. GET /api/users/:id/posts - Get user's posts
-
-### Phase 5: Comments API (30 min)
-21. GET /api/posts/:id/comments - Get post comments
-22. POST /api/posts/:id/comments - Add comment (auth required)
-23. DELETE /api/comments/:id - Delete comment (auth required, ownership check)
-
-### Phase 6: Validation & Error Handling (30 min)
-24. Add request validation with Joi
-25. Implement global error handler
-26. Add input sanitization
-27. Implement rate limiting
-
-### Phase 7: Testing (60 min)
-28. Write unit tests for models
-29. Write integration tests for auth endpoints
-30. Write integration tests for posts endpoints
-31. Write integration tests for comments endpoints
-32. Achieve 80%+ code coverage
-
-### Phase 8: Documentation & Deployment (30 min)
-33. Generate API documentation with Swagger
-34. Create README with setup instructions
-35. Add Docker configuration
-36. Set up CI/CD pipeline
-
-**Estimated Time**: 4.5 hours
-**Files to Create**: ~25
-**Key Technologies**: Express, PostgreSQL, JWT, TypeScript
-
-**API Endpoints Summary**:
-- Authentication: 2 endpoints
-- Posts: 6 endpoints
-- Comments: 3 endpoints
-- Total: 11 endpoints
-
-Ready to proceed? (yes/no/modify)
-
-User: yes
-
-Claude: Starting Phase 1: Project Setup...
-[Implements each phase systematically]
+Claude：我来创建这个 API...
+[立即开始编码，可能会遗漏需求]
 ```
 
-## Example 2: Database Migration
-
-### With Planning Mode
+### 使用规划模式
 
 ```
-User: /plan Migrate from MongoDB to PostgreSQL
+用户：/plan 构建一个博客 REST API
 
-Claude: This is a complex migration. Let me create a detailed plan.
+Claude：让我为博客 API 创建一个全面的计划。
 
-## MongoDB to PostgreSQL Migration Plan
+## 博客 REST API 实施计划
 
-### Phase 1: Analysis & Preparation (Day 1)
-1. Analyze current MongoDB schema
-2. Identify data relationships and constraints
-3. Document current data volume and growth rate
-4. Design equivalent PostgreSQL schema
-5. Plan data type mappings
-6. Identify potential migration challenges
+### 阶段 1：项目设置（15 分钟）
+1. 使用 Express 初始化 Node.js 项目
+2. 设置 TypeScript 配置
+3. 安装依赖（express, pg, jwt, joi）
+4. 配置环境变量
+5. 设置项目结构
 
-### Phase 2: PostgreSQL Setup (Day 1)
-7. Set up PostgreSQL database
-8. Create schema with tables, indexes, constraints
-9. Set up connection pooling
-10. Configure backup strategy
+### 阶段 2：数据库层（30 分钟）
+6. 设计数据库 schema
+   - users 表（id, email, password_hash, created_at）
+   - posts 表（id, user_id, title, content, published, created_at, updated_at）
+   - comments 表（id, post_id, user_id, content, created_at）
+7. 创建迁移文件
+8. 设置数据库连接池
+9. 实现数据库模型
 
-### Phase 3: Dual-Write Implementation (Day 2-3)
-11. Create database abstraction layer
-12. Implement dual-write to both databases
-13. Add data consistency checks
-14. Deploy dual-write to staging
-15. Monitor for issues
+### 阶段 3：认证（45 分钟）
+10. 实现用户注册端点
+11. 实现带 JWT 的登录端点
+12. 创建认证中间件
+13. 添加 bcrypt 密码哈希
+14. 实现令牌刷新逻辑
 
-### Phase 4: Data Migration (Day 4)
-16. Create data export scripts for MongoDB
-17. Create data import scripts for PostgreSQL
-18. Implement data transformation logic
-19. Run initial migration on copy of production data
-20. Validate migrated data integrity
+### 阶段 4：Posts API（40 分钟）
+15. GET /api/posts - 列出所有已发布的 posts（分页）
+16. GET /api/posts/:id - 获取单个 post
+17. POST /api/posts - 创建新 post（需要认证）
+18. PUT /api/posts/:id - 更新 post（需要认证，所有权检查）
+19. DELETE /api/posts/:id - 删除 post（需要认证，所有权检查）
+20. GET /api/users/:id/posts - 获取用户的 posts
 
-### Phase 5: Gradual Cutover (Day 5-7)
-21. Enable dual-write in production
-22. Migrate historical data in batches
-23. Continuously validate data consistency
-24. Monitor both databases
-25. Fix any data synchronization issues
+### 阶段 5：Comments API（30 分钟）
+21. GET /api/posts/:id/comments - 获取 post 的评论
+22. POST /api/posts/:id/comments - 添加评论（需要认证）
+23. DELETE /api/comments/:id - 删除评论（需要认证，所有权检查）
 
-### Phase 6: PostgreSQL Primary (Day 8)
-26. Switch read operations to PostgreSQL
-27. Monitor query performance
-28. Optimize slow queries
-29. Continue dual-write for safety
+### 阶段 6：验证和错误处理（30 分钟）
+24. 使用 Joi 添加请求验证
+25. 实现全局错误处理器
+26. 添加输入清理
+27. 实现速率限制
 
-### Phase 7: MongoDB Retirement (Day 9-10)
-30. Stop writing to MongoDB
-31. Keep MongoDB as backup for 2 weeks
-32. Remove MongoDB dependencies from code
-33. Archive MongoDB data
-34. Decommission MongoDB instance
+### 阶段 7：测试（60 分钟）
+28. 为模型编写单元测试
+29. 为认证端点编写集成测试
+30. 为 posts 端点编写集成测试
+31. 为 comments 端点编写集成测试
+32. 达到 80%+ 的代码覆盖率
 
-**Estimated Time**: 10 days
-**Risk Level**: High
-**Rollback Strategy**: Keep MongoDB running with dual-write
-**Success Criteria**:
-- Zero data loss
-- <5% performance regression
-- All tests passing
+### 阶段 8：文档和部署（30 分钟）
+33. 使用 Swagger 生成 API 文档
+34. 创建包含设置说明的 README
+35. 添加 Docker 配置
+36. 设置 CI/CD 流水线
 
-**Key Risks**:
-1. Data inconsistency during migration
-2. Query performance degradation
-3. Application downtime
-4. Data loss
+**预计时间**：4.5 小时
+**需要创建的文件**：约 25 个
+**关键技术**：Express, PostgreSQL, JWT, TypeScript
 
-**Mitigation**:
-- Dual-write pattern for safety
-- Gradual cutover
-- Continuous monitoring
-- Quick rollback capability
+**API 端点摘要**：
+- 认证：2 个端点
+- Posts：6 个端点
+- Comments：3 个端点
+- 总计：11 个端点
 
-Proceed with this plan? (yes/no/modify)
+是否继续？（是/否/修改）
 
-User: Modify - let's add a rollback plan for each phase
+用户：是
 
-Claude: Updated plan with rollback procedures for each phase...
+Claude：开始阶段 1：项目设置...
+[系统地实施每个阶段]
 ```
 
-## Example 3: Frontend Refactoring
+## 示例 2：数据库迁移
+
+### 使用规划模式
 
 ```
-User: /plan Refactor our React app from class components to hooks
+用户：/plan 从 MongoDB 迁移到 PostgreSQL
 
-Claude: I'll create a systematic refactoring plan.
+Claude：这是一个复杂的迁移。让我创建一个详细的计划。
 
-## React Class to Hooks Migration Plan
+## MongoDB 到 PostgreSQL 迁移计划
 
-### Phase 1: Preparation & Analysis (2 hours)
-1. Audit all class components (find all .jsx/.tsx files)
-2. Categorize by complexity:
-   - Simple (state only): ~15 components
-   - Medium (lifecycle methods): ~23 components
-   - Complex (multiple lifecycle, refs): ~8 components
-3. Identify third-party libraries that need updates
-4. Create component dependency graph
-5. Plan migration order (leaf nodes first)
+### 阶段 1：分析和准备（第 1 天）
+1. 分析当前的 MongoDB schema
+2. 识别数据关系和约束
+3. 记录当前数据量和增长率
+4. 设计等效的 PostgreSQL schema
+5. 规划数据类型映射
+6. 识别潜在的迁移挑战
 
-### Phase 2: Setup & Tooling (1 hour)
-6. Update React to v18+
-7. Set up ESLint rules for hooks
-8. Create conversion templates
-9. Set up automated tests
-10. Create checkpoint before starting
+### 阶段 2：PostgreSQL 设置（第 1 天）
+7. 设置 PostgreSQL 数据库
+8. 创建带有表、索引、约束的 schema
+9. 设置连接池
+10. 配置备份策略
 
-### Phase 3: Migrate Simple Components (4 hours)
-11. Convert simple stateful components (15 components)
-12. Replace this.state with useState
-13. Replace this.setState with state setters
-14. Test each component after conversion
-15. Update tests
+### 阶段 3：双写实现（第 2-3 天）
+11. 创建数据库抽象层
+12. 实现向两个数据库的双写
+13. 添加数据一致性检查
+14. 部署双写到 staging
+15. 监控问题
 
-### Phase 4: Migrate Medium Components (8 hours)
-16. Convert components with lifecycle methods (23 components)
-17. Replace componentDidMount with useEffect
-18. Replace componentDidUpdate with useEffect
-19. Replace componentWillUnmount with useEffect cleanup
-20. Test thoroughly
+### 阶段 4：数据迁移（第 4 天）
+16. 为 MongoDB 创建数据导出脚本
+17. 为 PostgreSQL 创建数据导入脚本
+18. 实现数据转换逻辑
+19. 在生产数据副本上运行初始迁移
+20. 验证迁移后的数据完整性
 
-### Phase 5: Migrate Complex Components (12 hours)
-21. Convert complex components (8 components)
-22. Replace refs with useRef
-23. Extract custom hooks for shared logic
-24. Handle edge cases (multiple useEffect)
-25. Extensive testing
+### 阶段 5：渐进式切换（第 5-7 天）
+21. 在生产环境启用双写
+22. 批量迁移历史数据
+23. 持续验证数据一致性
+24. 监控两个数据库
+25. 修复任何数据同步问题
 
-### Phase 6: Shared Logic Extraction (6 hours)
-26. Identify duplicated logic across components
-27. Create custom hooks:
+### 阶段 6：PostgreSQL 为主（第 8 天）
+26. 将读取操作切换到 PostgreSQL
+27. 监控查询性能
+28. 优化慢查询
+29. 继续双写以确保安全
+
+### 阶段 7：MongoDB 退役（第 9-10 天）
+30. 停止写入 MongoDB
+31. 保留 MongoDB 作为备份 2 周
+32. 从代码中移除 MongoDB 依赖
+33. 归档 MongoDB 数据
+34. 停用 MongoDB 实例
+
+**预计时间**：10 天
+**风险级别**：高
+**回滚策略**：保持 MongoDB 运行并使用双写
+**成功标准**：
+- 零数据丢失
+- 性能下降 <5%
+- 所有测试通过
+
+**主要风险**：
+1. 迁移期间数据不一致
+2. 查询性能下降
+3. 应用程序停机
+4. 数据丢失
+
+**缓解措施**：
+- 双写模式确保安全
+- 渐进式切换
+- 持续监控
+- 快速回滚能力
+
+是否继续此计划？（是/否/修改）
+
+用户：修改 - 让我们为每个阶段添加回滚计划
+
+Claude：更新的计划，包含每个阶段的回滚程序...
+```
+
+## 示例 3：前端重构
+
+```
+用户：/plan 将我们的 React 应用从 class 组件重构为 hooks
+
+Claude：我将创建一个系统的重构计划。
+
+## React Class 到 Hooks 迁移计划
+
+### 阶段 1：准备和分析（2 小时）
+1. 审计所有 class 组件（查找所有 .jsx/.tsx 文件）
+2. 按复杂度分类：
+   - 简单（仅 state）：约 15 个组件
+   - 中等（生命周期方法）：约 23 个组件
+   - 复杂（多个生命周期，refs）：约 8 个组件
+3. 识别需要更新的第三方库
+4. 创建组件依赖图
+5. 规划迁移顺序（从叶节点开始）
+
+### 阶段 2：设置和工具（1 小时）
+6. 更新 React 到 v18+
+7. 设置 ESLint hooks 规则
+8. 创建转换模板
+9. 设置自动化测试
+10. 在开始前创建检查点
+
+### 阶段 3：迁移简单组件（4 小时）
+11. 转换简单的有状态组件（15 个组件）
+12. 用 useState 替换 this.state
+13. 用 state setters 替换 this.setState
+14. 转换后测试每个组件
+15. 更新测试
+
+### 阶段 4：迁移中等组件（8 小时）
+16. 转换带有生命周期方法的组件（23 个组件）
+17. 用 useEffect 替换 componentDidMount
+18. 用 useEffect 替换 componentDidUpdate
+19. 用 useEffect cleanup 替换 componentWillUnmount
+20. 全面测试
+
+### 阶段 5：迁移复杂组件（12 小时）
+21. 转换复杂组件（8 个组件）
+22. 用 useRef 替换 refs
+23. 为共享逻辑提取自定义 hooks
+24. 处理边缘情况（多个 useEffect）
+25. 广泛测试
+
+### 阶段 6：共享逻辑提取（6 小时）
+26. 识别组件间重复的逻辑
+27. 创建自定义 hooks：
     - useAuth
     - useFetch
     - useLocalStorage
     - useDebounce
-28. Refactor components to use custom hooks
-29. Test custom hooks independently
+28. 重构组件使用自定义 hooks
+29. 独立测试自定义 hooks
 
-### Phase 7: Performance Optimization (4 hours)
-30. Add React.memo where needed
-31. Optimize with useCallback
-32. Optimize with useMemo
-33. Profile and fix performance regressions
+### 阶段 7：性能优化（4 小时）
+30. 在需要的地方添加 React.memo
+31. 使用 useCallback 优化
+32. 使用 useMemo 优化
+33. 分析并修复性能回归
 
-### Phase 8: Cleanup & Documentation (2 hours)
-34. Remove unused class component utilities
-35. Update documentation
-36. Update coding guidelines
-37. Create migration guide for team
+### 阶段 8：清理和文档（2 小时）
+34. 移除未使用的 class 组件工具
+35. 更新文档
+36. 更新编码指南
+37. 为团队创建迁移指南
 
-**Estimated Time**: 5 days (39 hours)
-**Files to Modify**: 46 components
-**Risk Level**: Medium
+**预计时间**：5 天（39 小时）
+**需要修改的文件**：46 个组件
+**风险级别**：中等
 
-**Migration Order**:
-1. Leaf components (no dependencies)
-2. Mid-level components
-3. Top-level container components
-4. App.jsx (last)
+**迁移顺序**：
+1. 叶组件（无依赖）
+2. 中级组件
+3. 顶层容器组件
+4. App.jsx（最后）
 
-**Testing Strategy**:
-- Unit tests for each component
-- Integration tests for user flows
-- Visual regression tests
-- Performance benchmarks
+**测试策略**：
+- 每个组件的单元测试
+- 用户流程的集成测试
+- 视觉回归测试
+- 性能基准测试
 
-**Success Metrics**:
-- All tests passing
-- No visual regressions
-- Performance maintained or improved
-- Bundle size not significantly increased
+**成功指标**：
+- 所有测试通过
+- 无视觉回归
+- 性能维持或改善
+- bundle 大小未显著增加
 
-Proceed? (yes/no/modify)
+是否继续？（是/否/修改）
 ```
 
-## Example 4: Security Implementation
+## 示例 4：安全实施
 
 ```
-User: /plan Implement comprehensive security for our web app
+用户：/plan 为我们的 Web 应用实施全面的安全措施
 
-Claude: Let me create a thorough security implementation plan.
+Claude：让我创建一个全面的安全实施计划。
 
-## Web Application Security Implementation Plan
+## Web 应用安全实施计划
 
-### Phase 1: Security Audit (Day 1)
-1. Run automated security scanners (npm audit, Snyk)
-2. Review dependencies for vulnerabilities
-3. Check OWASP Top 10 compliance
-4. Audit authentication flows
-5. Review data handling practices
-6. Document current security gaps
+### 阶段 1：安全审计（第 1 天）
+1. 运行自动化安全扫描（npm audit, Snyk）
+2. 检查依赖的漏洞
+3. 检查 OWASP Top 10 合规性
+4. 审计认证流程
+5. 审查数据处理实践
+6. 记录当前安全差距
 
-### Phase 2: Authentication Hardening (Day 2-3)
-7. Implement strong password requirements
-8. Add password strength meter
-9. Implement rate limiting on login
-10. Add account lockout after failed attempts
-11. Implement 2FA (TOTP)
-12. Add session management improvements
-13. Implement secure password reset flow
+### 阶段 2：认证加固（第 2-3 天）
+7. 实施强密码要求
+8. 添加密码强度计
+9. 在登录时实施速率限制
+10. 添加失败尝试后的账户锁定
+11. 实施 2FA（TOTP）
+12. 添加会话管理改进
+13. 实施安全的密码重置流程
 
-### Phase 3: Authorization & Access Control (Day 3-4)
-14. Implement RBAC (Role-Based Access Control)
-15. Add permission checks on all endpoints
-16. Implement principle of least privilege
-17. Add audit logging for sensitive operations
-18. Implement resource-level permissions
+### 阶段 3：授权和访问控制（第 3-4 天）
+14. 实施 RBAC（基于角色的访问控制）
+15. 在所有端点添加权限检查
+16. 实施最小权限原则
+17. 为敏感操作添加审计日志
+18. 实施资源级权限
 
-### Phase 4: Data Protection (Day 4-5)
-19. Implement encryption at rest (sensitive fields)
-20. Ensure TLS/SSL for all communications
-21. Implement secure session storage
-22. Add PII data masking in logs
-23. Implement data retention policies
-24. Add secure file upload handling
+### 阶段 4：数据保护（第 4-5 天）
+19. 实施静态加密（敏感字段）
+20. 确保所有通信使用 TLS/SSL
+21. 实施安全会话存储
+22. 在日志中添加 PII 数据屏蔽
+23. 实施数据保留策略
+24. 添加安全文件上传处理
 
-### Phase 5: Input Validation & Sanitization (Day 5-6)
-25. Implement input validation on all endpoints
-26. Add XSS protection (Content Security Policy)
-27. Implement SQL injection prevention (parameterized queries)
-28. Add CSRF protection
-29. Implement request size limits
-30. Add file upload type validation
+### 阶段 5：输入验证和清理（第 5-6 天）
+25. 在所有端点实施输入验证
+26. 添加 XSS 保护（Content Security Policy）
+27. 实施 SQL 注入预防（参数化查询）
+28. 添加 CSRF 保护
+29. 实施请求大小限制
+30. 添加文件上传类型验证
 
-### Phase 6: Security Headers & Configuration (Day 6)
-31. Add security headers:
+### 阶段 6：安全头和配置（第 6 天）
+31. 添加安全头：
     - Strict-Transport-Security
     - X-Content-Type-Options
     - X-Frame-Options
     - X-XSS-Protection
     - Content-Security-Policy
-32. Configure CORS properly
-33. Disable unnecessary HTTP methods
-34. Remove server version headers
+32. 正确配置 CORS
+33. 禁用不必要的 HTTP 方法
+34. 移除服务器版本头
 
-### Phase 7: Monitoring & Logging (Day 7)
-35. Implement security event logging
-36. Add anomaly detection
-37. Set up intrusion detection
-38. Implement real-time alerting
-39. Create security dashboard
+### 阶段 7：监控和日志（第 7 天）
+35. 实施安全事件日志
+36. 添加异常检测
+37. 设置入侵检测
+38. 实施实时告警
+39. 创建安全仪表板
 
-### Phase 8: Testing & Documentation (Day 8-9)
-40. Perform penetration testing
-41. Run security scanners
-42. Test all security features
-43. Create security documentation
-44. Train team on security practices
-45. Create incident response plan
+### 阶段 8：测试和文档（第 8-9 天）
+40. 进行渗透测试
+41. 运行安全扫描
+42. 测试所有安全功能
+43. 创建安全文档
+44. 培训团队安全实践
+45. 创建事件响应计划
 
-### Phase 9: Compliance & Policies (Day 10)
-46. GDPR compliance check
-47. Create privacy policy
-48. Implement data subject rights
-49. Add cookie consent
-50. Create security policies documentation
+### 阶段 9：合规性和策略（第 10 天）
+46. GDPR 合规检查
+47. 创建隐私政策
+48. 实施数据主体权利
+49. 添加 cookie 同意
+50. 创建安全策略文档
 
-**Estimated Time**: 10 days
-**Risk Level**: Critical
-**Priority**: High
+**预计时间**：10 天
+**风险级别**：关键
+**优先级**：高
 
-**Security Improvements Summary**:
-- Authentication: 7 enhancements
-- Authorization: 5 enhancements
-- Data Protection: 6 enhancements
-- Input Validation: 6 enhancements
-- Infrastructure: 9 enhancements
-- Monitoring: 5 enhancements
+**安全改进摘要**：
+- 认证：7 项增强
+- 授权：5 项增强
+- 数据保护：6 项增强
+- 输入验证：6 项增强
+- 基础设施：9 项增强
+- 监控：5 项增强
 
-**Compliance**: OWASP Top 10, GDPR
+**合规性**：OWASP Top 10, GDPR
 
-**Success Criteria**:
-- Zero critical vulnerabilities
-- All OWASP Top 10 mitigated
-- Security score >90/100
-- All pen test issues resolved
+**成功标准**：
+- 零关键漏洞
+- 所有 OWASP Top 10 已缓解
+- 安全评分 >90/100
+- 所有渗透测试问题已解决
 
-Proceed? (yes/no/modify)
+是否继续？（是/否/修改）
 ```
 
-## Example 5: Performance Optimization
+## 示例 5：性能优化
 
 ```
-User: /plan Optimize our slow e-commerce website
+用户：/plan 优化我们缓慢的电子商务网站
 
-Claude: Let me create a comprehensive performance optimization plan.
+Claude：让我创建一个全面的性能优化计划。
 
-## E-commerce Performance Optimization Plan
+## 电子商务性能优化计划
 
-### Phase 1: Performance Audit (4 hours)
-1. Run Lighthouse audit
-2. Analyze Chrome DevTools performance profile
-3. Measure Core Web Vitals:
-   - LCP (Largest Contentful Paint)
-   - FID (First Input Delay)
-   - CLS (Cumulative Layout Shift)
-4. Identify performance bottlenecks
-5. Create baseline performance metrics
+### 阶段 1：性能审计（4 小时）
+1. 运行 Lighthouse 审计
+2. 分析 Chrome DevTools 性能配置文件
+3. 测量 Core Web Vitals：
+   - LCP（Largest Contentful Paint）
+   - FID（First Input Delay）
+   - CLS（Cumulative Layout Shift）
+4. 识别性能瓶颈
+5. 创建基线性能指标
 
-**Current Metrics**:
-- LCP: 4.2s (target: <2.5s)
-- FID: 280ms (target: <100ms)
-- CLS: 0.25 (target: <0.1)
-- Page Load: 8.3s (target: <3s)
+**当前指标**：
+- LCP：4.2s（目标：<2.5s）
+- FID：280ms（目标：<100ms）
+- CLS：0.25（目标：<0.1）
+- 页面加载：8.3s（目标：<3s）
 
-### Phase 2: Image Optimization (6 hours)
-6. Convert images to WebP format
-7. Implement responsive images
-8. Add lazy loading for images
-9. Optimize image sizes (compression)
-10. Implement CDN for images
-11. Add image placeholders
+### 阶段 2：图像优化（6 小时）
+6. 将图像转换为 WebP 格式
+7. 实施响应式图像
+8. 为图像添加懒加载
+9. 优化图像大小（压缩）
+10. 为图像实施 CDN
+11. 添加图像占位符
 
-**Expected Impact**: -40% load time
+**预期影响**：-40% 加载时间
 
-### Phase 3: Code Splitting & Lazy Loading (8 hours)
-12. Implement route-based code splitting
-13. Lazy load non-critical components
-14. Split vendor bundles
-15. Optimize chunk sizes
-16. Implement dynamic imports
-17. Add preloading for critical resources
+### 阶段 3：代码分割和懒加载（8 小时）
+12. 实施基于路由的代码分割
+13. 懒加载非关键组件
+14. 分割 vendor bundles
+15. 优化 chunk 大小
+16. 实施动态导入
+17. 为关键资源添加预加载
 
-**Expected Impact**: -30% initial bundle size
+**预期影响**：-30% 初始 bundle 大小
 
-### Phase 4: Caching Strategy (6 hours)
-18. Implement browser caching (Cache-Control)
-19. Add service worker for offline support
-20. Implement API response caching
-21. Add Redis cache for database queries
-22. Implement stale-while-revalidate
-23. Configure CDN caching
+### 阶段 4：缓存策略（6 小时）
+18. 实施浏览器缓存（Cache-Control）
+19. 添加 service worker 以支持离线
+20. 实施 API 响应缓存
+21. 为数据库查询添加 Redis 缓存
+22. 实施 stale-while-revalidate
+23. 配置 CDN 缓存
 
-**Expected Impact**: -50% API response time
+**预期影响**：-50% API 响应时间
 
-### Phase 5: Database Optimization (8 hours)
-24. Add database indexes
-25. Optimize slow queries (>100ms)
-26. Implement query result caching
-27. Add connection pooling
-28. Denormalize where appropriate
-29. Implement database read replicas
+### 阶段 5：数据库优化（8 小时）
+24. 添加数据库索引
+25. 优化慢查询（>100ms）
+26. 实施查询结果缓存
+27. 添加连接池
+28. 在适当的地方进行反规范化
+29. 实施数据库读副本
 
-**Expected Impact**: -60% database query time
+**预期影响**：-60% 数据库查询时间
 
-### Phase 6: Frontend Optimization (10 hours)
-30. Minimize and compress JavaScript
-31. Minimize and compress CSS
-32. Remove unused CSS (PurgeCSS)
-33. Implement critical CSS
-34. Defer non-critical JavaScript
-35. Reduce DOM size
-36. Optimize React rendering (memo, useMemo)
-37. Implement virtual scrolling for long lists
+### 阶段 6：前端优化（10 小时）
+30. 最小化和压缩 JavaScript
+31. 最小化和压缩 CSS
+32. 移除未使用的 CSS（PurgeCSS）
+33. 实施关键 CSS
+34. 延迟非关键 JavaScript
+35. 减少 DOM 大小
+36. 优化 React 渲染（memo, useMemo）
+37. 为长列表实施虚拟滚动
 
-**Expected Impact**: -35% JavaScript execution time
+**预期影响**：-35% JavaScript 执行时间
 
-### Phase 7: Network Optimization (4 hours)
-38. Enable HTTP/2
-39. Implement resource hints (preconnect, prefetch)
-40. Reduce number of HTTP requests
-41. Enable Brotli compression
-42. Optimize third-party scripts
+### 阶段 7：网络优化（4 小时）
+38. 启用 HTTP/2
+39. 实施资源提示（preconnect, prefetch）
+40. 减少 HTTP 请求数量
+41. 启用 Brotli 压缩
+42. 优化第三方脚本
 
-**Expected Impact**: -25% network time
+**预期影响**：-25% 网络时间
 
-### Phase 8: Monitoring & Testing (4 hours)
-43. Set up performance monitoring (Datadog/New Relic)
-44. Add Real User Monitoring (RUM)
-45. Create performance budgets
-46. Set up automated Lighthouse CI
-47. Test on real devices
+### 阶段 8：监控和测试（4 小时）
+43. 设置性能监控（Datadog/New Relic）
+44. 添加真实用户监控（RUM）
+45. 创建性能预算
+46. 设置自动化 Lighthouse CI
+47. 在真实设备上测试
 
-**Estimated Time**: 50 hours (2 weeks)
+**预计时间**：50 小时（2 周）
 
-**Target Metrics** (90th percentile):
-- LCP: <2.0s (from 4.2s) ✅
-- FID: <50ms (from 280ms) ✅
-- CLS: <0.05 (from 0.25) ✅
-- Page Load: <2.5s (from 8.3s) ✅
+**目标指标**（第 90 百分位）：
+- LCP：<2.0s（从 4.2s）✅
+- FID：<50ms（从 280ms）✅
+- CLS：<0.05（从 0.25）✅
+- 页面加载：<2.5s（从 8.3s）✅
 
-**Expected Revenue Impact**:
-- 100ms faster = 1% conversion increase
-- Target: 5.8s improvement = ~58% conversion increase
-- Estimated additional revenue: Significant
+**预期收入影响**：
+- 100ms 更快 = 1% 转化率提升
+- 目标：5.8s 提升 = 约 58% 转化率提升
+- 预计额外收入：显著
 
-**Priority Order**:
-1. Image optimization (quick wins)
-2. Code splitting (high impact)
-3. Caching (high impact)
-4. Database optimization (critical)
-5. Frontend optimization (polish)
+**优先级顺序**：
+1. 图像优化（快速见效）
+2. 代码分割（高影响）
+3. 缓存（高影响）
+4. 数据库优化（关键）
+5. 前端优化（完善）
 
-Proceed with this plan? (yes/no/modify)
+是否继续此计划？（是/否/修改）
 ```
 
-## Key Takeaways
+## 关键要点
 
-### Benefits of Planning Mode
+### 规划模式的好处
 
-1. **Clarity**: Clear roadmap before starting
-2. **Estimation**: Time and effort estimates
-3. **Risk Assessment**: Identify potential issues early
-4. **Prioritization**: Logical order of tasks
-5. **Approval**: Review and approve before execution
-6. **Modification**: Adjust plan based on feedback
+1. **清晰度**：开始前的明确路线图
+2. **估算**：时间和努力估算
+3. **风险评估**：早期识别潜在问题
+4. **优先级**：任务的逻辑顺序
+5. **审批**：执行前审查和批准
+6. **修改**：根据反馈调整计划
 
-### When to Use Planning Mode
+### 何时使用规划模式
 
-✅ **Always use for**:
-- Multi-day projects
-- Team collaborations
-- Critical system changes
-- Learning new concepts
-- Complex refactoring
+✅ **始终用于**：
+- 多日项目
+- 团队协作
+- 关键系统变更
+- 学习新概念
+- 复杂重构
 
-❌ **Don't use for**:
-- Bug fixes
-- Small tweaks
-- Simple queries
-- Quick experiments
+❌ **不要用于**：
+- Bug 修复
+- 小调整
+- 简单查询
+- 快速实验
 
-### Best Practices
+### 最佳实践
 
-1. **Review plans carefully** before approving
-2. **Modify plans** when you spot issues
-3. **Break down** complex tasks
-4. **Estimate realistic** timeframes
-5. **Include rollback** strategies
-6. **Add success** criteria
-7. **Plan for testing** at each phase
+1. **仔细审查**计划后再批准
+2. **修改**计划当你发现问题
+3. **分解**复杂任务
+4. **估算**现实的时间框架
+5. **包含回滚**策略
+6. **添加成功**标准
+7. **为每个阶段**规划测试

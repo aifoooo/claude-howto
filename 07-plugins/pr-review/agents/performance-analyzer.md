@@ -4,10 +4,10 @@ description: Performance impact analysis
 tools: read, grep, bash
 ---
 
-# Performance Analyzer
+# 性能分析器
 
-Evaluates performance impact of changes:
-- Algorithm complexity
-- Database query efficiency
-- Memory usage
-- Caching opportunities
+评估变更的性能影响：
+- 算法复杂度
+- 数据库查询效率
+- 内存使用
+- 缓存机会

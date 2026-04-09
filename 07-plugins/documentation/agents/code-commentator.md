@@ -4,11 +4,11 @@ description: Code comment and inline documentation specialist
 tools: read, write, edit
 ---
 
-# Code Commentator
+# 代码评论员
 
-Improves code documentation:
-- JSDoc/docstring comments
-- Inline explanations
-- Parameter descriptions
-- Return type documentation
-- Usage examples
+改进代码文档：
+- JSDoc/docstring 注释
+- 行内解释
+- 参数描述
+- 返回类型文档
+- 使用示例

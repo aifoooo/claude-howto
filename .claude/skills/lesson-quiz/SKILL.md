@@ -4,187 +4,187 @@ version: 1.0.0
 description: Interactive lesson-level quiz for Claude Code tutorials. Tests understanding of a specific lesson (01-10) with 8-10 questions mixing conceptual and practical knowledge. Use before a lesson to pre-test, during to check progress, or after to verify mastery. Use when asked to "quiz me on hooks", "test my knowledge of lesson 3", "lesson quiz", "practice quiz for MCP", or "do I understand skills".
 ---
 
-# Lesson Quiz
+# 课程测验
 
-Interactive quiz that tests understanding of a specific Claude Code lesson with 8-10 questions, provides per-question feedback, and identifies areas to review.
+交互式测验，通过 8-10 个问题测试对特定 Claude Code 课程的理解，提供每个问题的反馈，并识别需要复习的领域。
 
-## Instructions
+## 说明
 
-### Step 1: Determine the Lesson
+### 步骤 1：确定课程
 
-If the user provided a lesson as an argument (e.g., `/lesson-quiz hooks` or `/lesson-quiz 03`), map it to the lesson directory:
+如果用户提供了课程作为参数（例如 `/lesson-quiz hooks` 或 `/lesson-quiz 03`），请将其映射到课程目录：
 
-**Lesson mapping:**
-- `01`, `slash-commands`, `commands` → 01-slash-commands
-- `02`, `memory` → 02-memory
-- `03`, `skills` → 03-skills
-- `04`, `subagents`, `agents` → 04-subagents
-- `05`, `mcp` → 05-mcp
-- `06`, `hooks` → 06-hooks
-- `07`, `plugins` → 07-plugins
-- `08`, `checkpoints`, `checkpoint` → 08-checkpoints
-- `09`, `advanced`, `advanced-features` → 09-advanced-features
-- `10`, `cli` → 10-cli
+**课程映射：**
+- `01`、`slash-commands`、`commands` → 01-slash-commands
+- `02`、`memory` → 02-memory
+- `03`、`skills` → 03-skills
+- `04`、`subagents`、`agents` → 04-subagents
+- `05`、`mcp` → 05-mcp
+- `06`、`hooks` → 06-hooks
+- `07`、`plugins` → 07-plugins
+- `08`、`checkpoints`、`checkpoint` → 08-checkpoints
+- `09`、`advanced`、`advanced-features` → 09-advanced-features
+- `10`、`cli` → 10-cli
 
-If no argument was provided, present a selection prompt using AskUserQuestion:
+如果未提供参数，请使用 AskUserQuestion 呈现选择提示：
 
-**Question 1** (header: "Lesson"):
-"Which lesson do you want to quiz on?"
-Options:
-1. "Slash Commands (01)" — Custom commands, skills, frontmatter, arguments
-2. "Memory (02)" — CLAUDE.md, memory hierarchy, rules, auto memory
-3. "Skills (03)" — Progressive disclosure, auto-invocation, SKILL.md
-4. "Subagents (04)" — Task delegation, agent config, isolation
+**问题 1**（标题："课程"）：
+"你想测试哪一课？"
+选项：
+1. "斜杠命令 (01)" — 自定义命令、技能、frontmatter、参数
+2. "记忆 (02)" — CLAUDE.md、记忆层次、规则、自动记忆
+3. "技能 (03)" — 渐进式披露、自动调用、SKILL.md
+4. "子代理 (04)" — 任务委托、代理配置、隔离
 
-**Question 2** (header: "Lesson"):
-"Which lesson do you want to quiz on? (continued)"
-Options:
-1. "MCP (05)" — External integration, transport, servers, tool search
-2. "Hooks (06)" — Event automation, PreToolUse, exit codes, JSON I/O
-3. "Plugins (07)" — Bundled solutions, marketplace, plugin.json
-4. "More lessons..." — Checkpoints, Advanced Features, CLI
+**问题 2**（标题："课程"）：
+"你想测试哪一课？（续）"
+选项：
+1. "MCP (05)" — 外部集成、传输、服务器、工具搜索
+2. "钩子 (06)" — 事件自动化、PreToolUse、退出码、JSON I/O
+3. "插件 (07)" — 捆绑解决方案、市场、plugin.json
+4. "更多课程..." — 检查点、高级功能、CLI
 
-If "More lessons..." is selected, present:
+如果选择了"更多课程..."，请呈现：
 
-**Question 3** (header: "Lesson"):
-"Select your lesson:"
-Options:
-1. "Checkpoints (08)" — Rewind, restore, safe experimentation
-2. "Advanced Features (09)" — Planning, permissions, print mode, thinking
-3. "CLI Reference (10)" — Flags, output formats, scripting, piping
+**问题 3**（标题："课程"）：
+"选择你的课程："
+选项：
+1. "检查点 (08)" — 回退、恢复、安全实验
+2. "高级功能 (09)" — 规划、权限、打印模式、思考
+3. "CLI 参考 (10)" — 标志、输出格式、脚本、管道
 
-### Step 2: Read the Lesson Content
+### 步骤 2：阅读课程内容
 
-Read the lesson README.md file to refresh context:
-- Read file: `<lesson-directory>/README.md`
+阅读课程 README.md 文件以刷新上下文：
+- 阅读文件：`<lesson-directory>/README.md`
 
-Then use the question bank from `references/question-bank.md` for that lesson. The question bank provides 10 pre-written questions per lesson with correct answers and explanations.
+然后使用该课程的 `references/question-bank.md` 中的题库。题库为每课提供 10 道预写的问题，包含正确答案和解释。
 
-### Step 3: Present the Quiz
+### 步骤 3：呈现测验
 
-Ask the user about quiz timing context:
+询问用户测验时间上下文：
 
-Use AskUserQuestion (header: "Timing"):
-"When are you taking this quiz relative to the lesson?"
-Options:
-1. "Before (pre-test)" — I haven't read the lesson yet, testing my prior knowledge
-2. "During (progress check)" — I'm partway through the lesson
-3. "After (mastery check)" — I've completed the lesson and want to verify understanding
+使用 AskUserQuestion（标题："时间"）：
+"相对于课程，你什么时候进行这个测验？"
+选项：
+1. "之前（预测试）" — 我还没有阅读课程，测试我的先验知识
+2. "期间（进度检查）" — 我正在学习课程中
+3. "之后（掌握检查）" — 我已完成课程，想验证理解
 
-This context affects how the results are framed (see Step 5).
+此上下文影响结果的呈现方式（见步骤 5）。
 
-### Step 4: Present Questions in Rounds
+### 步骤 4：分轮呈现问题
 
-Present 10 questions from the question bank in rounds of 2 questions each (5 rounds total). Each question uses AskUserQuestion with the question text and 3-4 answer options.
+每轮呈现 2 个问题，共 5 轮（10 个问题）。每个问题使用 AskUserQuestion，包含问题文本和 3-4 个答案选项。
 
-**IMPORTANT**: Use AskUserQuestion with max 4 options per question, 2 questions per round.
+**重要**：每个问题使用 AskUserQuestion，最多 4 个选项，每轮 2 个问题。
 
-For each round, present 2 questions. After all 5 rounds, proceed to scoring.
+每轮呈现 2 个问题。5 轮结束后，进入评分。
 
-**Question format per round:**
+**每轮问题格式：**
 
-Each question from the question bank has:
-- `question`: The question text
-- `options`: 3-4 answer choices (one correct, labeled in the bank)
-- `correct`: The correct answer label
-- `explanation`: Why the answer is correct
-- `category`: "conceptual" or "practical"
+题库中的每个问题包含：
+- `question`：问题文本
+- `options`：3-4 个答案选项（一个正确，在题库中标注）
+- `correct`：正确答案标签
+- `explanation`：为什么答案正确
+- `category`："conceptual" 或 "practical"
 
-Present each question using AskUserQuestion. Record the user's answer for each.
+使用 AskUserQuestion 呈现每个问题。记录用户的答案。
 
-### Step 5: Score and Present Results
+### 步骤 5：评分并呈现结果
 
-After all rounds, calculate the score and present results.
+所有轮次结束后，计算分数并呈现结果。
 
-**Scoring:**
-- Each correct answer = 1 point
-- Total possible = 10 points
+**评分：**
+- 每个正确答案 = 1 分
+- 总分 = 10 分
 
-**Grade scale:**
-- 9-10: Mastered — Excellent understanding
-- 7-8: Proficient — Good grasp, minor gaps
-- 5-6: Developing — Fundamentals understood, needs review
-- 3-4: Beginning — Significant gaps, review recommended
-- 0-2: Not yet — Start from the beginning of this lesson
+**等级量表：**
+- 9-10：已掌握 — 理解优秀
+- 7-8：熟练 — 掌握良好，有小缺口
+- 5-6：发展中 — 理解基础，需要复习
+- 3-4：起步 — 显著缺口，建议复习
+- 0-2：尚未开始 — 从本课开头重新开始
 
-**Output format:**
+**输出格式：**
 
 ```markdown
-## Lesson Quiz Results: [Lesson Name]
+## 课程测验结果：[课程名称]
 
-**Score: N/10** — [Grade label]
-**Quiz timing**: [Before / During / After] the lesson
-**Question breakdown**: N conceptual correct, N practical correct
+**分数：N/10** — [等级标签]
+**测验时间**：课程 [之前/期间/之后]
+**问题分解**：N 道概念题正确，N 道实践题正确
 
-### Per-Question Results
+### 每题结果
 
-| # | Category | Question (short) | Your Answer | Result |
+| # | 类别 | 问题（简略）| 你的答案 | 结果 |
 |---|----------|-----------------|-------------|--------|
-| 1 | Conceptual | [abbreviated question] | [their answer] | [Correct / Incorrect] |
-| 2 | Practical | ... | ... | ... |
+| 1 | 概念 | [简略问题] | [他们的答案] | [正确/错误] |
+| 2 | 实践 | ... | ... | ... |
 | ... | ... | ... | ... | ... |
 
-### Incorrect Answers — Review These
+### 错误答案 — 复习这些
 
-[For each incorrect answer, show:]
+[对于每个错误答案，显示：]
 
-**Q[N]: [Full question text]**
-- Your answer: [what they chose]
-- Correct answer: [correct option]
-- Explanation: [why it's correct]
-- Review: [specific section of the lesson README to re-read]
+**Q[N]：[完整问题文本]**
+- 你的答案：[他们选择的]
+- 正确答案：[正确选项]
+- 解释：[为什么正确]
+- 复习：[要重新阅读的课程 README 的具体章节]
 
-### [Timing-specific message]
+### [时间特定消息]
 
-[If pre-test]:
-**Pre-test score: N/10.** This gives you a baseline! Focus your study on the topics you missed. After completing the lesson, retake the quiz to measure your improvement.
+[如果是预测试]：
+**预测试分数：N/10。** 这为你提供了一个基准！将学习重点放在你错过的主题上。完成课程后，重新参加测验以衡量你的进步。
 
-[If during]:
-**Progress check: N/10.** [If 7+: Great progress — keep going! If 4-6: Review the incorrect topics before continuing. If <4: Consider re-reading from the beginning.]
+[如果是期间]：
+**进度检查：N/10。** [如果是 7+：进步很大——继续加油！如果是 4-6：在继续之前复习错误的主题。如果是 <4：考虑从头重新阅读。]
 
-[If after]:
-**Mastery check: N/10.** [If 9-10: You've mastered this lesson! Move on to the next. If 7-8: Almost there — review the missed topics and retake. If <7: Spend more time with the lesson, especially the sections marked above.]
+[如果是之后]：
+**掌握检查：N/10。** [如果是 9-10：你已掌握本课！继续下一课。如果是 7-8：快到了——复习错过的题目并重新测试。如果是 <7：在本课上多花时间，特别是上面标记的章节。]
 
-### Recommended Next Steps
+### 建议的后续步骤
 
-[Based on score and timing:]
-- [If mastered]: Proceed to the next lesson in the roadmap: [next lesson link]
-- [If proficient]: Review these specific sections, then retake: [list sections]
-- [If developing or below]: Re-read the full lesson: [lesson link]. Focus on: [list weak categories]
-- [Offer]: "Would you like to retake this quiz, try a different lesson, or get help with a specific topic?"
+[根据分数和时间：]
+- [如果已掌握]：继续学习路线图中的下一课：[下一课链接]
+- [如果熟练]：复习这些具体章节，然后重新测试：[列出章节]
+- [如果是发展中或以下]：重新阅读完整课程：[课程链接]。重点关注：[列出薄弱类别]
+- [提供]："你想重新测试、测试其他课程，还是获得特定主题的帮助？"
 ```
 
-### Step 6: Offer Follow-up
+### 步骤 6：提供后续选项
 
-After presenting results, use AskUserQuestion:
+呈现结果后，使用 AskUserQuestion：
 
-"What would you like to do next?"
-Options:
-1. "Retake this quiz" — Try the same lesson quiz again
-2. "Quiz another lesson" — Switch to a different lesson
-3. "Explain a topic I missed" — Get a detailed explanation of an incorrect answer
-4. "Done" — End the quiz session
+"你想接下来做什么？"
+选项：
+1. "重新测试" — 再试一次同一课程测验
+2. "测试其他课程" — 切换到其他课程
+3. "解释我错过的题目" — 获取错误答案的详细解释
+4. "完成" — 结束测验会话
 
-If **Retake**: Go back to Step 4 (skip timing question, use same timing).
-If **Quiz another lesson**: Go back to Step 1.
-If **Explain a topic**: Ask which question number, then read the relevant section from the lesson README.md and explain it with examples.
+如果**重新测试**：返回步骤 4（跳过时间问题，使用相同的时间）。
+如果**测试其他课程**：返回步骤 1。
+如果**解释题目**：询问是哪个问题编号，然后从课程 README.md 中阅读相关章节并用示例解释。
 
-## Error Handling
+## 错误处理
 
-### Invalid lesson argument
-If the argument doesn't match any lesson, show the valid lesson list and ask the user to pick one.
+### 无效的课程参数
+如果参数与任何课程都不匹配，请显示有效课程列表并让用户选择一个。
 
-### User wants to quit mid-quiz
-If the user indicates they want to stop during any round, present partial results for questions answered so far.
+### 用户想在测验中途退出
+如果用户在任何一轮中表示想停止，请呈现已回答问题的部分结果。
 
-### Lesson README not found
-If the README.md file doesn't exist at the expected path, inform the user and suggest checking the repository structure.
+### 找不到课程 README
+如果 README.md 文件不存在于预期路径，请通知用户并建议检查仓库结构。
 
-## Validation
+## 验证
 
-### Triggering test suite
+### 触发测试套件
 
-**Should trigger:**
+**应该触发：**
 - "quiz me on hooks"
 - "lesson quiz"
 - "test my knowledge of lesson 3"
@@ -196,8 +196,8 @@ If the README.md file doesn't exist at the expected path, inform the user and su
 - "how well do I know the CLI"
 - "quiz me before I start the memory lesson"
 
-**Should NOT trigger:**
-- "assess my overall level" (use /self-assessment)
+**不应该触发：**
+- "assess my overall level"（使用 /self-assessment）
 - "explain hooks to me"
 - "create a hook"
 - "what is MCP"

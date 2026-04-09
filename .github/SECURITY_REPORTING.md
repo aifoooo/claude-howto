@@ -1,309 +1,309 @@
-# Security Vulnerability Reporting
+# 安全漏洞报告
 
-This file explains how to report security vulnerabilities to the Claude How To project.
+本文档说明如何向 Claude How To 项目报告安全漏洞。
 
-## Quick Links
+## 快速链接
 
-- **Private Reporting**: https://github.com/luongnv89/claude-howto/security/advisories
-- **Security Policy**: [SECURITY.md](../SECURITY.md)
-- **Report Template**: See below
+- **私人报告**: https://github.com/luongnv89/claude-howto/security/advisories
+- **安全策略**: [SECURITY.md](../SECURITY.md)
+- **报告模板**: 见下文
 
-## Report a Vulnerability
+## 报告漏洞
 
-### Option 1: GitHub Private Vulnerability Report (RECOMMENDED)
+### 选项 1：GitHub 私人漏洞报告（推荐）
 
-This is the preferred method for reporting security vulnerabilities.
+这是报告安全漏洞的首选方法。
 
-**Steps:**
-1. Go to: https://github.com/luongnv89/claude-howto/security/advisories
-2. Click "Report a vulnerability"
-3. Fill in the details (use template below)
-4. Submit
+**步骤：**
+1. 前往：https://github.com/luongnv89/claude-howto/security/advisories
+2. 点击"报告漏洞"
+3. 填写详情（使用下方模板）
+4. 提交
 
-**Advantages:**
-- Keeps vulnerability private until fix is released
-- Automatic notifications to maintainers
-- Built-in collaboration features
-- Integrated with GitHub security tools
+**优势：**
+- 在修复发布前保持漏洞私密
+- 自动通知维护者
+- 内置协作功能
+- 与 GitHub 安全工具集成
 
-### Option 2: GitHub Security Alert (For Dependencies)
+### 选项 2：GitHub 安全警报（用于依赖项）
 
-If you discover a vulnerability in a dependency:
+如果你发现依赖项中的漏洞：
 
-1. Go to: https://github.com/luongnv89/claude-howto/security/advisories
-2. Review the alert
-3. Create a pull request with the fix
-4. Tag with `security` label
+1. 前往：https://github.com/luongnv89/claude-howto/security/advisories
+2. 查看警报
+3. 创建包含修复的 pull request
+4. 添加 `security` 标签
 
-### Option 3: Private Email (If GitHub unavailable)
+### 选项 3：私人电子邮件（如果 GitHub 不可用）
 
-If you cannot use GitHub's reporting system:
+如果你无法使用 GitHub 的报告系统：
 
-**Coming soon**: Security contact email will be added here
+**即将推出**：安全联系电子邮件将添加在此处
 
-For now, use GitHub's private vulnerability reporting as described above.
+目前请使用上述 GitHub 私人漏洞报告。
 
-## Vulnerability Report Template
+## 漏洞报告模板
 
-Use this template when reporting a vulnerability:
+报告漏洞时使用此模板：
 
 ```
-**Title**: [Brief description of vulnerability]
+**标题**: [漏洞的简要描述]
 
-**Severity**: [Critical/High/Medium/Low]
-Estimated CVSS Score: [0-10]
+**严重程度**: [Critical/High/Medium/Low]
+预计 CVSS 评分: [0-10]
 
-**Type**: [Code/Documentation/Dependency/Configuration]
+**类型**: [Code/Documentation/Dependency/Configuration]
 
-**Affected Component**:
-- File: [path/to/file.py]
-- Section: [Section name if documentation]
-- Version: [latest/specific version]
+**受影响的组件**:
+- 文件: [path/to/file.py]
+- 章节: [如果文档，则为章节名称]
+- 版本: [latest/特定版本]
 
-**Description**:
-[Clear explanation of what the vulnerability is]
+**描述**:
+[清晰解释漏洞是什么]
 
-**Potential Impact**:
-[What could an attacker do with this vulnerability?]
-[Who could be affected?]
+**潜在影响**:
+[攻击者可以利用此漏洞做什么？]
+[谁可能受影响？]
 
-**Steps to Reproduce**:
-1. [First step]
-2. [Second step]
-3. [Third step]
-[Expected result vs actual result]
+**重现步骤**:
+1. [第一步]
+2. [第二步]
+3. [第三步]
+[预期结果 vs 实际结果]
 
-**Proof of Concept** (if available):
-[Code or steps to demonstrate the vulnerability]
+**概念验证**（如有）：
+[演示漏洞的代码或步骤]
 
-**Suggested Fix**:
-[Your recommended solution, if you have one]
+**建议修复**:
+[你的推荐解决方案，如果你有的话]
 
-**Additional Context**:
-[Any other relevant information]
+**其他上下文**:
+[任何其他相关信息]
 
-**Your Information**:
-- Name: [Your name or anonymous]
-- Email: [Your email]
-- Credit: [How you'd like to be credited, if at all]
+**你的信息**:
+- 姓名: [你的姓名或匿名]
+- 电子邮件: [你的电子邮件]
+- 致谢: [如果你希望被致谢，如何致谢]
 ```
 
-## What Happens After You Report
+## 报告后会发生什么
 
-### Timeline
+### 时间线
 
-1. **Immediate (< 1 hour)**
-   - Automatic notification sent to project maintainers
+1. **即时（< 1 小时）**
+   - 自动通知发送给项目维护者
 
-2. **Within 24 hours**
-   - Initial assessment of the report
-   - Confirmation that we received it
-   - Preliminary severity assessment
+2. **24 小时内**
+   - 对报告的初步评估
+   - 确认已收到
+   - 初步严重程度评估
 
-3. **Within 48 hours**
-   - Detailed response from security team
-   - Questions for clarification (if needed)
-   - Timeline for fix (if vulnerability confirmed)
+3. **48 小时内**
+   - 安全团队的详细回复
+   - 如需澄清的问题
+   - 修复时间线（如果漏洞已确认）
 
-4. **Within 1-7 days** (depends on severity)
-   - Fix developed and tested
-   - Security advisory prepared
-   - Fix released and public advisory published
+4. **1-7 天内**（取决于严重程度）
+   - 开发并测试修复
+   - 准备安全公告
+   - 发布修复并发布公开公告
 
-### Communication
+### 沟通
 
-We will keep you informed through:
-- GitHub private vulnerability discussion
-- Email (if provided)
-- Updates in the discussion thread
+我们将通过以下方式保持通知：
+- GitHub 私人漏洞讨论
+- 电子邮件（如果提供）
+- 讨论帖子的更新
 
-You can:
-- Ask clarifying questions
-- Provide additional information
-- Suggest improvements to the fix
-- Request timeline adjustments
+你可以：
+- 询问澄清问题
+- 提供其他信息
+- 建议改进修复
+- 请求时间线调整
 
-### Disclosure Timeline
+### 披露时间线
 
-**Critical Issues (CVSS 9.0-10.0)**
-- Fix: Released immediately (within 24 hours)
-- Disclosure: Public advisory issued same day
-- Notice: 24 hours advance notice to reporter
+**严重问题（CVSS 9.0-10.0）**
+- 修复：立即发布（24 小时内）
+- 披露：同一天发布公开公告
+- 通知：提前 24 小时通知报告者
 
-**High Issues (CVSS 7.0-8.9)**
-- Fix: Released within 48-72 hours
-- Disclosure: Public advisory on release
-- Notice: 5 days advance notice to reporter
+**高危问题（CVSS 7.0-8.9）**
+- 修复：48-72 小时内发布
+- 披露：发布时公开公告
+- 通知：提前 5 天通知报告者
 
-**Medium Issues (CVSS 4.0-6.9)**
-- Fix: Included in next regular update
-- Disclosure: Public advisory on release
-- Notice: Coordinated timing
+**中等问题（CVSS 4.0-6.9）**
+- 修复：包含在下次常规更新中
+- 披露：发布时公开公告
+- 通知：协调时间
 
-**Low Issues (CVSS 0.1-3.9)**
-- Fix: Included in next regular update
-- Disclosure: Advisory on release
-- Notice: Same day as release
+**低危问题（CVSS 0.1-3.9）**
+- 修复：包含在下次常规更新中
+- 披露：发布时公告
+- 通知：与发布同日
 
-## Security Vulnerability Criteria
+## 安全漏洞标准
 
-### In Scope
+### 范围内
 
-We accept reports on:
+我们接受以下报告：
 
-- **Code Vulnerabilities**
-  - Injection attacks (command, SQL, etc.)
-  - Cross-site scripting (XSS) in examples
-  - Authentication/authorization flaws
-  - Path traversal vulnerabilities
-  - Cryptography issues
+- **代码漏洞**
+  - 注入攻击（命令、SQL 等）
+  - 示例中的跨站脚本（XSS）
+  - 认证/授权缺陷
+  - 路径遍历漏洞
+  - 加密问题
 
-- **Documentation Security**
-  - Exposed secrets or credentials
-  - Insecure code patterns
-  - Security anti-patterns
-  - Misleading security claims
+- **文档安全**
+  - 暴露的密钥或凭据
+  - 不安全的代码模式
+  - 安全反模式
+  - 误导性安全声明
 
-- **Dependency Vulnerabilities**
-  - Known CVEs in dependencies
-  - Supply chain attacks
-  - Malicious dependencies
+- **依赖项漏洞**
+  - 依赖项中的已知 CVE
+  - 供应链攻击
+  - 恶意依赖项
 
-- **Configuration Issues**
-  - Insecure defaults
-  - Missing security headers
-  - Credential exposure in examples
+- **配置问题**
+  - 不安全的默认值
+  - 缺少安全头
+  - 示例中的凭据暴露
 
-### Out of Scope
+### 范围外
 
-We do NOT accept reports on:
+我们不接受以下报告：
 
-- Vulnerabilities in Claude Code itself (contact Anthropic)
-- Vulnerabilities in external services
-- Theoretical vulnerabilities without proof
-- Issues already reported to upstream projects
-- Social engineering or phishing
-- User education/training issues
+- Claude Code 本身的漏洞（联系 Anthropic）
+- 外部服务的漏洞
+- 无概念证明的理论漏洞
+- 已向上游项目报告的问题
+- 社会工程或钓鱼
+- 用户教育/培训问题
 
-## Responsible Disclosure Guidelines
+## 负责任披露指南
 
-### Do's ✅
+### 应该做 ✅
 
-- **Report privately** before public disclosure
-- **Be specific** with file paths and line numbers
-- **Provide proof** of the vulnerability
-- **Give us time** to fix (coordinated disclosure)
-- **Update** if you discover more details
-- **Be professional** in all communications
-- **Respect confidentiality** until we publish
+- **私下报告**后再公开披露
+- **具体说明**文件路径和行号
+- **提供证明**漏洞的证据
+- **给我们时间**修复（协调披露）
+- **更新**如果你发现更多细节
+- **保持专业**所有沟通
+- **保密**直到我们发布
 
-### Don'ts ❌
+### 不应该做 ❌
 
-- **Don't publicly disclose** before we fix
-- **Don't exploit** the vulnerability beyond testing
-- **Don't modify** other users' data
-- **Don't demand** payment or favors
-- **Don't share** the vulnerability with others
-- **Don't use** it in any harmful way
-- **Don't spam** with non-security related issues
+- **不要公开披露**直到我们修复
+- **不要利用**漏洞进行测试以外的操作
+- **不要修改**其他用户的数据
+- **不要要求**付款或好处
+- **不要分享**漏洞给其他人
+- **不要使用**它做任何有害的事
+- **不要发送**与安全无关的问题
 
-## Coordinated Disclosure
+## 协调披露
 
-We practice responsible disclosure:
+我们实行负责任披露：
 
-1. **Private Report**: You report to us privately
-2. **Our Assessment**: We evaluate and assess severity
-3. **Fix Development**: We develop and test a fix
-4. **Advance Notice**: We give you advance notice before public disclosure
-5. **Public Release**: We release fix and advisory together
-6. **Your Credit**: We acknowledge your contribution (if desired)
+1. **私人报告**：你私下向我们报告
+2. **我们的评估**：我们评估并确定严重程度
+3. **修复开发**：我们开发和测试修复
+4. **提前通知**：我们在公开披露前给你提前通知
+5. **公开发布**：我们同时发布修复和公告
+6. **你的致谢**：我们致谢你的贡献（如需要）
 
-**Timeline varies based on severity** (see section above)
+**时间线因严重程度而异**（见上方部分）
 
-## After the Fix is Released
+## 修复发布后
 
-### Public Advisory
+### 公开公告
 
-A public security advisory will include:
-- Description of the vulnerability
-- Affected versions
-- Severity (CVSS score)
-- Steps to remediate
-- Link to the fix
-- Credit to reporter (with permission)
+公开安全公告将包括：
+- 漏洞描述
+- 受影响版本
+- 严重程度（CVSS 评分）
+- 补救步骤
+- 修复链接
+- 对报告者的致谢（如获许可）
 
-### Your Recognition
+### 你的认可
 
-If you wish to be credited:
-- Your name/handle in the advisory
-- Link to your profile/website
-- Mention in release notes
-- Addition to hall of fame (if created)
+如果你希望被致谢：
+- 你的姓名/handle 在公告中
+- 你的 profile/网站链接
+- 在发布说明中提及
+- 加入名人堂（如果创建）
 
-### No Compensation
+### 无补偿
 
-Please note:
-- This is a volunteer-run open-source project
-- We cannot offer financial rewards
-- We do offer recognition and credit
-- Your contribution helps the community
+请注意：
+- 这是一个志愿者运营的开源项目
+- 我们无法提供经济奖励
+- 我们提供认可和致谢
+- 你的贡献帮助社区
 
-## Security Research
+## 安全研究
 
-If you're conducting security research:
+如果你进行安全研究：
 
-1. **Get Permission**: Contact maintainers first
-2. **Define Scope**: Agree on what you'll test
-3. **Report Findings**: Use this process
-4. **Respect Timeline**: Allow time for fixes
-5. **Publish Responsibly**: Coordinate with us
+1. **获取许可**：首先联系维护者
+2. **定义范围**：同意你将测试的内容
+3. **报告发现**：使用此流程
+4. **尊重时间线**：允许修复时间
+5. **负责任地发布**：与我们协调
 
-## Questions?
+## 问题？
 
-For questions about this process:
+关于此流程的问题：
 
-1. Check [SECURITY.md](../SECURITY.md) for detailed policy
-2. Look at [FAQ](#faq) section below
-3. Open a discussion with `[SECURITY]` label
-4. Use private vulnerability reporting for sensitive questions
+1. 查看 [SECURITY.md](../SECURITY.md) 了解详细策略
+2. 查看下方 [FAQ](#faq) 部分
+3. 打开带有 `[SECURITY]` 标签的讨论
+4. 对敏感问题使用私人漏洞报告
 
 ## FAQ
 
-**Q: Will my report be kept confidential?**
-A: Yes, until the fix is released. We only share details with those working on the fix.
+**Q: 我的报告会保密吗？**
+A: 是的，直到修复发布。我们只与处理修复的人员分享详情。
 
-**Q: How long do I need to wait before public disclosure?**
-A: We follow responsible disclosure timelines based on severity (24 hours to 7 days). You can agree to extend this if needed.
+**Q: 我需要等多久才能公开披露？**
+A: 我们根据严重程度遵循负责任披露时间线（24 小时到 7 天）。如需要，你可以同意延长。
 
-**Q: Will I get credit?**
-A: Yes, in the security advisory and release notes (unless you prefer anonymity).
+**Q: 我会获得致谢吗？**
+A: 是的，在安全公告和发布说明中（除非你更喜欢匿名）。
 
-**Q: What if the vulnerability is minor?**
-A: All legitimate security issues are taken seriously. Even minor fixes will be acknowledged.
+**Q: 如果漏洞很小怎么办？**
+A: 所有合法的安全问题都会被认真对待。即使是小修复也会被确认。
 
-**Q: Can I report vulnerabilities in documentation only?**
-A: Yes! Documentation security is important too. Examples with insecure patterns are in scope.
+**Q: 我可以只报告文档中的漏洞吗？**
+A: 可以！文档安全也很重要。不安全模式的示例也在范围内。
 
-**Q: What if I'm not sure if something is a security issue?**
-A: Report it anyway! If it's not a security issue, we'll let you know. False positives are fine.
+**Q: 如果我不确定某事是否是安全问题怎么办？**
+A: 无论如何都要报告！如果没有安全问题，我们会告诉你。误报没关系。
 
-**Q: Can I publicly discuss the vulnerability after reporting?**
-A: No, please keep it private until we publish the advisory. Premature disclosure could put users at risk.
+**Q: 报告后我可以公开讨论漏洞吗？**
+A: 不行，请在我们发布公告前保持私密。过早披露可能使用户处于危险之中。
 
-**Q: How do I know you received my report?**
-A: GitHub will send an automatic notification, and we'll follow up within 24 hours.
+**Q: 我怎么知道你们收到了我的报告？**
+A: GitHub 会发送自动通知，我们会在 24 小时内跟进。
 
-**Q: What if I don't hear back?**
-A: Check GitHub security advisories page. If you still don't see a response, you can follow up with a comment on the private report.
+**Q: 如果我没有收到回复怎么办？**
+A: 查看 GitHub 安全公告页面。如果你仍然没有看到回复，你可以在私人报告上评论跟进。
 
-## Resources
+## 资源
 
-- [SECURITY.md](../SECURITY.md) - Full security policy
-- [CONTRIBUTING.md](../CONTRIBUTING.md) - Contributing guidelines
-- [CODE_OF_CONDUCT.md](../CODE_OF_CONDUCT.md) - Community standards
-- [OWASP Vulnerability Disclosure](https://cheatsheetseries.owasp.org/cheatsheets/Vulnerability_Disclosure_Cheat_Sheet.html) - Responsible disclosure best practices
+- [SECURITY.md](../SECURITY.md) - 完整安全策略
+- [CONTRIBUTING.md](../CONTRIBUTING.md) - 贡献指南
+- [CODE_OF_CONDUCT.md](../CODE_OF_CONDUCT.md) - 社区标准
+- [OWASP Vulnerability Disclosure](https://cheatsheetseries.owasp.org/cheatsheets/Vulnerability_Disclosure_Cheat_Sheet.html) - 负责任披露最佳实践
 - [Coordinated Vulnerability Disclosure](https://cheatsheetseries.owasp.org/cheatsheets/Vulnerable_Dependency_Management_Cheat_Sheet.html)
 
 ---
 
-Thank you for helping keep this project secure! 🔒
+感谢你帮助保护这个项目安全！

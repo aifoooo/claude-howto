@@ -1,180 +1,180 @@
-# Testing Guide
+# 测试指南
 
-This document describes the testing infrastructure for Claude How To.
+本文档描述了 Claude How To 的测试基础设施。
 
-## Overview
+## 概述
 
-The project uses GitHub Actions to automatically run tests on every push and pull request. Tests cover:
+该项目使用 GitHub Actions 在每次 push 和 pull request 时自动运行测试。测试涵盖：
 
-- **Unit Tests**: Python tests using pytest
-- **Code Quality**: Linting and formatting with Ruff
-- **Security**: Vulnerability scanning with Bandit
-- **Type Checking**: Static type analysis with mypy
-- **Build Verification**: EPUB generation test
+- **单元测试**：使用 pytest 的 Python 测试
+- **代码质量**：使用 Ruff 的格式检查和 linting
+- **安全**：使用 Bandit 的漏洞扫描
+- **类型检查**：使用 mypy 的静态类型分析
+- **构建验证**：EPUB 生成测试
 
-## Running Tests Locally
+## 本地运行测试
 
-### Prerequisites
+### 前置条件
 
 ```bash
-# Install uv (fast Python package manager)
+# 安装 uv（快速 Python 包管理器）
 pip install uv
 
-# Or on macOS with Homebrew
+# 或者在 macOS 上使用 Homebrew
 brew install uv
 ```
 
-### Setup Environment
+### 设置环境
 
 ```bash
-# Clone the repository
+# 克隆仓库
 git clone https://github.com/luongnv89/claude-howto.git
 cd claude-howto
 
-# Create virtual environment
+# 创建虚拟环境
 uv venv
 
-# Activate it
+# 激活它
 source .venv/bin/activate  # macOS/Linux
-# or
+# 或者
 .venv\Scripts\activate     # Windows
 
-# Install development dependencies
+# 安装开发依赖
 uv pip install -r requirements-dev.txt
 ```
 
-### Run Tests
+### 运行测试
 
 ```bash
-# Run all unit tests
+# 运行所有单元测试
 pytest scripts/tests/ -v
 
-# Run tests with coverage
+# 运行带覆盖率的测试
 pytest scripts/tests/ -v --cov=scripts --cov-report=html
 
-# Run specific test file
+# 运行特定测试文件
 pytest scripts/tests/test_build_epub.py -v
 
-# Run specific test function
+# 运行特定测试函数
 pytest scripts/tests/test_build_epub.py::test_function_name -v
 
-# Run tests in watch mode (requires pytest-watch)
+# 以监视模式运行测试（需要 pytest-watch）
 ptw scripts/tests/
 ```
 
-### Run Linting
+### 运行 Linting
 
 ```bash
-# Check code formatting
+# 检查代码格式
 ruff format --check scripts/
 
-# Auto-fix formatting issues
+# 自动修复格式问题
 ruff format scripts/
 
-# Run linter
+# 运行 linter
 ruff check scripts/
 
-# Auto-fix linter issues
+# 自动修复 linter 问题
 ruff check --fix scripts/
 ```
 
-### Run Security Scan
+### 运行安全扫描
 
 ```bash
-# Run Bandit security scan
+# 运行 Bandit 安全扫描
 bandit -c pyproject.toml -r scripts/ --exclude scripts/tests/
 
-# Generate JSON report
+# 生成 JSON 报告
 bandit -c pyproject.toml -r scripts/ --exclude scripts/tests/ -f json -o bandit-report.json
 ```
 
-### Run Type Checking
+### 运行类型检查
 
 ```bash
-# Check types with mypy
+# 使用 mypy 检查类型
 mypy scripts/ --ignore-missing-imports --no-implicit-optional
 ```
 
-## GitHub Actions Workflow
+## GitHub Actions 工作流
 
-### Triggered On
+### 触发条件
 
-- **Push** to `main` or `develop` branches (when scripts change)
-- **Pull Request** to `main` (when scripts change)
-- Manual workflow dispatch
+- **Push** 到 `main` 或 `develop` 分支（当 scripts 更改时）
+- **Pull Request** 到 `main`（当 scripts 更改时）
+- 手动工作流调度
 
-### Jobs
+### 任务
 
-#### 1. Unit Tests (pytest)
+#### 1. 单元测试 (pytest)
 
-- **Runs on**: Ubuntu latest
-- **Python versions**: 3.10, 3.11, 3.12
-- **What it does**:
-  - Installs dependencies from `requirements-dev.txt`
-  - Runs pytest with coverage reporting
-  - Uploads coverage to Codecov
-  - Archives test results and coverage HTML
+- **运行平台**: Ubuntu latest
+- **Python 版本**: 3.10, 3.11, 3.12
+- **功能**:
+  - 从 `requirements-dev.txt` 安装依赖
+  - 运行带覆盖率报告的 pytest
+  - 上传覆盖率到 Codecov
+  - 存档测试结果和覆盖率 HTML
 
-**Outcome**: If any test fails, the workflow fails (critical)
+**结果**: 如果任何测试失败，工作流失败（关键）
 
-#### 2. Code Quality (Ruff)
+#### 2. 代码质量 (Ruff)
 
-- **Runs on**: Ubuntu latest
-- **Python version**: 3.11
-- **What it does**:
-  - Checks code formatting with `ruff format`
-  - Runs linter with `ruff check`
-  - Reports issues but doesn't fail the workflow
+- **运行平台**: Ubuntu latest
+- **Python 版本**: 3.11
+- **功能**:
+  - 使用 `ruff format` 检查代码格式
+  - 使用 `ruff check` 运行 linter
+  - 报告问题但不失败工作流
 
-**Outcome**: Non-blocking (warning only)
+**结果**: 非阻塞（仅警告）
 
-#### 3. Security Scan (Bandit)
+#### 3. 安全扫描 (Bandit)
 
-- **Runs on**: Ubuntu latest
-- **Python version**: 3.11
-- **What it does**:
-  - Scans for security vulnerabilities
-  - Generates JSON report
-  - Uploads report as artifact
+- **运行平台**: Ubuntu latest
+- **Python 版本**: 3.11
+- **功能**:
+  - 扫描安全漏洞
+  - 生成 JSON 报告
+  - 上传报告作为 artifact
 
-**Outcome**: Non-blocking (warning only)
+**结果**: 非阻塞（仅警告）
 
-#### 4. Type Checking (mypy)
+#### 4. 类型检查 (mypy)
 
-- **Runs on**: Ubuntu latest
-- **Python version**: 3.11
-- **What it does**:
-  - Performs static type analysis
-  - Reports type mismatches
-  - Helps catch bugs early
+- **运行平台**: Ubuntu latest
+- **Python 版本**: 3.11
+- **功能**:
+  - 执行静态类型分析
+  - 报告类型不匹配
+  - 帮助及早发现 bug
 
-**Outcome**: Non-blocking (warning only)
+**结果**: 非阻塞（仅警告）
 
-#### 5. Build EPUB
+#### 5. 构建 EPUB
 
-- **Runs on**: Ubuntu latest
-- **Depends on**: pytest, lint, security (all must pass)
-- **What it does**:
-  - Builds the EPUB file using `scripts/build_epub.py`
-  - Verifies the EPUB was created successfully
-  - Uploads EPUB as artifact
+- **运行平台**: Ubuntu latest
+- **依赖**: pytest, lint, security（全部必须通过）
+- **功能**:
+  - 使用 `scripts/build_epub.py` 构建 EPUB 文件
+  - 验证 EPUB 创建成功
+  - 上传 EPUB 作为 artifact
 
-**Outcome**: If build fails, the workflow fails (critical)
+**结果**: 如果构建失败，工作流失败（关键）
 
-#### 6. Summary
+#### 6. 总结
 
-- **Runs on**: Ubuntu latest
-- **Depends on**: All other jobs
-- **What it does**:
-  - Generates workflow summary
-  - Lists all artifacts
-  - Reports overall status
+- **运行平台**: Ubuntu latest
+- **依赖**: 所有其他任务
+- **功能**:
+  - 生成工作流总结
+  - 列出所有 artifacts
+  - 报告整体状态
 
-## Writing Tests
+## 编写测试
 
-### Test Structure
+### 测试结构
 
-Tests should be placed in `scripts/tests/` with names like `test_*.py`:
+测试应放在 `scripts/tests/`，命名为 `test_*.py`：
 
 ```python
 # scripts/tests/test_example.py
@@ -198,144 +198,144 @@ async def test_async_function():
     assert result is not None
 ```
 
-### Test Best Practices
+### 测试最佳实践
 
-- **Use descriptive names**: `test_function_returns_correct_value()`
-- **One assertion per test** (when possible): Easier to debug failures
-- **Use fixtures** for reusable setup: See `scripts/tests/conftest.py`
-- **Mock external services**: Use `unittest.mock` or `pytest-mock`
-- **Test edge cases**: Empty inputs, None values, errors
-- **Keep tests fast**: Avoid sleep() and external I/O
-- **Use pytest markers**: `@pytest.mark.slow` for slow tests
+- **使用描述性名称**: `test_function_returns_correct_value()`
+- **每个测试一个断言**（尽可能）：更容易调试失败
+- **使用 fixtures**: 参见 `scripts/tests/conftest.py` 中的可重用设置
+- **Mock 外部服务**: 使用 `unittest.mock` 或 `pytest-mock`
+- **测试边界情况**: 空输入、None 值、错误
+- **保持测试快速**: 避免 sleep() 和外部 I/O
+- **使用 pytest markers**: `@pytest.mark.slow` 用于慢速测试
 
 ### Fixtures
 
-Common fixtures are defined in `scripts/tests/conftest.py`:
+通用 fixtures 定义在 `scripts/tests/conftest.py`：
 
 ```python
-# Use fixtures in your tests
+# 在测试中使用 fixtures
 def test_something(tmp_path):
-    """tmp_path fixture provides temporary directory."""
+    """tmp_path fixture 提供临时目录。"""
     test_file = tmp_path / "test.txt"
     test_file.write_text("content")
     assert test_file.read_text() == "content"
 ```
 
-## Coverage Reports
+## 覆盖率报告
 
-### Local Coverage
+### 本地覆盖率
 
 ```bash
-# Generate coverage report
+# 生成覆盖率报告
 pytest scripts/tests/ --cov=scripts --cov-report=html
 
-# Open the coverage report in your browser
+# 在浏览器中打开覆盖率报告
 open htmlcov/index.html
 ```
 
-### Coverage Goals
+### 覆盖率目标
 
-- **Minimum coverage**: 80%
-- **Branch coverage**: Enabled
-- **Focus areas**: Core functionality and error paths
+- **最低覆盖率**: 80%
+- **分支覆盖率**: 启用
+- **重点领域**: 核心功能和错误路径
 
 ## Pre-commit Hooks
 
-The project uses pre-commit hooks to run checks automatically before commits:
+该项目使用 pre-commit hooks 在提交前自动运行检查：
 
 ```bash
-# Install pre-commit hooks
+# 安装 pre-commit hooks
 pre-commit install
 
-# Run hooks manually
+# 手动运行 hooks
 pre-commit run --all-files
 
-# Skip hooks for a commit (not recommended)
+# 跳过 hooks 进行提交（不推荐）
 git commit --no-verify
 ```
 
-Configured hooks in `.pre-commit-config.yaml`:
-- Ruff formatter
+`.pre-commit-config.yaml` 中配置的 hooks：
+- Ruff 格式化工具
 - Ruff linter
-- Bandit security scanner
-- YAML validation
-- File size checks
-- Merge conflict detection
+- Bandit 安全扫描器
+- YAML 验证
+- 文件大小检查
+- 合并冲突检测
 
-## Troubleshooting
+## 故障排查
 
-### Tests Pass Locally but Fail in CI
+### 测试在本地通过但在 CI 失败
 
-Common causes:
-1. **Python version difference**: CI uses 3.10, 3.11, 3.12
-2. **Missing dependencies**: Update `requirements-dev.txt`
-3. **Platform differences**: Path separators, environment variables
-4. **Flaky tests**: Tests that depend on timing or order
+常见原因：
+1. **Python 版本差异**: CI 使用 3.10、3.11、3.12
+2. **缺少依赖**: 更新 `requirements-dev.txt`
+3. **平台差异**: 路径分隔符、环境变量
+4. **不稳定测试**: 依赖时间或顺序的测试
 
-Solution:
+解决方案：
 ```bash
-# Test with the same Python versions
+# 使用相同的 Python 版本测试
 uv python install 3.10 3.11 3.12
 
-# Test with clean environment
+# 使用干净环境测试
 rm -rf .venv
 uv venv
 uv pip install -r requirements-dev.txt
 pytest scripts/tests/
 ```
 
-### Bandit Reports False Positives
+### Bandit 报告误报
 
-Some security warnings may be false positives. Configure in `pyproject.toml`:
+某些安全警告可能是误报。在 `pyproject.toml` 中配置：
 
 ```toml
 [tool.bandit]
 exclude_dirs = ["scripts/tests"]
-skips = ["B101"]  # Skip assert_used warning
+skips = ["B101"]  # 跳过 assert_used 警告
 ```
 
-### Type Checking Too Strict
+### 类型检查过于严格
 
-Relax type checking for specific files:
+为特定文件放宽类型检查：
 
 ```python
-# Add at the top of file
+# 在文件顶部添加
 # type: ignore
 
-# Or for specific lines
+# 或针对特定行
 some_dynamic_code()  # type: ignore
 ```
 
-## Continuous Integration Best Practices
+## 持续集成最佳实践
 
-1. **Keep tests fast**: Each test should complete in <1 second
-2. **Don't test external APIs**: Mock external services
-3. **Test in isolation**: Each test should be independent
-4. **Use clear assertions**: `assert x == 5` not `assert x`
-5. **Handle async tests**: Use `@pytest.mark.asyncio`
-6. **Generate reports**: Coverage, security, type checking
+1. **保持测试快速**: 每个测试应在 1 秒内完成
+2. **不要测试外部 API**: Mock 外部服务
+3. **隔离测试**: 每个测试应该是独立的
+4. **使用清晰的断言**: `assert x == 5` 而不是 `assert x`
+5. **处理异步测试**: 使用 `@pytest.mark.asyncio`
+6. **生成报告**: 覆盖率、安全、类型检查
 
-## Resources
+## 资源
 
-- [pytest Documentation](https://docs.pytest.org/)
-- [Ruff Documentation](https://docs.astral.sh/ruff/)
-- [Bandit Documentation](https://bandit.readthedocs.io/)
-- [mypy Documentation](https://mypy.readthedocs.io/)
-- [GitHub Actions Documentation](https://docs.github.com/en/actions)
+- [pytest 文档](https://docs.pytest.org/)
+- [Ruff 文档](https://docs.astral.sh/ruff/)
+- [Bandit 文档](https://bandit.readthedocs.io/)
+- [mypy 文档](https://mypy.readthedocs.io/)
+- [GitHub Actions 文档](https://docs.github.com/en/actions)
 
-## Contributing Tests
+## 贡献测试
 
-When submitting a PR:
+提交 PR 时：
 
-1. **Write tests** for new functionality
-2. **Run tests locally**: `pytest scripts/tests/ -v`
-3. **Check coverage**: `pytest scripts/tests/ --cov=scripts`
-4. **Run linting**: `ruff check scripts/`
-5. **Security scan**: `bandit -r scripts/ --exclude scripts/tests/`
-6. **Update documentation** if tests change
+1. **为新功能编写测试**
+2. **本地运行测试**: `pytest scripts/tests/ -v`
+3. **检查覆盖率**: `pytest scripts/tests/ --cov=scripts`
+4. **运行 linting**: `ruff check scripts/`
+5. **安全扫描**: `bandit -r scripts/ --exclude scripts/tests/`
+6. **如果测试更改则更新文档**
 
-Tests are required for all PRs! 🧪
+所有 PR 都需要测试！
 
 ---
 
-For questions or issues with testing, open a GitHub issue or discussion.
+关于测试的问题或问题，请打开 GitHub issue 或讨论。

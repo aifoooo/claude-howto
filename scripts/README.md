@@ -3,118 +3,118 @@
   <img alt="Claude How To" src="../resources/logos/claude-howto-logo.svg">
 </picture>
 
-# EPUB Builder Script
+# EPUB 构建器脚本
 
-Build an EPUB ebook from the Claude How-To markdown files.
+从 Claude How-To markdown 文件构建 EPUB 电子书。
 
-## Features
+## 功能
 
-- Organizes chapters by folder structure (01-slash-commands, 02-memory, etc.)
-- Renders Mermaid diagrams as PNG images via Kroki.io API
-- Async concurrent fetching - renders all diagrams in parallel
-- Generates a cover image from the project logo
-- Converts internal markdown links to EPUB chapter references
-- Strict error mode - fails if any diagram cannot be rendered
+- 按文件夹结构组织章节（01-slash-commands、02-memory 等）
+- 通过 Kroki.io API 将 Mermaid 图表渲染为 PNG 图片
+- 异步并发获取 - 并行渲染所有图表
+- 从项目 logo 生成封面图片
+- 将内部 markdown 链接转换为 EPUB 章节引用
+- 严格错误模式 - 如果任何图表无法渲染则失败
 
-## Requirements
+## 要求
 
 - Python 3.10+
 - [uv](https://github.com/astral-sh/uv)
-- Internet connection for Mermaid diagram rendering
+- 用于 Mermaid 图表渲染的网络连接
 
-## Quick Start
+## 快速开始
 
 ```bash
-# Simplest way - uv handles everything
+# 最简单的方式 - uv 处理一切
 uv run scripts/build_epub.py
 ```
 
-## Development Setup
+## 开发设置
 
 ```bash
-# Create virtual environment
+# 创建虚拟环境
 uv venv
 
-# Activate and install dependencies
+# 激活并安装依赖
 source .venv/bin/activate
 uv pip install -r requirements-dev.txt
 
-# Run tests
+# 运行测试
 pytest scripts/tests/ -v
 
-# Run the script
+# 运行脚本
 python scripts/build_epub.py
 ```
 
-## Command-Line Options
+## 命令行选项
 
 ```
-usage: build_epub.py [-h] [--root ROOT] [--output OUTPUT] [--verbose]
+用法：build_epub.py [-h] [--root ROOT] [--output OUTPUT] [--verbose]
                      [--timeout TIMEOUT] [--max-concurrent MAX_CONCURRENT]
 
-options:
-  -h, --help            show this help message and exit
-  --root, -r ROOT       Root directory (default: repo root)
-  --output, -o OUTPUT   Output path (default: claude-howto-guide.epub)
-  --verbose, -v         Enable verbose logging
-  --timeout TIMEOUT     API timeout in seconds (default: 30)
-  --max-concurrent N    Max concurrent requests (default: 10)
+选项：
+  -h, --help            显示此帮助信息并退出
+  --root, -r ROOT       根目录（默认：仓库根目录）
+  --output, -o OUTPUT   输出路径（默认：claude-howto-guide.epub）
+  --verbose, -v         启用详细日志
+  --timeout TIMEOUT     API 超时时间（秒）（默认：30）
+  --max-concurrent N    最大并发请求数（默认：10）
 ```
 
-## Examples
+## 示例
 
 ```bash
-# Build with verbose output
+# 带详细输出构建
 uv run scripts/build_epub.py --verbose
 
-# Custom output location
+# 自定义输出位置
 uv run scripts/build_epub.py --output ~/Desktop/claude-guide.epub
 
-# Limit concurrent requests (if rate-limited)
+# 限制并发请求数（如果被限流）
 uv run scripts/build_epub.py --max-concurrent 5
 ```
 
-## Output
+## 输出
 
-Creates `claude-howto-guide.epub` in the repository root directory.
+在仓库根目录创建 `claude-howto-guide.epub`。
 
-The EPUB includes:
-- Cover image with project logo
-- Table of contents with nested sections
-- All markdown content converted to EPUB-compatible HTML
-- Mermaid diagrams rendered as PNG images
+EPUB 包含：
+- 带项目 logo 的封面图片
+- 带嵌套章节的目录
+- 所有 markdown 内容转换为 EPUB 兼容的 HTML
+- 渲染为 PNG 图片的 Mermaid 图表
 
-## Running Tests
+## 运行测试
 
 ```bash
-# With virtual environment
+# 使用虚拟环境
 source .venv/bin/activate
 pytest scripts/tests/ -v
 
-# Or with uv directly
+# 或直接使用 uv
 uv run --with pytest --with pytest-asyncio \
     --with ebooklib --with markdown --with beautifulsoup4 \
     --with httpx --with pillow --with tenacity \
     pytest scripts/tests/ -v
 ```
 
-## Dependencies
+## 依赖
 
-Managed via PEP 723 inline script metadata:
+通过 PEP 723 内联脚本元数据管理：
 
-| Package | Purpose |
+| 包 | 用途 |
 |---------|---------|
-| `ebooklib` | EPUB generation |
-| `markdown` | Markdown to HTML conversion |
-| `beautifulsoup4` | HTML parsing |
-| `httpx` | Async HTTP client |
-| `pillow` | Cover image generation |
-| `tenacity` | Retry logic |
+| `ebooklib` | EPUB 生成 |
+| `markdown` | Markdown 转 HTML |
+| `beautifulsoup4` | HTML 解析 |
+| `httpx` | 异步 HTTP 客户端 |
+| `pillow` | 封面图片生成 |
+| `tenacity` | 重试逻辑 |
 
-## Troubleshooting
+## 故障排查
 
-**Build fails with network error**: Check internet connectivity and Kroki.io status. Try `--timeout 60`.
+**构建失败并显示网络错误**：检查网络连接和 Kroki.io 状态。尝试 `--timeout 60`。
 
-**Rate limiting**: Reduce concurrent requests with `--max-concurrent 3`.
+**限流**：使用 `--max-concurrent 3` 减少并发请求。
 
-**Missing logo**: The script generates a text-only cover if `claude-howto-logo.png` is not found.
+**缺少 logo**：如果未找到 `claude-howto-logo.png`，脚本会生成纯文本封面。
